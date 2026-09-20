@@ -251,8 +251,8 @@ td:first-child{font-weight:900}
 .champRacePts{text-align:right;font-size:12px;font-weight:950;color:#e7eaed}
 .champRaceBar{grid-column:2/4;height:6px;background:#21282d;border-radius:99px;overflow:hidden;margin-top:-4px}.champRaceBar i{display:block;height:100%;border-radius:99px}
 .champRank{padding:0 13px 13px}
-.champRankRow{display:grid;grid-template-columns:24px 78px 1fr 35px;gap:8px;align-items:center;margin:8px 0}
-.champRankNo{font-size:13px;font-weight:950;text-align:center}.champRankName{font-size:13px;font-weight:900}
+.champRankRow{display:grid;grid-template-columns:28px 112px minmax(0,1fr) 38px;gap:8px;align-items:center;margin:8px 0}
+.champRankNo{font-size:13px;font-weight:950;text-align:center}.champRankName{font-size:13px;font-weight:900;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .champRankBar{height:17px;background:#20272c;border-radius:2px;overflow:hidden}.champRankBar i{display:block;height:100%}
 .champRankPts{font-size:12px;font-weight:950;text-align:right;color:var(--gold)}
 @media(max-width:1320px){
@@ -434,8 +434,8 @@ td:first-child{font-weight:900}
   .app{padding:6px}.brand h1{font-size:27px}.brand .cup{font-size:30px}
   .champKpis{gap:6px}.champKpi{padding:9px}.champKpi .num{font-size:25px}
   .champPod .name{font-size:11px}.champPod .pts{font-size:10px}
-  .champRankRow{grid-template-columns:20px 68px minmax(0,1fr) 28px;gap:5px}
-  .champRankName{font-size:10px}.champRankPts{font-size:10px}
+  .champRankRow{grid-template-columns:22px 92px minmax(0,1fr) 30px;gap:5px}
+  .champRankName{font-size:10px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.champRankPts{font-size:10px}
   .champResultsTable table{font-size:8.8px}
   .champResultsTable th,.champResultsTable td{padding:6px 4px}
 }
@@ -463,8 +463,8 @@ td:first-child{font-weight:900}
   /* Best lap column can make the table too dense; show it on a second compact line via smaller text. */
   .champResultsTable th:nth-child(5),.champResultsTable td:nth-child(5){font-size:8.5px}
   /* Ranking rows need enough width for all 12 drivers. */
-  .champRankRow{grid-template-columns:20px 70px minmax(0,1fr) 28px!important;gap:5px!important}
-  .champRankName{font-size:10.5px!important}
+  .champRankRow{grid-template-columns:22px 96px minmax(0,1fr) 30px!important;gap:5px!important}
+  .champRankName{font-size:10.5px!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
   .champRankPts{font-size:10.5px!important}
 }
 
@@ -618,6 +618,119 @@ td:first-child{font-weight:900}
 /* Results pages share the same visual language as the pilot race-results panel. */
 .resultsHero .title{font-size:21px;font-weight:950}
 @media(max-width:700px){.resultsHero .title{font-size:18px}}
+
+/* Clickable championship ranking rows */
+.champRankRow{cursor:pointer;transition:transform .15s ease,background .15s ease,filter .15s ease;border-radius:8px;padding:2px 4px;}
+.champRankRow:hover{background:rgba(255,255,255,.045);transform:translateX(2px);filter:brightness(1.08)}
+.champRankRow:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.pilotJumpFlash{animation:pilotJumpFlash .9s ease;}
+@keyframes pilotJumpFlash{0%,100%{box-shadow:none}40%{box-shadow:0 0 0 2px rgba(239,23,33,.75),0 0 24px rgba(239,23,33,.22)}}
+
+
+
+/* ===== GLOBAL FONT BOOST — slightly larger while preserving the layout ===== */
+body{font-size:17px}
+.title{font-size:27px}
+.slicerTitle{font-size:23px}
+.btn{font-size:14px}
+.classificationSelect{font-size:16px}
+.champKpi .label{font-size:17px}
+.champKpi .num{font-size:48px}
+.champLeaderLabel{font-size:15px}
+.champLeaderName{font-size:34px}
+.champLeaderPts{font-size:20px}
+.champPod .place{font-size:30px}
+.champPod .name{font-size:25px}
+.champPod .pts{font-size:19px}
+.champRankName{font-size:16px}
+.champRankNo{font-size:16px}
+.champRankPts{font-size:15px}
+.champRaceHead{font-size:17px}
+.champRaceName{font-size:14px}
+.champRacePts{font-size:15px}
+.champResultsTable table{font-size:12.5px}
+.champResultsTable th{font-size:11px}
+.champResultsTable td:nth-child(3){font-size:11.5px}
+.champResultsTable td:nth-child(4){font-size:13px}
+.champResultsTable td:nth-child(5){font-size:11.5px}
+.raceResultsTable{font-size:13px}
+.raceResultsTable thead th{font-size:11px}
+.raceResultsTable .resultPos{font-size:15px}
+.raceResultsTable .resultPoints{font-size:15px}
+.raceResultsTable .resultLap{font-size:11.5px}
+.resultsControls label{font-size:12px}
+.resultsHero .title{font-size:23px}
+.pilotHeroInfo .season{font-size:13px}
+.pilotHeroInfo .name{font-size:61px}
+.pilotHeroInfo .rankLine{font-size:20px}
+.pilotHeroInfo .rankNo{font-size:29px}
+.pilotHeroInfo .quote{font-size:17px}
+.heroMini .mini b{font-size:24px}
+.heroMini .mini span{font-size:12px}
+.pilotMetric .micon{font-size:25px}
+.pilotMetric .mlabel{font-size:12px}
+.pilotMetric .mvalue{font-size:31px}
+.pilotChooser label{font-size:14px}
+.pilotChooser select{font-size:14px}
+.positionNote{font-size:12px}
+.legendTitle{font-size:12px}
+.legendItem{font-size:17px}
+.legendValue{font-size:15px}
+.champEvoLegend .item{font-size:16px}
+.champEvoLegend .score{font-size:15px}
+
+@media(max-width:700px){
+  body{font-size:16px}
+  .title{font-size:22px}
+  .slicerTitle{font-size:20px}
+  .btn{font-size:11px}
+  .classificationSelect{font-size:15px}
+  .champKpi .label{font-size:13px}
+  .champKpi .num{font-size:34px}
+  .champLeaderLabel{font-size:11px}
+  .champLeaderName{font-size:27px}
+  .champLeaderPts{font-size:15px}
+  .champPod .place{font-size:24px}
+  .champPod .name{font-size:15px}
+  .champPod .pts{font-size:13px}
+  .champRankName{font-size:13px}
+  .champRankNo{font-size:13px}
+  .champRankPts{font-size:13px}
+  .champRaceHead{font-size:15px}
+  .champRaceName{font-size:13px}
+  .champRacePts{font-size:14px}
+  .champResultsTable table{font-size:10.5px}
+  .champResultsTable th{font-size:9.5px}
+  .champResultsTable td:nth-child(3){font-size:10px}
+  .champResultsTable td:nth-child(4){font-size:11px}
+  .champResultsTable td:nth-child(5){font-size:10px}
+  .raceResultsTable{font-size:10px}
+  .raceResultsTable thead th{font-size:8.5px}
+  .raceResultsTable .resultPos{font-size:11.5px}
+  .raceResultsTable .resultPoints{font-size:11.5px}
+  .raceResultsTable .resultLap{font-size:9px}
+  .resultsControls label{font-size:10px}
+  .resultsHero .title{font-size:20px}
+  .pilotHeroInfo .season{font-size:10px}
+  .pilotHeroInfo .name{font-size:46px}
+  .pilotHeroInfo .rankLine{font-size:16px}
+  .pilotHeroInfo .rankNo{font-size:28px}
+  .pilotHeroInfo .quote{font-size:14px}
+  .heroMini .mini b{font-size:21px}
+  .heroMini .mini span{font-size:10px}
+  .pilotMetric .micon{font-size:19px}
+  .pilotMetric .mlabel{font-size:9px}
+  .pilotMetric .mvalue{font-size:23px}
+  .pilotChooser label{font-size:11px}
+  .pilotChooser select{font-size:14px}
+  .positionNote{font-size:10px}
+  .legendTitle{font-size:10px}
+  .legendItem{font-size:13px}
+  .legendValue{font-size:11px}
+  .champEvoLegend .item{font-size:13px}
+  .champEvoLegend .score{font-size:11px}
+}
+
 </style>
 </head>
 <body>
@@ -910,6 +1023,21 @@ function lineChart(series,labels,colors,maxY,withValues=false){
 }
 
 
+function openPilot(pilot){
+  const sel=document.getElementById("pilotSelect");
+  if(!sel)return;
+  sel.value=pilot;
+  showPage("pilot");
+  updatePilot();
+  const chooser=document.querySelector(".pilotChooser");
+  const pilotPage=document.getElementById("pilot");
+  if(pilotPage){
+    try{pilotPage.scrollIntoView({behavior:"smooth",block:"start"});}catch(e){pilotPage.scrollIntoView();}
+  }
+  if(chooser) chooser.classList.add("pilotJumpFlash");
+  setTimeout(()=>chooser&&chooser.classList.remove("pilotJumpFlash"),900);
+}
+
 function getChampPilot(){
   const el=document.getElementById("champPilotFilter");
   return el?el.value:"ALL";
@@ -943,7 +1071,7 @@ function updateChamp(){
 
   const max=st[0]?.[1]||1;
   document.getElementById("ranking").innerHTML=st.length?st.map((x,i)=>
-    `<div class="champRankRow">
+    `<div class="champRankRow" role="button" tabindex="0" data-pilot="${esc(x[0])}" onclick="openPilot('${esc(x[0]).replace("'","\\'")}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPilot('${esc(x[0]).replace("'","\\'")}')}" title="Abrir página de ${esc(x[0])}">
       <div class="champRankNo">${i+1}</div>
       <div class="champRankName">${esc(x[0])}</div>
       <div class="champRankBar"><i style="width:${x[1]/max*100}%;background:${pilotColor(x[0])}"></i></div>
