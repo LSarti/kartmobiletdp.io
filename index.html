@@ -565,22 +565,59 @@ td:first-child{font-weight:900}
 .resultsControls label{display:block;font-size:11px;color:#aeb5bc;text-transform:uppercase;font-weight:950;margin-bottom:5px}
 .resultsTableScroll{height:590px;overflow:auto;padding:0 13px 13px;scrollbar-width:thin;scrollbar-color:#66717a #151b20}
 .resultsTableScroll::-webkit-scrollbar{width:8px}.resultsTableScroll::-webkit-scrollbar-track{background:#151b20;border-radius:8px}.resultsTableScroll::-webkit-scrollbar-thumb{background:#66717a;border-radius:8px}
-.resultsTableScroll table{font-size:12px}
-.resultsTableScroll th,.resultsTableScroll td{padding:9px 8px}
-.resultsTableScroll td:first-child{font-weight:950}
+
+/* ===== SHARED RACE RESULTS STYLE ===== */
+.raceResultsTable{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:12px}
+.raceResultsTable thead th{position:sticky;top:0;z-index:4;background:#11171b;color:#aeb7bf;padding:10px 10px;text-align:left;text-transform:uppercase;font-size:10px;letter-spacing:.06em;border-bottom:1px solid #353e45}
+.raceResultsTable tbody tr{--pilotColor:#66717a}
+.raceResultsTable tbody td{padding:10px 10px;background:linear-gradient(145deg,#20272c,#151b1f);color:#eef1f3;border-top:1px solid #2c353b;border-bottom:1px solid #11161a;box-shadow:0 3px 10px rgba(0,0,0,.22)}
+.raceResultsTable tbody td:first-child{border-left:3px solid var(--pilotColor);border-radius:9px 0 0 9px;font-weight:950}
+.raceResultsTable tbody td:last-child{border-radius:0 9px 9px 0}
+.raceResultsTable .resultPilot{font-weight:950;white-space:nowrap}
+.raceResultsTable .resultRace{font-weight:850;color:#d9dee2}
+.raceResultsTable .resultPos{font-size:14px;font-weight:950}
+.raceResultsTable .resultPoints{font-size:14px;font-weight:950;color:var(--gold)}
+.raceResultsTable .resultLap{font-family:Consolas,"Courier New",monospace;font-weight:850;color:#e9edf0;white-space:nowrap}
+.raceResultsTable .pod1{color:#ffe37c}.raceResultsTable .pod2{color:#eef1f3}.raceResultsTable .pod3{color:#f3a55d}
+.raceResultsTable .resultPosBadge{display:inline-block;min-width:34px;padding:4px 7px;text-align:center;border:1px solid #3c464d;border-radius:8px;background:#12181c}
+.resultsCorner .dataBlock{max-height:none}
+.resultsCorner .raceResultsTable{font-size:12px}
+.resultsCorner .raceResultsTable thead th,.resultsCorner .raceResultsTable tbody td{padding:9px 9px}
+
 @media(max-width:700px){
  .resultsHero{min-height:0}
  .resultsControls{grid-template-columns:1fr;padding:0 12px 11px}
  .resultsTableScroll{height:520px;padding:0 7px 9px;overflow:auto}
- .resultsTableScroll table{min-width:0;width:100%;table-layout:fixed;font-size:9.5px}
- .resultsTableScroll th,.resultsTableScroll td{padding:7px 4px;word-break:break-word}
- .resultsTableScroll th:nth-child(1),.resultsTableScroll td:nth-child(1){width:25%}
- .resultsTableScroll th:nth-child(2),.resultsTableScroll td:nth-child(2){width:18%}
- .resultsTableScroll th:nth-child(3),.resultsTableScroll td:nth-child(3){width:22%}
- .resultsTableScroll th:nth-child(4),.resultsTableScroll td:nth-child(4){width:14%}
- .resultsTableScroll th:nth-child(5),.resultsTableScroll td:nth-child(5){width:21%}
+ .resultsTableScroll .raceResultsTable{min-width:0;width:100%;table-layout:fixed;font-size:9.2px}
+ .resultsTableScroll .raceResultsTable thead th{font-size:8px;padding:8px 4px}
+ .resultsTableScroll .raceResultsTable tbody td{padding:7px 4px;word-break:break-word}
+ .resultsTableScroll .raceResultsTable th:nth-child(1),.resultsTableScroll .raceResultsTable td:nth-child(1){width:24%}
+ .resultsTableScroll .raceResultsTable th:nth-child(2),.resultsTableScroll .raceResultsTable td:nth-child(2){width:15%}
+ .resultsTableScroll .raceResultsTable th:nth-child(3),.resultsTableScroll .raceResultsTable td:nth-child(3){width:20%}
+ .resultsTableScroll .raceResultsTable th:nth-child(4),.resultsTableScroll .raceResultsTable td:nth-child(4){width:13%}
+ .resultsTableScroll .raceResultsTable th:nth-child(5),.resultsTableScroll .raceResultsTable td:nth-child(5){width:28%}
+ .resultsTableScroll .raceResultsTable .resultPilot{white-space:normal}
+ .resultsTableScroll .raceResultsTable .resultPos{font-size:11px}
+ .resultsTableScroll .raceResultsTable .resultPoints{font-size:11px}
+ .resultsTableScroll .raceResultsTable .resultLap{font-size:8.7px;white-space:normal}
+ .resultsTableScroll .raceResultsTable .resultPosBadge{min-width:27px;padding:3px 4px}
+
+ .resultsCorner .raceResultsTable{font-size:9.2px;table-layout:fixed}
+ .resultsCorner .raceResultsTable thead th{font-size:8px;padding:8px 4px}
+ .resultsCorner .raceResultsTable tbody td{padding:7px 4px;word-break:break-word}
+ .resultsCorner .raceResultsTable th:nth-child(1),.resultsCorner .raceResultsTable td:nth-child(1){width:24%}
+ .resultsCorner .raceResultsTable th:nth-child(2),.resultsCorner .raceResultsTable td:nth-child(2){width:15%}
+ .resultsCorner .raceResultsTable th:nth-child(3),.resultsCorner .raceResultsTable td:nth-child(3){width:20%}
+ .resultsCorner .raceResultsTable th:nth-child(4),.resultsCorner .raceResultsTable td:nth-child(4){width:13%}
+ .resultsCorner .raceResultsTable th:nth-child(5),.resultsCorner .raceResultsTable td:nth-child(5){width:28%}
+ .resultsCorner .raceResultsTable .resultPilot{white-space:normal}
+ .resultsCorner .raceResultsTable .resultLap{font-size:8.7px;white-space:normal}
 }
 
+
+/* Results pages share the same visual language as the pilot race-results panel. */
+.resultsHero .title{font-size:21px;font-weight:950}
+@media(max-width:700px){.resultsHero .title{font-size:18px}}
 </style>
 </head>
 <body>
@@ -952,6 +989,29 @@ function htmlTable(rows){
  return`<table><thead><tr><th>PILOTO</th><th>COLOCAÇÃO</th><th>CORRIDA</th><th>MELHOR VOLTA</th><th>PONTOS</th></tr></thead><tbody>${rows.map(x=>`<tr><td>${esc(x.piloto)}</td><td>${esc(x.posicao)}</td><td>${esc(x.raceKey)}</td><td>${esc(x.volta)}</td><td>${x.pontos}</td></tr>`).join("")}</tbody></table>`;
 }
 
+function raceResultsTable(rows){
+  if(!rows.length)return `<div class="empty">Sem dados para os filtros selecionados.</div>`;
+  const result=rows.slice().sort((a,b)=>
+    RACES.indexOf(a.raceKey)-RACES.indexOf(b.raceKey) ||
+    (posMap[a.posicao]||99)-(posMap[b.posicao]||99) ||
+    a.piloto.localeCompare(b.piloto)
+  );
+  return `<table class="raceResultsTable">
+    <thead><tr><th>CORRIDA</th><th>POSIÇÃO</th><th>PILOTO</th><th>PONTOS</th><th>MELHOR VOLTA</th></tr></thead>
+    <tbody>${result.map(x=>{
+      const pos=posMap[x.posicao]||null;
+      const posClass=pos===1?'pod1':pos===2?'pod2':pos===3?'pod3':'';
+      return `<tr style="--pilotColor:${pilotColor(x.piloto)}">
+        <td class="resultRace">${esc(x.raceKey)}</td>
+        <td><span class="resultPosBadge resultPos ${posClass}">${pos?pos+'º':'—'}</span></td>
+        <td class="resultPilot">${esc(x.piloto)}</td>
+        <td class="resultPoints">${x.pontos}</td>
+        <td class="resultLap">${esc(x.volta)}</td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table>`;
+}
+
 function updatePilot(){
   const p=document.getElementById("pilotSelect").value;
   const rows=DATA.filter(x=>x.piloto===p);
@@ -988,11 +1048,7 @@ function updatePilot(){
     ph.onerror=()=>{ph.style.display="none";fb.style.display="grid"};
   }else{ph.style.display="none";fb.style.display="grid"}
 
-  document.getElementById("pilotTable").innerHTML=rows.length?`
-  <table><thead><tr><th>CORRIDA</th><th>POSIÇÃO</th><th>PONTOS</th><th>MELHOR VOLTA</th></tr></thead>
-  <tbody>${RACES.map(r=>rows.find(x=>x.raceKey===r)).filter(Boolean).map(x=>
-    `<tr><td>${esc(x.raceKey)}</td><td><strong>${posMap[x.posicao]||"—"}º</strong></td><td>${x.pontos}</td><td>${esc(x.volta)}</td></tr>`
-  ).join("")}</tbody></table>`:`<div class="empty">Sem dados</div>`;
+  document.getElementById("pilotTable").innerHTML=raceResultsTable(rows);
 
   // Red bar chart: actual points earned in each race.
   const pointVals=RACES.map(r=>rows.filter(x=>x.raceKey===r).reduce((a,x)=>a+Number(x.pontos),0));
@@ -1079,24 +1135,7 @@ function updateResultsPage(){
     (rf==="ALL"||x.raceKey===rf) &&
     (pf==="ALL"||x.piloto===pf)
   );
-
-  const result=rows.slice().sort((a,b)=>
-    RACES.indexOf(a.raceKey)-RACES.indexOf(b.raceKey) ||
-    (posMap[a.posicao]||99)-(posMap[b.posicao]||99) ||
-    a.piloto.localeCompare(b.piloto)
-  );
-
-  document.getElementById("resultsAllTable").innerHTML=result.length?`
-    <table>
-      <thead><tr><th>CORRIDA</th><th>POSIÇÃO</th><th>PILOTO</th><th>PONTOS</th><th>MELHOR VOLTA</th></tr></thead>
-      <tbody>${result.map(x=>`<tr>
-        <td>${esc(x.raceKey)}</td>
-        <td><strong>${posMap[x.posicao]||"—"}º</strong></td>
-        <td>${esc(x.piloto)}</td>
-        <td>${x.pontos}</td>
-        <td>${esc(x.volta)}</td>
-      </tr>`).join("")}</tbody>
-    </table>`:`<div class="empty">Sem dados para os filtros selecionados.</div>`;
+  document.getElementById("resultsAllTable").innerHTML=raceResultsTable(rows);
 }
 
 function init(){
