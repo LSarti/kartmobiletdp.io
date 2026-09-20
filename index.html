@@ -798,13 +798,20 @@ function pilotColor(name){
 
 function readableTop5Chart(series,labels,colors,maxY){
   if(!labels.length)return `<div class="empty">Sem dados</div>`;
-  const W=900,H=320,L=64,R=20,T=22,B=58,M=Math.max(1,maxY);
+
+  // Reserve more space on the right because the final scores are shown
+  // beside the final points, not above the lines.
+  const W=900,H=320,L=64,R=120,T=22,B=58,M=Math.max(1,maxY);
   let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="none">`;
+
+  // Grid / Y axis
   for(let i=0;i<=5;i++){
     const y=T+(H-T-B)*i/5,val=M-(M*i/5);
-    s+=`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#30383e" stroke-width="1"/>`;
-    s+=`<text x="11" y="${y+5}" fill="#c4cbd0" font-size="14" font-weight="800">${Number.isInteger(val)?val:val.toFixed(1)}</text>`;
+    s+=`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#30383e" stroke-width="1.2"/>`;
+    s+=`<text x="9" y="${y+6}" fill="#d6dde1" font-size="17" font-weight="900">${Number.isInteger(val)?val:val.toFixed(1)}</text>`;
   }
+
+  // Lines and points only — no values printed above intermediate points.
   series.forEach((arr,si)=>{
     const col=colors[si];
     const pts=arr.map((v,i)=>{
@@ -812,21 +819,39 @@ function readableTop5Chart(series,labels,colors,maxY){
       const y=T+(H-T-B)*(1-(v/M));
       return `${x},${y}`;
     }).join(" ");
-    s+=`<polyline points="${pts}" fill="none" stroke="${col}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+    s+=`<polyline points="${pts}" fill="none" stroke="${col}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
+
     arr.forEach((v,i)=>{
       const x=L+i*(W-L-R)/Math.max(1,labels.length-1);
       const y=T+(H-T-B)*(1-(v/M));
-      s+=`<circle cx="${x}" cy="${y}" r="7" fill="${col}" stroke="#11161a" stroke-width="2"/>`;
-      s+=`<text x="${x}" y="${y-12}" text-anchor="middle" fill="#fff" font-size="14" font-weight="950">${v}</text>`;
+      s+=`<circle cx="${x}" cy="${y}" r="8" fill="${col}" stroke="#11161a" stroke-width="3"/>`;
     });
   });
-  labels.forEach((l,i)=>{
-    const x=L+i*(W-L-R)/Math.max(1,labels.length-1);
-    s+=`<text x="${x}" y="${H-15}" text-anchor="middle" fill="#e6e9eb" font-size="13" font-weight="850">${esc(l)}</text>`;
+
+  // Show each pilot's score only once, at the end of the line,
+  // positioned to the right of the final point.
+  series.forEach((arr,si)=>{
+    const col=colors[si];
+    const lastIndex=arr.length-1;
+    const value=Number(arr[lastIndex]??0);
+    const x=L+lastIndex*(W-L-R)/Math.max(1,labels.length-1);
+    const y=T+(H-T-B)*(1-(value/M));
+
+    s+=`<text x="${x+16}" y="${y+6}" text-anchor="start"
+      fill="#fff" stroke="#101418" stroke-width="6" paint-order="stroke"
+      font-size="18" font-weight="950">${value}</text>`;
   });
+
+  // Race labels
+  labels.forEach((label,i)=>{
+    const x=L+i*(W-L-R)/Math.max(1,labels.length-1);
+    s+=`<text x="${x}" y="${H-14}" text-anchor="middle"
+      fill="#f1f3f4" font-size="15" font-weight="900">${esc(label)}</text>`;
+  });
+
   return s+"</svg>";
 }
-
 function syncRacePills(){document.querySelectorAll("#racesBox .racePill").forEach(el=>{const cb=el.querySelector("input");el.classList.toggle("on",cb.checked);});}
 function selected(id){return[...document.querySelectorAll(`#${id} input:checked`)].map(x=>x.value)}
 function showPage(id){
