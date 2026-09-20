@@ -255,6 +255,62 @@ td:first-child{font-weight:900}
 .champRankNo{font-size:13px;font-weight:950;text-align:center}.champRankName{font-size:13px;font-weight:900;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .champRankBar{height:17px;background:#20272c;border-radius:2px;overflow:hidden}.champRankBar i{display:block;height:100%}
 .champRankPts{font-size:12px;font-weight:950;text-align:right;color:var(--gold)}
+
+/* ===== TITLE CHANCE — TOP 6 ===== */
+.titleChancePanel{
+  margin-top:12px;
+  background:
+    radial-gradient(420px 120px at 50% 0%,rgba(243,207,78,.055),transparent 72%),
+    linear-gradient(145deg,rgba(24,31,36,.96),rgba(10,15,18,.96));
+  border:1px solid rgba(67,76,83,.95);
+  border-radius:16px;
+  box-shadow:0 10px 28px rgba(0,0,0,.45);
+  overflow:hidden;
+}
+.titleChancePanel .title{
+  font-size:20px;
+  padding:13px 15px 9px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border-bottom:1px solid rgba(70,78,84,.55);
+}
+.titleChanceSub{
+  padding:8px 15px 2px;
+  color:#8f9aa2;
+  font-size:10px;
+  line-height:1.35;
+}
+.titleChanceList{padding:6px 11px 11px}
+.titleChanceRow{
+  display:grid;
+  grid-template-columns:24px 92px minmax(0,1fr) 42px;
+  gap:7px;
+  align-items:center;
+  margin:5px 0;
+  padding:4px 5px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:background .14s ease,transform .14s ease,filter .14s ease;
+}
+.titleChanceRow:hover{background:rgba(255,255,255,.045);transform:translateX(2px);filter:brightness(1.05)}
+.titleChanceRow:focus-visible{outline:2px solid var(--red);outline-offset:1px}
+.titleChanceNo{font-size:12px;font-weight:950;text-align:center;color:#cfd6da}
+.titleChancePilot{font-size:12px;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.titleChanceBar{height:10px;background:#20282d;border-radius:999px;overflow:hidden}
+.titleChanceBar i{display:block;height:100%;border-radius:999px}
+.titleChancePct{font-size:12px;font-weight:950;text-align:right;color:var(--gold)}
+@media(max-width:1320px){
+  .titleChancePanel{margin-top:0}
+}
+@media(max-width:700px){
+  .titleChancePanel .title{font-size:19px}
+  .titleChanceSub{font-size:9px;padding-top:7px}
+  .titleChanceRow{grid-template-columns:20px 82px minmax(0,1fr) 38px;gap:5px;margin:4px 0}
+  .titleChanceNo,.titleChancePilot,.titleChancePct{font-size:11px}
+  .titleChanceBar{height:9px}
+}
+
 @media(max-width:1320px){
  .champGrid{grid-template-columns:235px minmax(0,1fr)}.champRight{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr}
 }
@@ -731,6 +787,20 @@ body{font-size:17px}
   .champEvoLegend .score{font-size:11px}
 }
 
+
+
+/* ===== PILOT MINI STATS — title chance alongside the existing indicators ===== */
+.heroMini{grid-template-columns:repeat(4,1fr)}
+.heroMini .mini:last-child b{color:var(--gold)}
+@media(max-width:700px){
+  .heroMini{grid-template-columns:repeat(4,1fr);gap:4px}
+  .heroMini .mini b{font-size:19px}
+  .heroMini .mini span{font-size:9px;line-height:1.1}
+}
+@media(max-width:520px){
+  .heroMini{grid-template-columns:repeat(2,1fr);gap:8px}
+}
+
 </style>
 </head>
 <body>
@@ -793,6 +863,12 @@ body{font-size:17px}
       <div class="title">📊 Classificação Geral</div>
       <div class="champRank" id="ranking"></div>
     </div>
+
+    <div class="titleChancePanel">
+      <div class="title">🏆 Chance de Título</div>
+      <div class="titleChanceSub">Top 6 estimados para conquistar o campeonato em 10 corridas.</div>
+      <div class="titleChanceList" id="titleChanceList"></div>
+    </div>
   </aside>
 </div>
 </section>
@@ -840,6 +916,7 @@ body{font-size:17px}
           <div class="mini"><b id="pRaceMini">0</b><span>corridas</span></div>
           <div class="mini"><b id="pPtsMini">0</b><span>pontos</span></div>
           <div class="mini"><b id="pWinsMini">0</b><span>vitórias</span></div>
+          <div class="mini"><b id="pilotTitleProb">—%</b><span>chance de título</span></div>
         </div>
       </div>
     </div>
@@ -1079,6 +1156,26 @@ function updateChamp(){
     </div>`
   ).join(""):`<div class="empty">Sem dados</div>`;
 
+  // Top 6 title chances are calculated from the full championship dataset.
+  updateTitleProbability();
+  const chanceBox=document.getElementById("titleChanceList");
+  if(chanceBox){
+    const top6=Object.entries(window.TITLE_PROBS||{})
+      .sort((a,b)=>b[1]-a[1])
+      .slice(0,6);
+    chanceBox.innerHTML=top6.length ? top6.map(([pilot,prob],i)=>`
+      <div class="titleChanceRow" role="button" tabindex="0"
+           title="Abrir página de ${esc(pilot)}"
+           onclick="openPilot('${pilot}')"
+           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPilot('${pilot}')}" >
+        <div class="titleChanceNo">${i+1}º</div>
+        <div class="titleChancePilot">${esc(pilot)}</div>
+        <div class="titleChanceBar"><i style="width:${Math.max(0,Math.min(100,prob))}%;background:${pilotColor(pilot)}"></i></div>
+        <div class="titleChancePct">${prob.toFixed(0)}%</div>
+      </div>`).join("") : `<div class="empty">Sem dados</div>`;
+  }
+
+
   // Cumulative points, race by race.
   const top5=st.slice(0,5).map(x=>x[0]);
   const totals=Object.fromEntries(top5.map(p=>[p,0]));
@@ -1140,8 +1237,59 @@ function raceResultsTable(rows){
   </table>`;
 }
 
+function updateTitleProbability(){
+  const TOTAL_RACES=10;
+  const completed=RACES.length;
+  const remaining=Math.max(0,TOTAL_RACES-completed);
+  const all=standings(DATA);
+
+  if(!all.length){
+    window.TITLE_PROBS={};
+    return;
+  }
+
+  // Mantém a mesma metodologia usada no dashboard anterior:
+  // pontos atuais + projeção das corridas restantes com média histórica
+  // suavizada pelo desempenho médio do campo.
+  const observed=DATA.map(x=>Number(x.pontos));
+  const fieldMean=observed.length ? observed.reduce((a,b)=>a+b,0)/observed.length : 0;
+  const PRIOR=2;
+
+  const projections=all.map(([pilot,current])=>{
+    const history=DATA.filter(x=>x.piloto===pilot).map(x=>Number(x.pontos));
+    const n=history.length;
+    const avg=n
+      ? (history.reduce((a,b)=>a+b,0)+PRIOR*fieldMean)/(n+PRIOR)
+      : fieldMean;
+
+    return {
+      pilot,
+      current:Number(current),
+      projected:Number(current)+avg*remaining
+    };
+  });
+
+  // Converte a projeção em uma distribuição de chances.
+  // A temperatura evita concentração excessiva com poucas corridas disputadas.
+  const maxProjected=Math.max(...projections.map(x=>x.projected));
+  const TEMP=16;
+  const weights=projections.map(x=>Math.exp((x.projected-maxProjected)/TEMP));
+  const z=weights.reduce((a,b)=>a+b,0)||1;
+
+  projections.forEach((x,i)=>x.prob=weights[i]/z*100);
+  window.TITLE_PROBS=Object.fromEntries(projections.map(x=>[x.pilot,x.prob]));
+} 
+
 function updatePilot(){
   const p=document.getElementById("pilotSelect").value;
+  updateTitleProbability();
+  const pilotProbEl=document.getElementById("pilotTitleProb");
+  if(pilotProbEl){
+    const prob=(window.TITLE_PROBS&&window.TITLE_PROBS[p]!==undefined)
+      ? window.TITLE_PROBS[p]
+      : 0;
+    pilotProbEl.textContent=prob.toFixed(0)+"%";
+  }
   const rows=DATA.filter(x=>x.piloto===p);
   const st=standings(DATA);
   const rank=st.findIndex(x=>x[0]===p)+1;
