@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COPA TDP</title>
+<style>
+:root{
+ --bg:#070a0d;--panel:rgba(17,21,25,.82);--panel2:rgba(28,32,37,.88);
+ --edge:#282e34;--white:#f7f8f9;--muted:#a4abb2;--red:#ef1721;--gold:#f3cf4e;
+ --blue:#4fb2ff;--navy:#263eac;--green:#19d64d;--cream:#eadf9b;--gray:#777b80;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;color:var(--white);font-family:Segoe UI,Arial,sans-serif;
+ background:
+   radial-gradient(1050px 520px at 78% 4%,rgba(199,210,219,.27),transparent 62%),
+   radial-gradient(900px 580px at 12% 32%,rgba(239,23,33,.15),transparent 62%),
+   radial-gradient(1000px 600px at 78% 90%,rgba(54,84,98,.22),transparent 68%),
+   linear-gradient(135deg,#0b0f13 0%,#1b2429 38%,#283237 58%,#101519 100%);
+ min-height:100vh;
+}
+body:before{
+ content:"";position:fixed;inset:0;pointer-events:none;opacity:.13;
+ background:
+   radial-gradient(720px 220px at 78% 9%,rgba(255,255,255,.12),transparent 70%),
+   linear-gradient(155deg,transparent 0 49%,rgba(239,23,33,.74) 49.3% 50.1%,transparent 50.4% 53%),
+   repeating-linear-gradient(135deg,transparent 0 38px,rgba(255,255,255,.065) 39px 41px);
+ mix-blend-mode:screen;
+}
+body:after{
+ content:"";position:fixed;inset:0;pointer-events:none;opacity:.14;
+ background:
+   linear-gradient(152deg,transparent 0 70%,rgba(239,23,33,.55) 70.4% 71.2%,transparent 71.6%),
+   linear-gradient(19deg,transparent 0 79%,rgba(255,255,255,.11) 79.5% 80%,transparent 80.5%),
+   radial-gradient(500px 210px at 16% 96%,rgba(239,23,33,.18),transparent 73%);
+}
+.app{max-width:1680px;margin:auto;padding:17px 36px 28px;position:relative;z-index:1}
+.top{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:12px}
+.brand{display:flex;align-items:center;gap:16px}.brand .cup{font-size:51px;filter:drop-shadow(0 5px 3px #000)}
+.brand h1{font-size:50px;line-height:1;margin:0;font-weight:950;letter-spacing:-2px}.brand h1 span{color:var(--red);font-style:italic}
+.nav{display:flex;gap:8px}.nav button{
+ color:#fff;background:#11161a;border:1px solid #444a50;border-radius:10px;padding:10px 15px;font-weight:900;cursor:pointer
+}
+.nav button.active,.nav button:hover{background:var(--red);border-color:var(--red)}
+.page{display:none}.page.active{display:block}
+.grid{display:grid;grid-template-columns:255px minmax(0,1fr) 420px;gap:15px}
+.panel{
+ background:linear-gradient(145deg,rgba(30,37,42,.84),rgba(13,18,22,.84));
+ border:1.2px solid rgba(57,63,69,.9);border-radius:19px;box-shadow:0 13px 36px rgba(0,0,0,.6);overflow:hidden
+}
+.title{font-size:21px;font-weight:950;padding:14px 17px 10px}.subtitle{font-size:14px;font-weight:900}
+.filters{padding:0 17px 18px}
+.toolrow{display:flex;gap:7px;padding:0 0 9px}.btn{
+ background:#23282d;color:#f0f1f2;border:1px solid #485057;border-radius:8px;padding:8px 10px;font-size:11px;font-weight:900;cursor:pointer
+}.btn.red{background:var(--red);border-color:var(--red)}
+.sep{height:1px;background:#2b3136;margin:15px 0}
+.chk{display:flex;align-items:center;gap:8px;margin:9px 0;font-weight:800;font-size:13px}
+input[type=checkbox]{appearance:none;width:18px;height:18px;border:2px solid #d0d4d8;background:#101316;border-radius:2px;flex:0 0 18px}
+input[type=checkbox]:checked{background:var(--red);border-color:var(--red);box-shadow:inset 0 0 0 3px #101316}
+.filterHint{font-size:11px;color:#9199a1;margin-top:6px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kpi{padding:14px 18px;min-height:106px}.kpi .label{font-size:14px;font-weight:900;color:#e0e3e5}.kpi .n{font-size:36px;font-weight:950;margin-top:4px}.kpi .leader{font-size:23px;line-height:1.1}
+.block{margin-top:12px}.podium{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 17px 17px}.pod{
+ padding:12px;border-radius:16px;text-align:center;border:1px solid #5d6267;background:linear-gradient(145deg,#44484c,#25292d)
+}.pod:nth-child(1){background:linear-gradient(145deg,#5e5a2b,#2b291b);border-color:#7a712e}
+.pod:nth-child(3){background:linear-gradient(145deg,#623a1c,#2c2016);border-color:#7b451c}
+.pod .p{font-size:24px;font-weight:950;color:var(--gold)}.pod:nth-child(3) .p{color:#e58016}.pod .nm{font-size:19px;font-weight:950;margin-top:7px}.pod .pt{font-size:12px;color:#dfe1e3}
+.evoWrap{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:12px;align-items:stretch;padding:0 14px 15px}
+.chart{height:320px;border-radius:11px}
+.legendBox{
+ background:rgba(8,11,14,.52);border-left:1px solid #3c4248;border-radius:0 12px 12px 0;padding:18px 17px;display:flex;flex-direction:column;justify-content:center
+}
+.legendTitle{text-transform:uppercase;color:#a9b0b7;font-size:11px;font-weight:950;letter-spacing:.11em;margin-bottom:13px}
+.legendItem{display:grid;grid-template-columns:17px 1fr auto;gap:9px;align-items:center;margin:13px 0;font-size:16px;font-weight:950}
+.legendDot{width:15px;height:15px;border-radius:50%;border:2px solid #0e1114}
+.legendValue{color:#d7dce0;font-size:14px}
+.dataBlock{padding:0 12px 14px;overflow:auto;max-height:335px}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+th{position:sticky;top:0;z-index:3;background:#171c21;color:#e2e6e9;text-align:left;padding:11px;border-bottom:1px solid #4e555c}
+td{padding:8px 10px;background:#4b4d50;border-bottom:1px solid #34393e}
+tr:nth-child(even) td{background:#cecece;color:#24272a}
+td:first-child{font-weight:900}
+.rank{padding:0 14px 17px}.rankRow{display:grid;grid-template-columns:88px 1fr 30px;gap:8px;align-items:center;margin:8px 0}
+.rankName{text-align:right;font-size:13px;font-weight:900}.rankBar{height:18px;background:#252b30;border-radius:2px;overflow:hidden}.rankBar i{display:block;height:100%}.rankPts{color:var(--gold);font-weight:950}
+.raceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 12px 15px}
+.raceCard{min-width:0}.raceHead{padding:12px 14px 9px;border-bottom:1px solid #343a40}.raceHead strong{font-size:17px}.raceHead span{display:block;color:#8f979f;font-size:10px;margin-top:3px}
+.raceRows{padding:7px 10px 10px}.raceRow{display:grid;grid-template-columns:18px 1fr 42px;gap:8px;align-items:center;margin:7px 0;font-size:12px}.swatch{width:12px;height:12px;border-radius:50%;border:1px solid #111}.raceName{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.racePts{text-align:right;font-weight:950;color:#e5e8ea}
+.raceBar{height:7px;background:#252b30;border-radius:999px;overflow:hidden;grid-column:2/4;margin-top:-4px}.raceBar i{display:block;height:100%;border-radius:999px}
+.pilotHeader{display:grid;grid-template-columns:315px 1fr;gap:15px}.photoCard{padding:17px;display:flex;flex-direction:column;align-items:center}.photo{width:100%;height:280px;object-fit:cover;border-radius:15px;border:1px solid #4a5158;background:#171b1f;box-shadow:0 10px 26px #0009}.fallback{width:100%;height:280px;border-radius:15px;background:linear-gradient(145deg,#343a40,#111519);display:grid;place-items:center;font-size:105px}.photoCard h2{font-size:28px;margin:12px 0 2px}
+.pilotStats{padding:18px 22px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.pilotName{text-align:center;font-size:40px;font-weight:950;margin-top:4px}.stat{text-align:center}.stat .ico{font-size:23px}.stat b{display:block;font-size:29px;margin:4px 0}.stat span{font-size:13px;color:#c1c6cb;font-weight:800}
+.twoCols{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:13px}.metricGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 15px 15px}.metric{text-align:center;background:#161b20;border:1px solid #30363b;border-radius:12px;padding:12px}.metric b{font-size:24px;display:block;margin-top:5px}.metric span{font-size:10px;color:#a4abb2;text-transform:uppercase}
+.pilotBottom{display:grid;grid-template-columns:1.12fr .88fr;gap:13px;margin-top:13px}.evoSmall{height:310px;padding:3px 14px 12px}
+.empty{padding:34px;text-align:center;color:#8d969e}
+.footer{text-align:center;color:#777f87;font-size:11px;padding:14px}
+@media(max-width:1320px){.grid{grid-template-columns:235px 1fr}.grid>.panel:last-child{grid-column:1/-1}.pilotHeader{grid-template-columns:280px 1fr}}
+@media(max-width:960px){.app{padding:12px}.top{flex-direction:column;align-items:flex-start}.brand h1{font-size:37px}.grid,.pilotHeader,.pilotBottom{grid-template-columns:1fr}.evoWrap{grid-template-columns:1fr}.legendBox{border-left:0;border-top:1px solid #3c4248;border-radius:0 0 12px 12px}.raceGrid{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.pilotStats{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.kpis,.podium,.pilotStats,.twoCols{grid-template-columns:1fr}.brand h1{font-size:29px}.logo{font-size:41px}}
+
+/* ===== PILOT PAGE — reference-inspired layout ===== */
+.pilotRef{
+  display:grid;grid-template-columns:1.35fr 1fr;gap:14px;
+  margin-top:2px;
+}
+.pilotHero{
+  display:grid;grid-template-columns:48% 52%;min-height:345px;
+  background:linear-gradient(145deg,rgba(13,20,24,.94),rgba(7,11,14,.94));
+}
+.pilotHeroPhoto{
+  position:relative;padding:12px;overflow:hidden;
+}
+.pilotHeroPhoto:after{display:none!important}
+.pilotHeroPhoto img,.pilotHeroPhoto .fallback{
+  width:100%;height:318px;object-fit:cover;border-radius:9px;
+  border:1px solid #485158;box-shadow:0 14px 30px #0009;
+}
+.pilotHeroPhoto .fallback{display:grid;place-items:center;background:linear-gradient(145deg,#333a40,#101417);font-size:95px}
+.pilotHeroInfo{padding:26px 32px 18px 25px;display:flex;flex-direction:column;justify-content:center}
+.pilotHeroInfo .season{font-size:12px;letter-spacing:.16em;color:#98a1a8;text-transform:uppercase;font-weight:900}
+.pilotHeroInfo .name{
+  font-size:58px;font-weight:950;font-style:italic;line-height:.94;margin:3px 0 6px;letter-spacing:-2px
+}
+.pilotHeroInfo .rankLine{font-size:19px;font-weight:850}
+.pilotHeroInfo .rankNo{color:var(--red);font-size:27px;font-weight:950;margin-right:7px}
+.pilotHeroInfo .quote{font-size:16px;color:#b8bec4;line-height:1.35;margin-top:22px;max-width:390px}
+.heroMini{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:auto;padding-top:18px;border-top:1px solid #3a4248
+}
+.heroMini .mini{text-align:center}.heroMini b{display:block;font-size:23px}.heroMini span{font-size:11px;color:#9ca4ab}
+.pilotMetricGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pilotMetric{
+  min-height:108px;padding:14px;border-radius:15px;
+  background:linear-gradient(145deg,rgba(16,29,34,.96),rgba(10,17,20,.94));
+  border:1px solid #314047;display:flex;flex-direction:column;justify-content:center
+}
+.pilotMetric .micon{font-size:24px;line-height:1}.pilotMetric .mlabel{font-size:11px;color:#c4cbd0;text-transform:uppercase;font-weight:900;margin-top:7px}
+.pilotMetric .mvalue{font-size:29px;font-weight:950;margin-top:4px}
+.pilotChooser{
+  grid-column:1/-1;margin-top:11px;display:grid;grid-template-columns:180px 1fr;gap:10px;align-items:center
+}
+.pilotChooser label{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#aeb5bc;font-weight:950}
+.pilotChooser select{
+  width:100%;background:#10161a;border:1px solid #475159;color:#fff;border-radius:9px;padding:11px;font-weight:900
+}
+.pilotVizRow{display:grid;grid-template-columns:1fr 1.15fr;gap:14px;margin-top:14px}
+.pilotViz{min-height:280px}.pilotViz .title{display:flex;align-items:center;gap:8px}
+.pilotViz .title .redIcon{color:var(--red);font-size:25px}
+.pilotChart{height:245px;padding:0 10px 12px}
+.positionNote{
+  position:absolute;right:16px;top:74px;width:170px;color:#bdc4c9;font-size:11px;line-height:1.35
+}
+.positionChartWrap{position:relative;height:245px;padding-right:185px}
+.pilotBottomRef{display:grid;grid-template-columns:2.1fr 1fr;gap:14px;margin-top:14px}
+.resultRef{min-height:235px}
+.resultRef .dataBlock{max-height:245px}
+.quoteRef{
+  min-height:235px;padding:30px 34px;position:relative;
+  background:linear-gradient(145deg,rgba(13,20,24,.94),rgba(8,12,15,.94))
+}
+.quoteRef .bigQuote{font-size:56px;color:#7e878e;line-height:.5;font-family:Georgia,serif}
+.quoteRef p{font-size:18px;line-height:1.4;color:#c5cbd0;max-width:310px;margin:18px 0 0}
+.quoteRef .helmetMark{position:absolute;right:23px;bottom:18px;font-size:82px;opacity:.12}
+.pilotRefLabel{font-size:12px;color:#99a2aa;letter-spacing:.09em;font-weight:950;text-transform:uppercase}
+@media(max-width:1200px){
+ .pilotRef{grid-template-columns:1fr}.pilotMetricGrid{grid-template-columns:repeat(3,1fr)}
+ .pilotVizRow,.pilotBottomRef{grid-template-columns:1fr}
+}
+@media(max-width:800px){
+ .pilotHero{grid-template-columns:1fr}.pilotHeroPhoto:after{display:none}
+ .pilotHeroInfo{padding:18px}.pilotHeroInfo .name{font-size:46px}
+ .pilotMetricGrid{grid-template-columns:1fr 1fr}.pilotChooser{grid-template-columns:1fr}
+ .positionChartWrap{padding-right:0}.positionNote{display:none}
+}
+@media(max-width:520px){.pilotMetricGrid{grid-template-columns:1fr}.heroMini{grid-template-columns:1fr}}
+
+
+/* Pilot page cleanup and reference layout */
+.pilotHeroPhoto{position:relative;overflow:hidden}
+.pilotHeroPhoto img,.pilotHeroPhoto .fallback{
+  position:relative;z-index:2;
+}
+.pilotLower{display:grid;grid-template-columns:2.1fr .9fr;gap:14px;margin-top:14px}
+.pointsRacePanel{min-height:250px}
+.pointsRaceTables{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 14px 14px}
+.pointsRaceCard{border:1px solid #2e373e;background:rgba(10,15,18,.70);border-radius:10px;overflow:hidden}
+.pointsRaceCard h4{margin:0;padding:10px 12px;border-bottom:1px solid #2e373e;font-size:14px}
+.pointsRaceCard table{font-size:12px}.pointsRaceCard th,.pointsRaceCard td{padding:8px 9px}
+.pointsRaceCard th{background:#12181c}.pointsRaceCard td{background:#3b3f42;color:#fff}
+.pointsRaceCard tr:nth-child(even) td{background:#c7c7c7;color:#222}
+.resultsCorner{min-height:250px}.resultsCorner .dataBlock{max-height:210px}
+.resultsCorner table{font-size:11px}.resultsCorner th,.resultsCorner td{padding:7px 8px}
+@media(max-width:1050px){.pilotLower{grid-template-columns:1fr}.pointsRaceTables{grid-template-columns:1fr}}
+
+
+/* ===== Final pilot-page reference polish ===== */
+.pilotViz .title{display:flex;align-items:center;gap:9px}
+.pilotViz .redIcon{color:var(--red);font-size:24px}
+#pilotPointsRaceChart{height:245px;padding:0 10px 12px}
+.pilotLowerRef{display:grid;grid-template-columns:2.15fr .85fr;gap:14px;margin-top:14px}
+.resultsCorner{min-height:250px}
+.resultsCorner .dataBlock{max-height:220px}
+.resultsCorner table{font-size:12px}
+.resultsCorner table th,.resultsCorner table td{padding:8px 9px}
+.quoteRef{
+ min-height:250px;padding:28px 34px;position:relative;
+ background:linear-gradient(145deg,rgba(13,20,24,.94),rgba(8,12,15,.94))
+}
+.quoteRef .bigQuote{font-size:56px;color:#777f86;line-height:.5;font-family:Georgia,serif}
+.quoteRef p{font-size:18px;line-height:1.4;color:#c5cbd0;max-width:310px;margin:18px 0 0}
+.quoteRef .helmetMark{position:absolute;right:22px;bottom:18px;font-size:78px;opacity:.10}
+@media(max-width:1050px){.pilotLowerRef{grid-template-columns:1fr}}
+
+
+/* ===== FIRST PAGE — classification refinement ===== */
+.champGrid{
+  display:grid;grid-template-columns:255px minmax(0,1fr) 430px;gap:14px;align-items:start
+}
+.champMain{min-width:0}
+.champRight{display:flex;flex-direction:column;gap:12px;min-width:0}
+.champRightPanel{min-width:0}
+.champRightResults{min-height:0}
+.champKpis{display:grid;grid-template-columns:1fr 1fr 1.35fr;gap:12px}
+.champKpi{min-height:112px;padding:15px 18px;display:flex;flex-direction:column;justify-content:center}
+.champKpi .label{font-size:14px;font-weight:900;color:#dfe4e7}
+.champKpi .num{font-size:39px;font-weight:950;margin-top:5px}
+.champLeader{display:grid;grid-template-columns:66px 1fr;align-items:center;gap:10px}
+.champLeaderIcon{font-size:45px;text-align:center}.champLeaderLabel{font-size:12px;color:#c5ccd1;font-weight:800}
+.champLeaderName{font-size:27px;font-weight:950;line-height:1.03}.champLeaderPts{font-size:16px;font-weight:950;color:var(--gold);margin-top:3px}
+.champTop3{margin-top:12px}.champPodium{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;padding:0 17px 17px}
+.champPod{min-height:118px;padding:13px;border-radius:15px;text-align:center;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(145deg,#3d4145,#20252a);border:1px solid #555b60}
+.champPod.first{background:linear-gradient(145deg,#706314,#27200b);border-color:#b49a2a}
+.champPod.third{background:linear-gradient(145deg,#633715,#2a1c10);border-color:#8a4e1e}
+.champPod .place{font-size:22px;font-weight:950;color:var(--gold)}.champPod.third .place{color:#e78017}
+.champPod .name{font-size:19px;font-weight:950;margin:5px 0}.champPod .pts{font-size:15px;color:#f3cf4e;font-weight:950}
+.champEvoWrap{display:grid;grid-template-columns:minmax(0,1fr) 215px;gap:10px;padding:0 12px 14px}
+.champEvoChart{height:335px}
+.champEvoLegend{padding:34px 7px 0;border-left:1px solid #333b42}
+.champEvoLegend .item{display:grid;grid-template-columns:14px 1fr auto;gap:8px;align-items:center;margin:14px 0;font-size:15px;font-weight:950}
+.champEvoLegend .dot{width:13px;height:13px;border-radius:50%;border:1px solid #101316}
+.champEvoLegend .score{font-size:14px;color:#e7eaec}
+.champResultsTable{padding:0 12px 12px;max-height:310px;overflow:auto}
+.champResultsTable table{font-size:11.5px}.champResultsTable th,.champResultsTable td{padding:8px 8px}
+.champResultsTable td:first-child{font-weight:950}
+.champRaceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;padding:0 12px 14px}
+.champRaceCard{min-width:0;background:rgba(8,12,15,.64);border:1px solid #273037;border-radius:10px;overflow:hidden}
+.champRaceHead{padding:10px 12px 8px;border-bottom:1px solid #2a3339;font-size:14px;font-weight:950}
+.champRaceBody{padding:7px 11px 9px}
+.champRaceRow{display:grid;grid-template-columns:14px 1fr 30px;gap:7px;align-items:center;margin:8px 0}
+.champRaceDot{width:10px;height:10px;border-radius:50%;border:1px solid #111}
+.champRaceName{font-size:11px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.champRacePts{text-align:right;font-size:12px;font-weight:950;color:#e7eaed}
+.champRaceBar{grid-column:2/4;height:6px;background:#21282d;border-radius:99px;overflow:hidden;margin-top:-4px}.champRaceBar i{display:block;height:100%;border-radius:99px}
+.champRank{padding:0 13px 13px}
+.champRankRow{display:grid;grid-template-columns:24px 78px 1fr 35px;gap:8px;align-items:center;margin:8px 0}
+.champRankNo{font-size:13px;font-weight:950;text-align:center}.champRankName{font-size:13px;font-weight:900}
+.champRankBar{height:17px;background:#20272c;border-radius:2px;overflow:hidden}.champRankBar i{display:block;height:100%}
+.champRankPts{font-size:12px;font-weight:950;text-align:right;color:var(--gold)}
+@media(max-width:1320px){
+ .champGrid{grid-template-columns:235px minmax(0,1fr)}.champRight{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr}
+}
+@media(max-width:960px){
+ .champGrid,.champRight{grid-template-columns:1fr}.champRight{display:flex}
+ .champKpis{grid-template-columns:1fr 1fr}.champLeader{grid-column:1/-1}.champEvoWrap{grid-template-columns:1fr}
+ .champEvoLegend{border-left:0;border-top:1px solid #333b42;padding:10px;display:flex;gap:16px;flex-wrap:wrap}.champEvoLegend .item{margin:4px 0}
+ .champRaceGrid{grid-template-columns:1fr}
+}
+@media(max-width:560px){.champKpis,.champPodium{grid-template-columns:1fr}.champLeader{grid-column:auto}}
+
+
+/* ===== TOP 3 premium podium styling ===== */
+.champTop3{
+  position:relative;
+  background:
+    radial-gradient(420px 120px at 50% 100%,rgba(255,255,255,.05),transparent 70%),
+    linear-gradient(145deg,rgba(34,39,43,.94),rgba(9,13,16,.92));
+}
+.champTop3:after{
+  content:"";position:absolute;left:4%;right:4%;bottom:0;height:2px;
+  background:linear-gradient(90deg,transparent,#4b5258 18%,#aeb6bd 50%,#4b5258 82%,transparent);
+  opacity:.45;
+}
+.champPodium{align-items:stretch}
+.champPod{
+  position:relative;overflow:hidden;min-height:136px;padding:14px 12px 16px;
+  border-radius:16px;
+  display:flex;flex-direction:column;justify-content:center;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 8px 18px rgba(0,0,0,.32);
+  transform:translateY(4px);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.champPod:hover{transform:translateY(0);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 12px 24px rgba(0,0,0,.42)}
+.champPod:before{
+  content:"";position:absolute;inset:-35% -10% auto;height:90px;
+  background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.16),transparent 67%);
+  transform:rotate(-8deg);pointer-events:none;
+}
+.champPod.first{
+  background:
+    radial-gradient(circle at 50% 5%,rgba(255,244,155,.33),transparent 45%),
+    linear-gradient(145deg,#7c6a18 0%,#4d3e0c 38%,#201a08 100%);
+  border:1px solid #b99f33;
+}
+.champPod.first:after{
+  content:"";position:absolute;inset:5px;border:1px solid rgba(255,223,95,.18);border-radius:12px;pointer-events:none;
+}
+.champPod:nth-child(2){
+  background:
+    radial-gradient(circle at 50% 5%,rgba(255,255,255,.24),transparent 43%),
+    linear-gradient(145deg,#62686d 0%,#3b4146 40%,#1c2125 100%);
+  border-color:#8d949a;
+}
+.champPod.third{
+  background:
+    radial-gradient(circle at 50% 5%,rgba(255,187,112,.24),transparent 43%),
+    linear-gradient(145deg,#75421d 0%,#4e2912 42%,#20140c 100%);
+  border-color:#a6632c;
+}
+.champPod .place{
+  font-size:25px;line-height:1;font-weight:950;color:#ffe37c;
+  text-shadow:0 2px 8px rgba(0,0,0,.45)
+}
+.champPod:nth-child(2) .place{color:#eef1f3}
+.champPod.third .place{color:#f3a55d}
+.champPod .name{
+  font-size:21px;font-weight:950;margin:10px 0 5px;
+  text-shadow:0 2px 8px rgba(0,0,0,.45)
+}
+.champPod .pts{font-size:16px;color:#fff0a0;font-weight:950}
+.champPod:nth-child(2) .pts{color:#f4f5f6}
+.champPod.third .pts{color:#ffc488}
+.champPod .place:before{
+  content:"✦";font-size:11px;display:inline-block;margin-right:7px;opacity:.75;vertical-align:middle
+}
+.champPod:nth-child(2) .place:before{content:"◆"}
+.champPod.third .place:before{content:"✦"}
+
+@media(max-width:900px){
+ .champPod{min-height:118px}
+}
+
+
+/* ===== FINAL MOBILE LAYOUT ===== */
+@media(max-width:700px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  .app{width:100%;padding:8px}
+  .top{position:sticky;top:0;z-index:50;display:flex;flex-direction:column;align-items:stretch;gap:8px;
+       padding:6px 2px 9px;margin-bottom:7px;background:rgba(10,14,17,.94);backdrop-filter:blur(10px)}
+  .brand{gap:8px}.brand .cup{font-size:33px}.brand h1{font-size:29px;letter-spacing:-1.3px}
+  .nav{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .nav button{padding:10px 6px;font-size:11px}
+
+  /* First page: pilot selector first, then classification/results, then the remaining charts. */
+  .champGrid{display:flex;flex-direction:column;gap:9px}
+  .slicerPanel{order:0;min-height:0;width:100%}
+  .champRight{order:1;width:100%;display:flex!important;flex-direction:column;gap:9px}
+  .champMain{order:2;display:flex;flex-direction:column;gap:9px;width:100%}
+  .champRightPanel{width:100%}
+  .champRightResults{width:100%}
+
+  .slicerTitle{font-size:17px;padding:12px 13px 8px}
+  .slicerSection{padding:0 12px 12px}
+  .filterTools{padding-bottom:5px}
+  .btn{padding:8px 9px;font-size:10px}
+  .pilotList{max-height:none;overflow:visible}
+  .chk{font-size:13px;margin:7px 0}
+  .racePill{font-size:12px;padding:10px 9px;margin:5px 0}
+
+  .champKpis{grid-template-columns:1fr 1fr;gap:7px}
+  .champKpi{min-height:82px;padding:10px 12px}
+  .champKpi .label{font-size:10px;line-height:1.2}.champKpi .num{font-size:28px}
+  .champLeader{grid-column:1/-1;grid-template-columns:42px 1fr;min-height:84px}
+  .champLeaderIcon{font-size:31px}.champLeaderLabel{font-size:10px}.champLeaderName{font-size:22px}.champLeaderPts{font-size:13px}
+
+  .title{font-size:18px;padding:11px 12px 8px}
+  .champPodium{grid-template-columns:repeat(3,1fr);gap:6px;padding:0 9px 10px}
+  .champPod{min-height:106px;padding:9px 4px;border-radius:11px}
+  .champPod .place{font-size:18px}.champPod .name{font-size:12px;margin:6px 0 2px}.champPod .pts{font-size:11px}
+
+  /* General ranking: show the complete list without an internal height cap. */
+  .champRank{padding:0 10px 11px;max-height:none;overflow:visible}
+  .champRankRow{grid-template-columns:22px 72px minmax(0,1fr) 30px;gap:6px;margin:7px 0}
+  .champRankNo{font-size:11px}.champRankName{font-size:11px;white-space:nowrap}
+  .champRankBar{height:17px}.champRankPts{font-size:11px}
+
+  /* Result table must fit on the phone: hide only the least useful lap column and allow race names to wrap. */
+  .champResultsTable{max-height:none;overflow:visible;padding:0 8px 9px}
+  .champResultsTable table{width:100%;min-width:0;table-layout:fixed;font-size:9.5px}
+  .champResultsTable th,.champResultsTable td{padding:7px 5px;overflow:hidden}
+  .champResultsTable th:nth-child(1),.champResultsTable td:nth-child(1){width:12%}
+  .champResultsTable th:nth-child(2),.champResultsTable td:nth-child(2){width:24%}
+  .champResultsTable th:nth-child(3),.champResultsTable td:nth-child(3){width:35%;white-space:normal}
+  .champResultsTable th:nth-child(4),.champResultsTable td:nth-child(4){width:13%}
+  .champResultsTable th:last-child,.champResultsTable td:last-child{display:table-cell}
+
+  .champEvoWrap{grid-template-columns:1fr;gap:3px;padding:0 7px 9px}
+  .champEvoChart{height:215px}
+  .champEvoLegend{border-left:0;border-top:1px solid #333b42;padding:9px 3px;
+                   display:grid;grid-template-columns:1fr 1fr;gap:3px 9px}
+  .champEvoLegend .item{font-size:12px;margin:3px 0}
+  .champEvoLegend .dot{width:10px;height:10px}.champEvoLegend .score{font-size:10px}
+
+  .champRaceGrid{grid-template-columns:1fr;gap:7px;padding:0 8px 10px}
+  .champRaceCard{border-radius:9px}.champRaceHead{font-size:13px;padding:9px 10px 7px}
+  .champRaceBody{padding:5px 9px 7px}.champRaceName{font-size:11px}
+
+  /* Pilot page on small screens */
+  .pilotRef{display:flex;flex-direction:column;gap:9px}
+  .pilotHero{display:flex;flex-direction:column;min-height:0}
+  .pilotHeroPhoto{padding:8px}.pilotHeroPhoto img,.pilotHeroPhoto .fallback{height:225px}
+  .pilotHeroInfo{padding:14px 15px 12px}.pilotHeroInfo .season{font-size:9px}
+  .pilotHeroInfo .name{font-size:44px}.pilotHeroInfo .rankLine{font-size:15px}
+  .pilotHeroInfo .quote{font-size:13px;margin-top:12px}
+  .heroMini{padding-top:11px}.heroMini .mini b{font-size:20px}.heroMini .mini span{font-size:9px}
+  .pilotMetricGrid{grid-template-columns:1fr 1fr;gap:7px}
+  .pilotMetric{min-height:82px;padding:9px;border-radius:11px}.pilotMetric .micon{font-size:18px}
+  .pilotMetric .mlabel{font-size:8px}.pilotMetric .mvalue{font-size:22px}
+  .pilotChooser{display:grid;grid-template-columns:1fr;gap:5px;margin:0 0 9px;padding:12px}
+  .pilotChooser label{display:block;font-size:10px;margin-bottom:0}
+  .pilotChooser select{padding:10px;font-size:13px}
+
+  .pilotVizRow{display:flex;flex-direction:column;gap:9px;margin-top:9px}
+  .pilotViz{min-height:0}.pilotChart,#pilotPointsRaceChart{height:215px;padding:0 4px 7px}
+  .positionChartWrap{height:215px;padding-right:0}.positionNote{display:none}
+  .pilotLowerRef{display:flex;flex-direction:column;gap:9px;margin-top:9px}
+  .quoteRef{display:none}
+  .resultsCorner .dataBlock{max-height:none}
+  .resultsCorner table{font-size:10px;min-width:0;table-layout:fixed}
+  .resultsCorner table th,.resultsCorner table td{padding:7px 5px}
+  .resultsCorner table th:nth-child(4),.resultsCorner table td:nth-child(4){width:35%}
+
+  .footer{font-size:8px;padding:9px 2px}
+}
+@media(max-width:420px){
+  .app{padding:6px}.brand h1{font-size:27px}.brand .cup{font-size:30px}
+  .champKpis{gap:6px}.champKpi{padding:9px}.champKpi .num{font-size:25px}
+  .champPod .name{font-size:11px}.champPod .pts{font-size:10px}
+  .champRankRow{grid-template-columns:20px 68px minmax(0,1fr) 28px;gap:5px}
+  .champRankName{font-size:10px}.champRankPts{font-size:10px}
+  .champResultsTable table{font-size:8.8px}
+  .champResultsTable th,.champResultsTable td{padding:6px 4px}
+}
+
+
+@media(max-width:700px){
+  .slicerPanel{display:flex;flex-direction:column}
+  /* Current first-page filter markup: race title/section, separator, pilot title/section. */
+  .slicerPanel > .slicerTitle:nth-child(4){order:1}
+  .slicerPanel > .slicerSection:nth-child(5){order:2}
+  .slicerPanel > .sep:nth-child(3){order:3}
+  .slicerPanel > .slicerTitle:nth-child(1){order:4}
+  .slicerPanel > .slicerSection:nth-child(2){order:5}
+  /* Never clip the pilot list or general classification on mobile. */
+  .pilotList{max-height:none!important;overflow:visible!important}
+  .champRank{max-height:none!important;overflow:visible!important}
+  /* Fit all result columns to the phone width. */
+  .champResultsTable table{min-width:0!important;width:100%!important;table-layout:fixed!important}
+  .champResultsTable th,.champResultsTable td{white-space:normal!important;word-break:break-word}
+  .champResultsTable th:nth-child(1),.champResultsTable td:nth-child(1){width:11%!important}
+  .champResultsTable th:nth-child(2),.champResultsTable td:nth-child(2){width:22%!important}
+  .champResultsTable th:nth-child(3),.champResultsTable td:nth-child(3){width:39%!important}
+  .champResultsTable th:nth-child(4),.champResultsTable td:nth-child(4){width:12%!important}
+  .champResultsTable th:nth-child(5),.champResultsTable td:nth-child(5){width:16%!important;display:table-cell!important}
+  /* Best lap column can make the table too dense; show it on a second compact line via smaller text. */
+  .champResultsTable th:nth-child(5),.champResultsTable td:nth-child(5){font-size:8.5px}
+  /* Ranking rows need enough width for all 12 drivers. */
+  .champRankRow{grid-template-columns:20px 70px minmax(0,1fr) 28px!important;gap:5px!important}
+  .champRankName{font-size:10.5px!important}
+  .champRankPts{font-size:10.5px!important}
+}
+
+
+@media (max-width:700px){
+  .pilotRef{display:flex!important;flex-direction:column!important}
+  .pilotRef > .pilotChooserMobile{order:-10}
+  .pilotChooserMobile_UNUSED{
+    display:grid!important;grid-template-columns:1fr!important;gap:5px!important;
+    margin:0 0 1px!important;padding:12px!important;border:1px solid #2f383f!important;
+    border-radius:12px!important;background:linear-gradient(145deg,rgba(26,34,39,.92),rgba(10,15,18,.92))!important;
+  }
+  .pilotChooserMobile label{font-size:10px!important;display:block!important}
+  .pilotChooserMobile select{width:100%!important}
+}
+
+
+@media(max-width:700px){
+  .pilotChooser{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:5px!important;
+    margin:0 0 9px!important;
+    padding:12px!important;
+    border:1px solid #2f383f!important;
+    border-radius:12px!important;
+    background:linear-gradient(145deg,rgba(26,34,39,.92),rgba(10,15,18,.92))!important;
+  }
+  .pilotChooser label{font-size:10px!important;display:block!important}
+  .pilotChooser select{width:100%!important;padding:10px!important;font-size:13px!important}
+  #pilotChooserMobileSlot{display:block!important;order:1;width:100%}
+}
+@media(min-width:701px){
+  #pilotChooserMobileSlot{display:none!important}
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <div class="brand"><div class="cup">🏆</div><h1>COPA <span>TDP</span></h1></div>
+ <div class="nav"><button id="nChamp" class="active" onclick="showPage('champ')">📊 Classificação Geral</button><button id="nPilot" onclick="showPage('pilot')">🏎️ Piloto</button></div>
+</header>
+
+
+<section id="champ" class="page active">
+<div class="champGrid">
+  <aside class="panel slicerPanel">
+    <div class="slicerTitle">🏁 Selecionar Corrida</div>
+    <div class="slicerSection">
+      <div id="racesBox"></div>
+    </div>
+    <div class="sep"></div>
+    <div class="slicerTitle">👤 Selecionar Piloto</div>
+    <div class="slicerSection">
+      <div class="filterTools">
+        <button class="btn red" onclick="allPilots()">Selecionar todos</button>
+        <button class="btn" onclick="nonePilots()">Limpar</button>
+      </div>
+      <div id="pilotsBox" class="pilotList"></div>
+      
+    </div>
+  </aside>
+
+  <main class="champMain">
+    <div class="champKpis">
+      <div class="panel champKpi"><div class="label">🏁 Total de Corridas</div><div class="num" id="kRaces">0</div></div>
+      <div class="panel champKpi"><div class="label">👥 Total de Pilotos</div><div class="num" id="kDrivers">0</div></div>
+      <div class="panel champKpi champLeader">
+        <div class="champLeaderIcon">🏆</div>
+        <div><div class="champLeaderLabel">Líder do Campeonato</div><div class="champLeaderName" id="kLeaderName">—</div><div class="champLeaderPts" id="kLeaderPts">0 pts</div></div>
+      </div>
+    </div>
+
+    <div class="panel champTop3"><div class="title">🏆 Top 3 do Campeonato</div><div class="champPodium" id="podium"></div></div>
+
+    <div class="panel block">
+      <div class="title">📈 Evolução do Top 5 no Campeonato</div>
+      <div class="champEvoWrap">
+        <div class="champEvoChart" id="top5Chart"></div>
+        <div class="champEvoLegend" id="top5Legend"></div>
+      </div>
+    </div>
+
+    <div class="panel block">
+      <div class="title">📊 Pontos por Corrida</div>
+      <div class="champRaceGrid" id="raceGrid"></div>
+    </div>
+  </main>
+
+  <aside class="champRight">
+    <div class="panel champRightPanel">
+      <div class="title">📊 Classificação Geral</div>
+      <div class="champRank" id="ranking"></div>
+    </div>
+
+    <div class="panel champRightResults">
+      <div class="title">🏁 Últimos Resultados</div>
+      <div class="champResultsTable" id="resultTable"></div>
+    </div>
+  </aside>
+</div>
+</section>
+
+
+
+<section id="pilot" class="page">
+
+  <div class="pilotRef">
+    <div class="panel pilotHero">
+      <div class="pilotHeroPhoto">
+        <img id="pPhoto" style="display:none" alt="Foto do piloto">
+        <div id="pFallback" class="fallback">🏎️</div>
+      </div>
+      <div class="pilotHeroInfo">
+        <div class="season">Copa TDP • Temporada 2025/2026</div>
+        <div class="name" id="pTitle">—</div>
+        <div class="rankLine"><span class="rankNo">#<span id="pRankNo">—</span></span> NO CAMPEONATO</div>
+        <div class="quote">“Disciplina hoje,<br>pódio amanhã.”</div>
+        <div class="heroMini">
+          <div class="mini"><b id="pRaceMini">0</b><span>corridas</span></div>
+          <div class="mini"><b id="pPtsMini">0</b><span>pontos</span></div>
+          <div class="mini"><b id="pWinsMini">0</b><span>vitórias</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pilotMetricGrid">
+      <div class="pilotMetric">
+        <div class="micon">🏆</div><div class="mlabel">Pontos</div><div class="mvalue" id="pPts">0</div>
+      </div>
+      <div class="pilotMetric">
+        <div class="micon">🏁</div><div class="mlabel">Corridas</div><div class="mvalue" id="pRace">0</div>
+      </div>
+      <div class="pilotMetric">
+        <div class="micon">⏱️</div><div class="mlabel">Melhor tempo</div><div class="mvalue" id="pBest">—</div>
+      </div>
+      <div class="pilotMetric">
+        <div class="micon">🥇</div><div class="mlabel">Melhor posição</div><div class="mvalue" id="pBestPos">—</div>
+      </div>
+      <div class="pilotMetric">
+        <div class="micon">🏎️</div><div class="mlabel">Vitórias</div><div class="mvalue" id="pWins">0</div>
+      </div>
+      <div class="pilotMetric">
+        <div class="micon">📊</div><div class="mlabel">Posição no campeonato</div><div class="mvalue" id="pRank">—</div>
+      </div>
+      <div class="pilotMetric">
+        <div class="micon">📊</div><div class="mlabel">Média de pontos</div><div class="mvalue" id="mAvg">—</div>
+      </div>
+      <div class="pilotMetric">
+        <div class="micon">〽️</div><div class="mlabel">Consistência</div><div class="mvalue" id="mCons">—</div>
+      </div>
+      <div class="pilotMetric">
+        <div class="micon">🎯</div><div class="mlabel">Taxa de pódio</div><div class="mvalue" id="mPodium">—</div>
+      </div>
+
+      <div class="pilotChooser">
+        <label>Selecionar piloto</label>
+        <select id="pilotSelect"></select>
+      </div>
+    </div>
+  </div>
+
+  <div id="pilotChooserMobileSlot"></div>
+
+  <div class="pilotVizRow">
+    <div class="panel pilotViz">
+      <div class="title"><span class="redIcon">💯</span> PONTOS POR CORRIDA</div>
+      <div class="pilotChart" id="pilotPointsRaceChart"></div>
+    </div>
+
+    <div class="panel pilotViz">
+      <div class="title"><span class="redIcon">⌁</span> EVOLUÇÃO DE POSIÇÕES</div>
+      <div class="positionChartWrap">
+        <div class="pilotChart" id="pilotEvo"></div>
+        <div class="positionNote">ⓘ<br><br>Quanto mais alto no gráfico,<br>melhor a posição.<br><br>O eixo é invertido (1º no topo).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pilotLowerRef">
+    <div class="panel resultsCorner">
+      <div class="title">🏁 RESULTADOS DAS CORRIDAS</div>
+      <div class="dataBlock" id="pilotTable"></div>
+    </div>
+
+    <div class="panel quoteRef">
+      <div class="bigQuote">“</div>
+      <p>Cada volta<br>é uma chance<br>de ser melhor.</p>
+      <div class="helmetMark">🏎️</div>
+    </div>
+  </div>
+</section>
+
+<div class="footer">COPA TDP • Dashboard independente • Dados incorporados dos arquivos enviados</div>
+</div>
+
+<script>
+const PAYLOAD={"data": [{"piloto": "BERTON", "corrida": "KGV", "data": "04/25", "raceKey": "KGV 04/25", "pontos": 10.0, "posicao": "Primeiro", "volta": "1:21.076"}, {"piloto": "BERTON", "corrida": "DREAM CAR", "data": "11/25", "raceKey": "DREAM CAR 11/25", "pontos": 10.0, "posicao": "Primeiro", "volta": "00:37.30"}, {"piloto": "GUIMA", "corrida": "KGV", "data": "04/25", "raceKey": "KGV 04/25", "pontos": 7.0, "posicao": "Segundo", "volta": "1:24.100"}, {"piloto": "REX", "corrida": "DREAM CAR", "data": "11/25", "raceKey": "DREAM CAR 11/25", "pontos": 7.0, "posicao": "Segundo", "volta": "00:39.06"}, {"piloto": "ROBINHO", "corrida": "KGV", "data": "04/25", "raceKey": "KGV 04/25", "pontos": 5.0, "posicao": "Terceiro", "volta": "1:22.513"}, {"piloto": "HENRIQUE", "corrida": "KGV", "data": "04/25", "raceKey": "KGV 04/25", "pontos": 3.0, "posicao": "Quarto", "volta": "1:23.065"}, {"piloto": "HENRIQUE", "corrida": "DREAM CAR", "data": "11/25", "raceKey": "DREAM CAR 11/25", "pontos": 5.0, "posicao": "Terceiro", "volta": "00:40.00"}, {"piloto": "ROSE", "corrida": "KGV", "data": "04/25", "raceKey": "KGV 04/25", "pontos": 2.0, "posicao": "Quinto", "volta": "1:22.484"}, {"piloto": "NICOLAS", "corrida": "DREAM CAR", "data": "11/25", "raceKey": "DREAM CAR 11/25", "pontos": 3.0, "posicao": "Quarto", "volta": "00:42.20"}, {"piloto": "LUCAS", "corrida": "KGV", "data": "04/25", "raceKey": "KGV 04/25", "pontos": 1.0, "posicao": "Sexto", "volta": "1:24.546"}, {"piloto": "GUILHERME", "corrida": "DREAM CAR", "data": "11/25", "raceKey": "DREAM CAR 11/25", "pontos": 2.0, "posicao": "Quinto", "volta": "00:39.07"}, {"piloto": "HIRO", "corrida": "KGV", "data": "04/25", "raceKey": "KGV 04/25", "pontos": 0.0, "posicao": "Sétimo", "volta": "1:27.268"}, {"piloto": "GUIMA", "corrida": "DREAM CAR", "data": "11/25", "raceKey": "DREAM CAR 11/25", "pontos": 1.0, "posicao": "Sexto", "volta": "00:38.34"}, {"piloto": "GUILHERME", "corrida": "KGV", "data": "04/25", "raceKey": "KGV 04/25", "pontos": 0.0, "posicao": "Oitavo", "volta": "1:30.691"}, {"piloto": "RIAN", "corrida": "DREAM CAR", "data": "11/25", "raceKey": "DREAM CAR 11/25", "pontos": 0.0, "posicao": "Setimo", "volta": "00:38.30"}, {"piloto": "NICOLAS", "corrida": "KGV", "data": "04/25", "raceKey": "KGV 04/25", "pontos": 0.0, "posicao": "Nono", "volta": "1:31.910"}, {"piloto": "ROSE", "corrida": "DREAM CAR", "data": "11/25", "raceKey": "DREAM CAR 11/25", "pontos": 0.0, "posicao": "Oitavo", "volta": "00:38.60"}, {"piloto": "RIAN", "corrida": "KGV", "data": "04/25", "raceKey": "KGV 04/25", "pontos": 0.0, "posicao": "Decimo", "volta": "1:30.590"}, {"piloto": "HIRO", "corrida": "DREAM CAR", "data": "11/25", "raceKey": "DREAM CAR 11/25", "pontos": 0.0, "posicao": "Nono", "volta": "00:42.08"}, {"piloto": "CAUA", "corrida": "DREAM CAR", "data": "11/25", "raceKey": "DREAM CAR 11/25", "pontos": 0.0, "posicao": "Decimo Primeiro", "volta": "00:47.75"}, {"piloto": "LUCAS", "corrida": "DREAM CAR", "data": "11/25", "raceKey": "DREAM CAR 11/25", "pontos": 0.0, "posicao": "Decimo", "volta": "00:46.81"}, {"piloto": "ROSE", "corrida": "KGV", "data": "07/26", "raceKey": "KGV 07/26", "pontos": 10.0, "posicao": "Primeiro", "volta": "1:02.699"}, {"piloto": "HENRIQUE", "corrida": "KGV", "data": "07/26", "raceKey": "KGV 07/26", "pontos": 7.0, "posicao": "Segundo", "volta": "1:04.819"}, {"piloto": "BERTON", "corrida": "KGV", "data": "07/26", "raceKey": "KGV 07/26", "pontos": 5.0, "posicao": "Terceiro", "volta": "1:05.547"}, {"piloto": "REX", "corrida": "KGV", "data": "07/26", "raceKey": "KGV 07/26", "pontos": 3.0, "posicao": "Quarto", "volta": "1:05.584"}, {"piloto": "RIAN", "corrida": "KGV", "data": "07/26", "raceKey": "KGV 07/26", "pontos": 2.0, "posicao": "Quinto", "volta": "1:05.542"}, {"piloto": "LUCAS", "corrida": "KGV", "data": "07/26", "raceKey": "KGV 07/26", "pontos": 1.0, "posicao": "Sexto", "volta": "1:08.143"}], "raceOrder": ["KGV 04/25", "DREAM CAR 11/25", "KGV 07/26"], "photos": {"BERTON": "https://raw.githubusercontent.com/LSarti/Kart/main/Berton.png", "CAUA": "https://raw.githubusercontent.com/LSarti/Kart/main/Caua.png", "GUILHERME": "https://raw.githubusercontent.com/LSarti/Kart/main/Guilherme.png", "GUIMA": "https://raw.githubusercontent.com/LSarti/Kart/main/Guima.png", "HENRIQUE": "https://raw.githubusercontent.com/LSarti/Kart/main/Henrique.png", "HIRO": "https://raw.githubusercontent.com/LSarti/Kart/main/Hiro.png", "LUCAS": "https://raw.githubusercontent.com/LSarti/Kart/main/Lucas.png", "NICOLAS": "https://raw.githubusercontent.com/LSarti/Kart/main/Nicolas.png", "REX": "https://raw.githubusercontent.com/LSarti/Kart/main/Rex.png", "RIAN": "https://raw.githubusercontent.com/LSarti/Kart/main/Rian.png", "ROBINHO": "https://raw.githubusercontent.com/LSarti/Kart/main/Robinho.png", "ROSE": "https://raw.githubusercontent.com/LSarti/Kart/main/Rose.png"}};
+const DATA=PAYLOAD.data, RACES=PAYLOAD.raceOrder, PHOTOS=PAYLOAD.photos;
+const PILOTS=[...new Set(DATA.map(x=>x.piloto))].sort();
+const posMap={"Primeiro":1,"Segundo":2,"Terceiro":3,"Quarto":4,"Quinta":5,"Quinto":5,"Sexto":6,"Sétimo":7,"Setimo":7,"Oitavo":8,"Nono":9,"Décimo":10,"Decimo":10,"Décimo Primeiro":11,"Decimo Primeiro":11};
+const palette=["#ffffff","#4fb2ff","#263eac","#eadf9b","#19d64d","#ef1721","#bb62bd","#7a7f83","#ff7a28","#38d7c6","#ffce3a","#c75fff"];
+
+function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function standings(rows){const s={};rows.forEach(x=>s[x.piloto]=(s[x.piloto]||0)+Number(x.pontos));return Object.entries(s).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]))}
+function timeMs(t){let s=String(t||"").trim().replace(",",".");if(!s)return Infinity;let p=s.split(":");if(p.length===3)return(+p[0]*3600+ +p[1]*60+ +p[2])*1000;if(p.length===2)return(+p[0]*60+ +p[1])*1000;return Infinity}
+
+const pilotColors={
+  "LUCAS":"#ef1721",
+  "BERTON":"#f2c94e",
+  "HENRIQUE":"#4e8cff",
+  "ROSE":"#9d4edd",
+  "REX":"#21c76a",
+  "GUIMA":"#22c1d6",
+  "ROBINHO":"#f39c33",
+  "NICOLAS":"#8a61d8",
+  "GUILHERME":"#f2f2f2",
+  "RIAN":"#ff4f9a",
+  "CAUA":"#8d969d",
+  "HIRO":"#ff7a18"
+};
+const fallbackPilotColors=["#d96c74","#6fd0a2","#7e9fff","#e7a5d9","#a6d65c","#d3a85e","#79c8d8","#bd9aff"];
+function pilotColor(name){
+  const n=String(name||"").toUpperCase();
+  if(pilotColors[n]) return pilotColors[n];
+  const idx=PILOTS.indexOf(name);
+  return fallbackPilotColors[(idx<0?0:idx)%fallbackPilotColors.length];
+}
+
+function readableTop5Chart(series,labels,colors,maxY){
+  if(!labels.length)return `<div class="empty">Sem dados</div>`;
+  const W=900,H=320,L=64,R=20,T=22,B=58,M=Math.max(1,maxY);
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="none">`;
+  for(let i=0;i<=5;i++){
+    const y=T+(H-T-B)*i/5,val=M-(M*i/5);
+    s+=`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#30383e" stroke-width="1"/>`;
+    s+=`<text x="11" y="${y+5}" fill="#c4cbd0" font-size="14" font-weight="800">${Number.isInteger(val)?val:val.toFixed(1)}</text>`;
+  }
+  series.forEach((arr,si)=>{
+    const col=colors[si];
+    const pts=arr.map((v,i)=>{
+      const x=L+i*(W-L-R)/Math.max(1,labels.length-1);
+      const y=T+(H-T-B)*(1-(v/M));
+      return `${x},${y}`;
+    }).join(" ");
+    s+=`<polyline points="${pts}" fill="none" stroke="${col}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`;
+    arr.forEach((v,i)=>{
+      const x=L+i*(W-L-R)/Math.max(1,labels.length-1);
+      const y=T+(H-T-B)*(1-(v/M));
+      s+=`<circle cx="${x}" cy="${y}" r="7" fill="${col}" stroke="#11161a" stroke-width="2"/>`;
+      s+=`<text x="${x}" y="${y-12}" text-anchor="middle" fill="#fff" font-size="14" font-weight="950">${v}</text>`;
+    });
+  });
+  labels.forEach((l,i)=>{
+    const x=L+i*(W-L-R)/Math.max(1,labels.length-1);
+    s+=`<text x="${x}" y="${H-15}" text-anchor="middle" fill="#e6e9eb" font-size="13" font-weight="850">${esc(l)}</text>`;
+  });
+  return s+"</svg>";
+}
+
+function syncRacePills(){document.querySelectorAll("#racesBox .racePill").forEach(el=>{const cb=el.querySelector("input");el.classList.toggle("on",cb.checked);});}
+function selected(id){return[...document.querySelectorAll(`#${id} input:checked`)].map(x=>x.value)}
+function showPage(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");document.getElementById("nChamp").classList.toggle("active",id==="champ");document.getElementById("nPilot").classList.toggle("active",id==="pilot")}
+function allRaces(){document.querySelectorAll("#racesBox input").forEach(x=>x.checked=true);syncRacePills();updateChamp()}
+function noneRaces(){document.querySelectorAll("#racesBox input").forEach(x=>x.checked=false);syncRacePills();updateChamp()}
+function allPilots(){document.querySelectorAll("#pilotsBox input").forEach(x=>x.checked=true);updateChamp()}
+function nonePilots(){document.querySelectorAll("#pilotsBox input").forEach(x=>x.checked=false);updateChamp()}
+
+function lineChart(series,labels,colors,maxY,withValues=false){
+ if(!labels.length)return `<div class="empty">Sem dados</div>`;
+ const W=900,H=300,L=54,R=18,T=20,B=48,M=Math.max(1,maxY);
+ let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="none">`;
+ for(let i=0;i<=5;i++){const y=T+(H-T-B)*i/5,val=M-(M*i/5);s+=`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#30373d"/><text x="6" y="${y+4}" fill="#969fa7" font-size="11">${Number.isInteger(val)?val:val.toFixed(1)}</text>`}
+ series.forEach((arr,si)=>{const pts=arr.map((v,i)=>{const x=L+i*(W-L-R)/Math.max(1,labels.length-1),y=T+(H-T-B)*(1-v/M);return`${x},${y}`}).join(" ");s+=`<polyline points="${pts}" fill="none" stroke="${colors[si]}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`;arr.forEach((v,i)=>{const x=L+i*(W-L-R)/Math.max(1,labels.length-1),y=T+(H-T-B)*(1-v/M);s+=`<circle cx="${x}" cy="${y}" r="6" fill="${colors[si]}" stroke="#11161a" stroke-width="2"/>`;if(withValues)s+=`<text x="${x}" y="${y-11}" text-anchor="middle" fill="#fff" font-size="12" font-weight="900">${v}</text>`})});
+ labels.forEach((l,i)=>{const x=L+i*(W-L-R)/Math.max(1,labels.length-1);s+=`<text x="${x}" y="${H-14}" text-anchor="middle" fill="#d9dde1" font-size="11">${esc(l)}</text>`});
+ return s+"</svg>";
+}
+
+function updateChamp(){
+  const rs=selected("racesBox"), ps=selected("pilotsBox");
+  const rows=DATA.filter(x=>rs.includes(x.raceKey)&&(ps.length===0||ps.includes(x.piloto)));
+  const st=standings(rows);
+
+   document.getElementById("kRaces").textContent=rs.length;
+  document.getElementById("kDrivers").textContent=new Set(rows.map(x=>x.piloto)).size;
+  document.getElementById("kLeaderName").textContent=st[0]?st[0][0]:"—";
+  document.getElementById("kLeaderPts").textContent=st[0]?st[0][1]+" pts":"0 pts";
+
+  document.getElementById("podium").innerHTML=st.slice(0,3).map((x,i)=>
+    `<div class="champPod ${i===0?"first":i===2?"third":""}">
+      <div class="place">${i+1}º</div><div class="name">${esc(x[0])}</div><div class="pts">${x[1]} pts</div>
+    </div>`
+  ).join("")||`<div class="empty">Sem dados</div>`;
+
+  const max=st[0]?.[1]||1;
+  document.getElementById("ranking").innerHTML=st.length?st.map((x,i)=>
+    `<div class="champRankRow">
+      <div class="champRankNo">${i+1}</div>
+      <div class="champRankName">${esc(x[0])}</div>
+      <div class="champRankBar"><i style="width:${x[1]/max*100}%;background:${pilotColor(x[0])}"></i></div>
+      <div class="champRankPts">${x[1]}</div>
+    </div>`
+  ).join(""):`<div class="empty">Sem dados</div>`;
+
+  // Cumulative Top 5: every race adds to the previous total.
+  const top5=st.slice(0,5).map(x=>x[0]);
+  const totals=Object.fromEntries(top5.map(p=>[p,0]));
+  const evo=top5.map(p=>rs.map(r=>{
+    totals[p]+=rows.filter(x=>x.piloto===p&&x.raceKey===r).reduce((a,x)=>a+Number(x.pontos),0);
+    return totals[p];
+  }));
+  document.getElementById("top5Chart").innerHTML=evo.length
+    ? readableTop5Chart(evo,rs,top5.map(p=>pilotColor(p)),Math.max(10,...evo.flat(),0))
+    : `<div class="empty">Sem dados</div>`;
+  document.getElementById("top5Legend").innerHTML=top5.length?top5.map((p,i)=>{
+    const last=evo[i]?.[evo[i].length-1]||0;
+    return `<div class="item"><span class="dot" style="background:${pilotColor(p)}"></span><span>${esc(p)}</span><span class="score">${last}</span></div>`;
+  }).join(""):`<div class="empty">Sem dados</div>`;
+
+  const raceIndex=key=>RACES.indexOf(key);
+  const sorted=rows.slice().sort((a,b)=>
+    raceIndex(b.raceKey)-raceIndex(a.raceKey) ||
+    (posMap[a.posicao]||99)-(posMap[b.posicao]||99) ||
+    Number(b.pontos)-Number(a.pontos) ||
+    a.piloto.localeCompare(b.piloto)
+  );
+  const latest=sorted.slice(0,6);
+  document.getElementById("resultTable").innerHTML=latest.length?`<table>
+    <thead><tr><th>POS.</th><th>PILOTO</th><th>CORRIDA</th><th>PTS</th><th>MELHOR VOLTA</th></tr></thead>
+    <tbody>${latest.map(x=>`<tr>
+      <td><strong>${posMap[x.posicao]||"—"}º</strong></td><td>${esc(x.piloto)}</td><td>${esc(x.raceKey)}</td>
+      <td>${x.pontos}</td><td>${esc(x.volta)}</td>
+    </tr>`).join("")}</tbody></table>`:`<div class="empty">Sem dados</div>`;
+
+  const raceGrid=document.getElementById("raceGrid");
+  raceGrid.innerHTML=rs.map(r=>{
+    const rr=rows.filter(x=>x.raceKey===r).sort((a,b)=>Number(b.pontos)-Number(a.pontos)||a.piloto.localeCompare(b.piloto));
+    const mx=Math.max(1,...rr.map(x=>Number(x.pontos)));
+    return `<div class="champRaceCard">
+      <div class="champRaceHead">🏁 ${esc(r)}</div>
+      <div class="champRaceBody">${rr.slice(0,6).map(x=>
+        `<div class="champRaceRow">
+          <div class="champRaceDot" style="background:${pilotColor(x.piloto)}"></div>
+          <div class="champRaceName">${esc(x.piloto)}</div>
+          <div class="champRacePts">${x.pontos}</div>
+          <div class="champRaceBar"><i style="width:${x.pontos/mx*100}%;background:${pilotColor(x.piloto)}"></i></div>
+        </div>`
+      ).join("")||`<div class="empty">Sem dados</div>`}</div>
+    </div>`;
+  }).join("");
+}
+
+function htmlTable(rows){
+ if(!rows.length)return`<div class="empty">Sem dados</div>`;
+ return`<table><thead><tr><th>PILOTO</th><th>COLOCAÇÃO</th><th>CORRIDA</th><th>MELHOR VOLTA</th><th>PONTOS</th></tr></thead><tbody>${rows.map(x=>`<tr><td>${esc(x.piloto)}</td><td>${esc(x.posicao)}</td><td>${esc(x.raceKey)}</td><td>${esc(x.volta)}</td><td>${x.pontos}</td></tr>`).join("")}</tbody></table>`;
+}
+
+function updatePilot(){
+  const p=document.getElementById("pilotSelect").value;
+  const rows=DATA.filter(x=>x.piloto===p);
+  const st=standings(DATA);
+  const rank=st.findIndex(x=>x[0]===p)+1;
+
+  const pts=rows.reduce((a,x)=>a+Number(x.pontos),0);
+  const wins=rows.filter(x=>posMap[x.posicao]===1).length;
+  const bestPos=Math.min(...rows.map(x=>posMap[x.posicao]||99),99);
+  const best=rows.slice().sort((a,b)=>timeMs(a.volta)-timeMs(b.volta))[0]?.volta||"—";
+  const podium=rows.filter(x=>(posMap[x.posicao]||99)<=3).length;
+
+  document.getElementById("pTitle").textContent=p;
+  document.getElementById("pRankNo").textContent=rank>0?rank:"—";
+  document.getElementById("pPts").textContent=pts;
+  document.getElementById("pRace").textContent=rows.length;
+  document.getElementById("pBest").textContent=best;
+  document.getElementById("pWins").textContent=wins;
+  document.getElementById("pBestPos").textContent=bestPos<99?bestPos+"º":"—";
+  document.getElementById("pRank").textContent=rank>0?rank+"º":"—";
+
+  document.getElementById("pRaceMini").textContent=rows.length;
+  document.getElementById("pPtsMini").textContent=pts;
+  document.getElementById("pWinsMini").textContent=wins;
+
+  document.getElementById("mAvg").textContent=rows.length?(pts/rows.length).toFixed(2).replace(".",","):"—";
+  document.getElementById("mPodium").textContent=rows.length?(podium/rows.length*100).toFixed(0)+"%":"—";
+  const avg=rows.length?rows.reduce((a,x)=>a+(posMap[x.posicao]||99),0)/rows.length:0;
+  document.getElementById("mCons").textContent=rows.length?Math.max(0,100-(avg-1)*12).toFixed(1).replace(".",","):"—";
+
+  const ph=document.getElementById("pPhoto"),fb=document.getElementById("pFallback");
+  if(PHOTOS[p]){
+    ph.src=PHOTOS[p];ph.style.display="block";fb.style.display="none";
+    ph.onerror=()=>{ph.style.display="none";fb.style.display="grid"};
+  }else{ph.style.display="none";fb.style.display="grid"}
+
+  document.getElementById("pilotTable").innerHTML=rows.length?`
+  <table><thead><tr><th>CORRIDA</th><th>POSIÇÃO</th><th>PONTOS</th><th>MELHOR VOLTA</th></tr></thead>
+  <tbody>${RACES.map(r=>rows.find(x=>x.raceKey===r)).filter(Boolean).map(x=>
+    `<tr><td>${esc(x.raceKey)}</td><td><strong>${posMap[x.posicao]||"—"}º</strong></td><td>${x.pontos}</td><td>${esc(x.volta)}</td></tr>`
+  ).join("")}</tbody></table>`:`<div class="empty">Sem dados</div>`;
+
+  // Red bar chart: actual points earned in each race.
+  const pointVals=RACES.map(r=>rows.filter(x=>x.raceKey===r).reduce((a,x)=>a+Number(x.pontos),0));
+  const W=760,H=245,L=50,R=15,T=18,B=48,M=Math.max(10,...pointVals,1);
+  let bars=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="none">`;
+  for(let g=0;g<=5;g++){
+    const y=T+(H-T-B)*g/5,val=M-(M*g/5);
+    bars+=`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#2d343a"/><text x="5" y="${y+4}" fill="#9aa2aa" font-size="11">${Number.isInteger(val)?val:val.toFixed(1)}</text>`;
+  }
+  pointVals.forEach((v,i)=>{
+    const slot=(W-L-R)/pointVals.length, bw=slot*0.56, x=L+slot*i+(slot-bw)/2, h=(v/M)*(H-T-B), y=H-B-h;
+    bars+=`<rect x="${x}" y="${y}" width="${bw}" height="${Math.max(1,h)}" rx="2" fill="#ef1721"/><text x="${x+bw/2}" y="${y-8}" text-anchor="middle" fill="#fff" font-size="14" font-weight="950">${v}</text>`;
+    bars+=`<text x="${x+bw/2}" y="${H-14}" text-anchor="middle" fill="#e0e3e5" font-size="11">${esc(RACES[i])}</text>`;
+  });
+  bars+="</svg>";
+  document.getElementById("pilotPointsRaceChart").innerHTML=bars;
+
+
+  // Inverted-position chart: 1st is at the top, exactly as in the reference.
+  const vals=RACES.map(r=>{
+    const x=rows.find(v=>v.raceKey===r);
+    return x?(posMap[x.posicao]||0):null;
+  });
+  const valid=vals.filter(v=>v!==null);
+  if(valid.length){
+    const W2=760,H2=245,L2=50,R2=15,T2=18,B2=48,maxPos=Math.max(10,...valid);
+    let g=`<svg viewBox="0 0 ${W2} ${H2}" width="100%" height="100%" preserveAspectRatio="none">`;
+    for(let pno=1;pno<=maxPos;pno+= (maxPos>12?2:1)){
+      const y=T2+(H2-T2-B2)*((pno-1)/(maxPos-1));
+      g+=`<line x1="${L2}" y1="${y}" x2="${W2-R2}" y2="${y}" stroke="#2d343a"/><text x="8" y="${y+4}" fill="#e6e8ea" font-size="11" font-weight="800">${pno}º</text>`;
+    }
+    const points=RACES.map((_,i)=>{
+      if(vals[i]===null)return null;
+      const x=L2+i*(W2-L2-R2)/Math.max(1,RACES.length-1);
+      const y=T2+(H2-T2-B2)*((vals[i]-1)/(maxPos-1));
+      return {x,y,v:vals[i]};
+    }).filter(Boolean);
+    g+=`<polyline points="${points.map(o=>o.x+","+o.y).join(" ")}" fill="none" stroke="#ef1721" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+    points.forEach(o=>{
+      g+=`<circle cx="${o.x}" cy="${o.y}" r="6" fill="#ef1721" stroke="#14191d" stroke-width="2"/><text x="${o.x}" y="${o.y-10}" text-anchor="middle" fill="#fff" font-size="12" font-weight="950">${o.v}º</text>`;
+    });
+    RACES.forEach((r,i)=>{
+      const x=L2+i*(W2-L2-R2)/Math.max(1,RACES.length-1);
+      g+=`<text x="${x}" y="${H2-14}" text-anchor="middle" fill="#e0e3e5" font-size="11">${esc(r)}</text>`;
+    });
+    g+="</svg>";
+    document.getElementById("pilotEvo").innerHTML=g;
+  }else{
+    document.getElementById("pilotEvo").innerHTML=`<div class="empty">Sem dados</div>`;
+  }
+}
+
+
+let pilotChooserHome=null;
+function placeExistingPilotChooser(){
+  const chooser=document.querySelector(".pilotChooser");
+  const grid=document.querySelector(".pilotMetricGrid");
+  const slot=document.getElementById("pilotChooserMobileSlot");
+  if(!chooser||!grid||!slot)return;
+  const mobile=window.matchMedia("(max-width: 700px)").matches;
+  if(!pilotChooserHome) pilotChooserHome={parent:grid,next:chooser.nextSibling};
+  if(mobile){
+    if(chooser.parentElement!==slot) slot.appendChild(chooser);
+  }else{
+    if(chooser.parentElement!==grid){
+      if(pilotChooserHome.next && pilotChooserHome.next.parentElement===grid) grid.insertBefore(chooser,pilotChooserHome.next);
+      else grid.appendChild(chooser);
+    }
+  }
+}
+
+function init(){
+ const rc=document.getElementById("racesBox");RACES.forEach(r=>rc.insertAdjacentHTML("beforeend",`<label class="chk"><input type="checkbox" value="${esc(r)}" checked onchange="updateChamp()"> ${esc(r)}</label>`));
+ const pc=document.getElementById("pilotsBox");PILOTS.forEach(p=>pc.insertAdjacentHTML("beforeend",`<label class="chk"><input type="checkbox" value="${esc(p)}" onchange="updateChamp()"> ${esc(p)}</label>`));
+ const sel=document.getElementById("pilotSelect");PILOTS.forEach(p=>sel.insertAdjacentHTML("beforeend",`<option value="${esc(p)}">${esc(p)}</option>`));sel.onchange=updatePilot;
+ placeExistingPilotChooser();
+ window.addEventListener("resize",placeExistingPilotChooser);
+ updateChamp();updatePilot();
+}
+init();
+</script>
+</body>
+</html>
