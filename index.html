@@ -501,32 +501,114 @@ td:first-child{font-weight:900}
   #pilotChooserMobileSlot{display:none!important}
 }
 
+@media(max-width:700px){
+  #pilot > .pilotChooser{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:5px!important;
+    margin:0 0 9px!important;
+    padding:11px 12px!important;
+    border:1px solid #2f383f!important;
+    border-radius:12px!important;
+    background:linear-gradient(145deg,rgba(26,34,39,.94),rgba(10,15,18,.94))!important;
+    width:100%!important;
+  }
+  #pilot > .pilotChooser label{
+    display:block!important;
+    font-size:10px!important;
+    margin:0 0 1px!important
+  }
+  #pilot > .pilotChooser select{
+    width:100%!important;
+    padding:10px!important;
+    font-size:13px!important
+  }
+}
+
+/* Classification selectors in the same visual language as the pilot selector */
+.classificationSelect{
+  width:100%;padding:12px 13px;background:#0f1519;color:#fff;
+  border:1.5px solid #4e5961;border-radius:11px;font-weight:900;font-size:13px;
+  outline:none;appearance:auto;
+}
+.classificationSelect:focus{border-color:#f2f3f4;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.slicerPanel .slicerSection{padding-bottom:15px}
+.classificationResults{
+  max-height:330px;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:0 12px 12px;
+  scrollbar-width:thin;
+  scrollbar-color:#66717a #151b20;
+}
+.classificationResults::-webkit-scrollbar{width:8px}
+.classificationResults::-webkit-scrollbar-track{background:#151b20;border-radius:8px}
+.classificationResults::-webkit-scrollbar-thumb{background:#66717a;border-radius:8px}
+@media(max-width:700px){
+  .classificationSelect{font-size:13px;padding:11px 12px}
+  .classificationResults{
+    max-height:340px;
+    overflow-y:auto;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .classificationResults table{
+    min-width:500px;
+    table-layout:auto;
+  }
+}
+
+
+.resultsPageGrid{display:grid;grid-template-columns:1fr;gap:14px}
+.resultsHero{min-height:720px}
+.resultsControls{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 18px 14px}
+.resultsControls label{display:block;font-size:11px;color:#aeb5bc;text-transform:uppercase;font-weight:950;margin-bottom:5px}
+.resultsTableScroll{height:590px;overflow:auto;padding:0 13px 13px;scrollbar-width:thin;scrollbar-color:#66717a #151b20}
+.resultsTableScroll::-webkit-scrollbar{width:8px}.resultsTableScroll::-webkit-scrollbar-track{background:#151b20;border-radius:8px}.resultsTableScroll::-webkit-scrollbar-thumb{background:#66717a;border-radius:8px}
+.resultsTableScroll table{font-size:12px}
+.resultsTableScroll th,.resultsTableScroll td{padding:9px 8px}
+.resultsTableScroll td:first-child{font-weight:950}
+@media(max-width:700px){
+ .resultsHero{min-height:0}
+ .resultsControls{grid-template-columns:1fr;padding:0 12px 11px}
+ .resultsTableScroll{height:520px;padding:0 7px 9px;overflow:auto}
+ .resultsTableScroll table{min-width:0;width:100%;table-layout:fixed;font-size:9.5px}
+ .resultsTableScroll th,.resultsTableScroll td{padding:7px 4px;word-break:break-word}
+ .resultsTableScroll th:nth-child(1),.resultsTableScroll td:nth-child(1){width:25%}
+ .resultsTableScroll th:nth-child(2),.resultsTableScroll td:nth-child(2){width:18%}
+ .resultsTableScroll th:nth-child(3),.resultsTableScroll td:nth-child(3){width:22%}
+ .resultsTableScroll th:nth-child(4),.resultsTableScroll td:nth-child(4){width:14%}
+ .resultsTableScroll th:nth-child(5),.resultsTableScroll td:nth-child(5){width:21%}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
 <header class="top">
  <div class="brand"><div class="cup">🏆</div><h1>COPA <span>TDP</span></h1></div>
- <div class="nav"><button id="nChamp" class="active" onclick="showPage('champ')">📊 Classificação Geral</button><button id="nPilot" onclick="showPage('pilot')">🏎️ Piloto</button></div>
+ <div class="nav"><button id="nChamp" class="active" onclick="showPage('champ')">📊 Classificação Geral</button><button id="nPilot" onclick="showPage('pilot')">🏎️ Piloto</button><button id="nResults" onclick="showPage('results')">🏁 Resultados</button></div>
 </header>
+
 
 
 <section id="champ" class="page active">
 <div class="champGrid">
   <aside class="panel slicerPanel">
-    <div class="slicerTitle">🏁 Selecionar Corrida</div>
-    <div class="slicerSection">
-      <div id="racesBox"></div>
-    </div>
-    <div class="sep"></div>
     <div class="slicerTitle">👤 Selecionar Piloto</div>
     <div class="slicerSection">
-      <div class="filterTools">
-        <button class="btn red" onclick="allPilots()">Selecionar todos</button>
-        <button class="btn" onclick="nonePilots()">Limpar</button>
-      </div>
-      <div id="pilotsBox" class="pilotList"></div>
-      
+      <select id="champPilotFilter" class="classificationSelect">
+        <option value="ALL">Todos os pilotos</option>
+      </select>
+    </div>
+
+    <div class="sep"></div>
+
+    <div class="slicerTitle">🏁 Selecionar Corrida</div>
+    <div class="slicerSection">
+      <select id="champRaceFilter" class="classificationSelect">
+        <option value="ALL">Todas as corridas</option>
+      </select>
     </div>
   </aside>
 
@@ -561,14 +643,33 @@ td:first-child{font-weight:900}
       <div class="title">📊 Classificação Geral</div>
       <div class="champRank" id="ranking"></div>
     </div>
-
-    <div class="panel champRightResults">
-      <div class="title">🏁 Últimos Resultados</div>
-      <div class="champResultsTable" id="resultTable"></div>
-    </div>
   </aside>
 </div>
 </section>
+
+<section id="results" class="page">
+  <div class="resultsPageGrid">
+    <div class="panel resultsHero">
+      <div class="title">🏁 Resultados das Corridas</div>
+      <div class="resultsControls">
+        <div>
+          <label>Corrida</label>
+          <select id="resultsRaceFilter" class="classificationSelect">
+            <option value="ALL">Todas as corridas</option>
+          </select>
+        </div>
+        <div>
+          <label>Piloto</label>
+          <select id="resultsPilotFilter" class="classificationSelect">
+            <option value="ALL">Todos os pilotos</option>
+          </select>
+        </div>
+      </div>
+      <div class="resultsTableScroll" id="resultsAllTable"></div>
+    </div>
+  </div>
+</section>
+
 
 
 
@@ -629,7 +730,6 @@ td:first-child{font-weight:900}
     </div>
   </div>
 
-  <div id="pilotChooserMobileSlot"></div>
 
   <div class="pilotVizRow">
     <div class="panel pilotViz">
@@ -729,11 +829,13 @@ function readableTop5Chart(series,labels,colors,maxY){
 
 function syncRacePills(){document.querySelectorAll("#racesBox .racePill").forEach(el=>{const cb=el.querySelector("input");el.classList.toggle("on",cb.checked);});}
 function selected(id){return[...document.querySelectorAll(`#${id} input:checked`)].map(x=>x.value)}
-function showPage(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");document.getElementById("nChamp").classList.toggle("active",id==="champ");document.getElementById("nPilot").classList.toggle("active",id==="pilot")}
-function allRaces(){document.querySelectorAll("#racesBox input").forEach(x=>x.checked=true);syncRacePills();updateChamp()}
-function noneRaces(){document.querySelectorAll("#racesBox input").forEach(x=>x.checked=false);syncRacePills();updateChamp()}
-function allPilots(){document.querySelectorAll("#pilotsBox input").forEach(x=>x.checked=true);updateChamp()}
-function nonePilots(){document.querySelectorAll("#pilotsBox input").forEach(x=>x.checked=false);updateChamp()}
+function showPage(id){
+  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.getElementById("nChamp").classList.toggle("active",id==="champ");
+  document.getElementById("nPilot").classList.toggle("active",id==="pilot");
+  document.getElementById("nResults").classList.toggle("active",id==="results");
+}
 
 function lineChart(series,labels,colors,maxY,withValues=false){
  if(!labels.length)return `<div class="empty">Sem dados</div>`;
@@ -745,12 +847,28 @@ function lineChart(series,labels,colors,maxY,withValues=false){
  return s+"</svg>";
 }
 
+
+function getChampPilot(){
+  const el=document.getElementById("champPilotFilter");
+  return el?el.value:"ALL";
+}
+function getChampRace(){
+  const el=document.getElementById("champRaceFilter");
+  return el?el.value:"ALL";
+}
+
 function updateChamp(){
-  const rs=selected("racesBox"), ps=selected("pilotsBox");
-  const rows=DATA.filter(x=>rs.includes(x.raceKey)&&(ps.length===0||ps.includes(x.piloto)));
+  const selectedPilot=document.getElementById("champPilotFilter")?.value||"ALL";
+  const selectedRace=document.getElementById("champRaceFilter")?.value||"ALL";
+  const rs=selectedRace==="ALL"?RACES:[selectedRace];
+
+  const rows=DATA.filter(x=>
+    (selectedRace==="ALL"||x.raceKey===selectedRace) &&
+    (selectedPilot==="ALL"||x.piloto===selectedPilot)
+  );
   const st=standings(rows);
 
-   document.getElementById("kRaces").textContent=rs.length;
+  document.getElementById("kRaces").textContent=rs.length;
   document.getElementById("kDrivers").textContent=new Set(rows.map(x=>x.piloto)).size;
   document.getElementById("kLeaderName").textContent=st[0]?st[0][0]:"—";
   document.getElementById("kLeaderPts").textContent=st[0]?st[0][1]+" pts":"0 pts";
@@ -771,7 +889,7 @@ function updateChamp(){
     </div>`
   ).join(""):`<div class="empty">Sem dados</div>`;
 
-  // Cumulative Top 5: every race adds to the previous total.
+  // Cumulative points, race by race.
   const top5=st.slice(0,5).map(x=>x[0]);
   const totals=Object.fromEntries(top5.map(p=>[p,0]));
   const evo=top5.map(p=>rs.map(r=>{
@@ -785,21 +903,6 @@ function updateChamp(){
     const last=evo[i]?.[evo[i].length-1]||0;
     return `<div class="item"><span class="dot" style="background:${pilotColor(p)}"></span><span>${esc(p)}</span><span class="score">${last}</span></div>`;
   }).join(""):`<div class="empty">Sem dados</div>`;
-
-  const raceIndex=key=>RACES.indexOf(key);
-  const sorted=rows.slice().sort((a,b)=>
-    raceIndex(b.raceKey)-raceIndex(a.raceKey) ||
-    (posMap[a.posicao]||99)-(posMap[b.posicao]||99) ||
-    Number(b.pontos)-Number(a.pontos) ||
-    a.piloto.localeCompare(b.piloto)
-  );
-  const latest=sorted.slice(0,6);
-  document.getElementById("resultTable").innerHTML=latest.length?`<table>
-    <thead><tr><th>POS.</th><th>PILOTO</th><th>CORRIDA</th><th>PTS</th><th>MELHOR VOLTA</th></tr></thead>
-    <tbody>${latest.map(x=>`<tr>
-      <td><strong>${posMap[x.posicao]||"—"}º</strong></td><td>${esc(x.piloto)}</td><td>${esc(x.raceKey)}</td>
-      <td>${x.pontos}</td><td>${esc(x.volta)}</td>
-    </tr>`).join("")}</tbody></table>`:`<div class="empty">Sem dados</div>`;
 
   const raceGrid=document.getElementById("raceGrid");
   raceGrid.innerHTML=rs.map(r=>{
@@ -922,27 +1025,82 @@ let pilotChooserHome=null;
 function placeExistingPilotChooser(){
   const chooser=document.querySelector(".pilotChooser");
   const grid=document.querySelector(".pilotMetricGrid");
-  const slot=document.getElementById("pilotChooserMobileSlot");
-  if(!chooser||!grid||!slot)return;
-  const mobile=window.matchMedia("(max-width: 700px)").matches;
+  const pilotPage=document.getElementById("pilot");
+  if(!chooser||!grid||!pilotPage)return;
+
   if(!pilotChooserHome) pilotChooserHome={parent:grid,next:chooser.nextSibling};
+
+  const mobile=window.matchMedia("(max-width: 700px)").matches;
   if(mobile){
-    if(chooser.parentElement!==slot) slot.appendChild(chooser);
+    if(chooser.parentElement!==pilotPage){
+      pilotPage.insertBefore(chooser,pilotPage.firstElementChild);
+    }
   }else{
     if(chooser.parentElement!==grid){
-      if(pilotChooserHome.next && pilotChooserHome.next.parentElement===grid) grid.insertBefore(chooser,pilotChooserHome.next);
-      else grid.appendChild(chooser);
+      if(pilotChooserHome.next && pilotChooserHome.next.parentElement===grid){
+        grid.insertBefore(chooser,pilotChooserHome.next);
+      }else{
+        grid.appendChild(chooser);
+      }
     }
   }
 }
 
+
+function updateResultsPage(){
+  const rf=document.getElementById("resultsRaceFilter")?.value||"ALL";
+  const pf=document.getElementById("resultsPilotFilter")?.value||"ALL";
+  const rows=DATA.filter(x=>
+    (rf==="ALL"||x.raceKey===rf) &&
+    (pf==="ALL"||x.piloto===pf)
+  );
+
+  const result=rows.slice().sort((a,b)=>
+    RACES.indexOf(a.raceKey)-RACES.indexOf(b.raceKey) ||
+    (posMap[a.posicao]||99)-(posMap[b.posicao]||99) ||
+    a.piloto.localeCompare(b.piloto)
+  );
+
+  document.getElementById("resultsAllTable").innerHTML=result.length?`
+    <table>
+      <thead><tr><th>CORRIDA</th><th>POSIÇÃO</th><th>PILOTO</th><th>PONTOS</th><th>MELHOR VOLTA</th></tr></thead>
+      <tbody>${result.map(x=>`<tr>
+        <td>${esc(x.raceKey)}</td>
+        <td><strong>${posMap[x.posicao]||"—"}º</strong></td>
+        <td>${esc(x.piloto)}</td>
+        <td>${x.pontos}</td>
+        <td>${esc(x.volta)}</td>
+      </tr>`).join("")}</tbody>
+    </table>`:`<div class="empty">Sem dados para os filtros selecionados.</div>`;
+}
+
 function init(){
- const rc=document.getElementById("racesBox");RACES.forEach(r=>rc.insertAdjacentHTML("beforeend",`<label class="chk"><input type="checkbox" value="${esc(r)}" checked onchange="updateChamp()"> ${esc(r)}</label>`));
- const pc=document.getElementById("pilotsBox");PILOTS.forEach(p=>pc.insertAdjacentHTML("beforeend",`<label class="chk"><input type="checkbox" value="${esc(p)}" onchange="updateChamp()"> ${esc(p)}</label>`));
- const sel=document.getElementById("pilotSelect");PILOTS.forEach(p=>sel.insertAdjacentHTML("beforeend",`<option value="${esc(p)}">${esc(p)}</option>`));sel.onchange=updatePilot;
- placeExistingPilotChooser();
- window.addEventListener("resize",placeExistingPilotChooser);
- updateChamp();updatePilot();
+  const raceSel=document.getElementById("champRaceFilter");
+  RACES.forEach(r=>raceSel.insertAdjacentHTML("beforeend",`<option value="${esc(r)}">${esc(r)}</option>`));
+
+  const pilotSel=document.getElementById("champPilotFilter");
+  PILOTS.forEach(p=>pilotSel.insertAdjacentHTML("beforeend",`<option value="${esc(p)}">${esc(p)}</option>`));
+
+  pilotSel.onchange=updateChamp;
+  raceSel.onchange=updateChamp;
+
+  const rr=document.getElementById("resultsRaceFilter");
+  RACES.forEach(r=>rr.insertAdjacentHTML("beforeend",`<option value="${esc(r)}">${esc(r)}</option>`));
+  const rp=document.getElementById("resultsPilotFilter");
+  PILOTS.forEach(p=>rp.insertAdjacentHTML("beforeend",`<option value="${esc(p)}">${esc(p)}</option>`));
+  rr.onchange=updateResultsPage;
+  rp.onchange=updateResultsPage;
+
+  const sel=document.getElementById("pilotSelect");
+  PILOTS.forEach(p=>sel.insertAdjacentHTML("beforeend",`<option value="${esc(p)}">${esc(p)}</option>`));
+  sel.onchange=updatePilot;
+
+  placeExistingPilotChooser();
+  window.addEventListener("resize",placeExistingPilotChooser);
+
+  updateChamp();
+  updatePilot();
+  updateResultsPage();
 }
 init();
 </script>
