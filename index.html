@@ -124,9 +124,11 @@ td:first-child{font-weight:900}
 .pilotHeroInfo .rankNo{color:var(--red);font-size:27px;font-weight:950;margin-right:7px}
 .pilotHeroInfo .quote{font-size:16px;color:#b8bec4;line-height:1.35;margin-top:22px;max-width:390px}
 .heroMini{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:auto;padding-top:18px;border-top:1px solid #3a4248
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:auto;padding-top:18px;border-top:1px solid #3a4248
 }
 .heroMini .mini{text-align:center}.heroMini b{display:block;font-size:23px}.heroMini span{font-size:11px;color:#9ca4ab}
+.heroMini .mini:last-child b{color:var(--gold)}
+.heroMini .mini:last-child span{color:#c8b95d}
 .pilotMetricGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .pilotMetric{
   min-height:108px;padding:14px;border-radius:15px;
@@ -171,7 +173,7 @@ td:first-child{font-weight:900}
  .pilotMetricGrid{grid-template-columns:1fr 1fr}.pilotChooser{grid-template-columns:1fr}
  .positionChartWrap{padding-right:0}.positionNote{display:none}
 }
-@media(max-width:520px){.pilotMetricGrid{grid-template-columns:1fr}.heroMini{grid-template-columns:1fr}}
+@media(max-width:520px){.pilotMetricGrid{grid-template-columns:1fr}.heroMini{grid-template-columns:repeat(2,1fr);gap:8px}}
 
 
 /* Pilot page cleanup and reference layout */
@@ -238,7 +240,7 @@ td:first-child{font-weight:900}
 .champEvoLegend .item{display:grid;grid-template-columns:14px 1fr auto;gap:8px;align-items:center;margin:14px 0;font-size:15px;font-weight:950}
 .champEvoLegend .dot{width:13px;height:13px;border-radius:50%;border:1px solid #101316}
 .champEvoLegend .score{font-size:14px;color:#e7eaec}
-.champResultsTable{padding:0 12px 12px;max-height:310px;overflow:auto}
+.champResultsTable{padding:0 12px 12px;max-height:420px;overflow:auto}
 .champResultsTable table{font-size:11.5px}.champResultsTable th,.champResultsTable td{padding:8px 8px}
 .champResultsTable td:first-child{font-weight:950}
 .champRaceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;padding:0 12px 14px}
@@ -251,66 +253,14 @@ td:first-child{font-weight:900}
 .champRacePts{text-align:right;font-size:12px;font-weight:950;color:#e7eaed}
 .champRaceBar{grid-column:2/4;height:6px;background:#21282d;border-radius:99px;overflow:hidden;margin-top:-4px}.champRaceBar i{display:block;height:100%;border-radius:99px}
 .champRank{padding:0 13px 13px}
-.champRankRow{display:grid;grid-template-columns:28px 112px minmax(0,1fr) 38px;gap:8px;align-items:center;margin:8px 0}
-.champRankNo{font-size:13px;font-weight:950;text-align:center}.champRankName{font-size:13px;font-weight:900;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.champRankRow{display:grid;grid-template-columns:24px 98px minmax(0,1fr) 35px;gap:8px;align-items:center;margin:8px 0;cursor:pointer;border-radius:8px;padding:2px 4px;transition:background .14s ease,transform .14s ease}
+.champRankRow:hover{background:rgba(255,255,255,.045);transform:translateX(2px)}
+.champRankRow:focus{outline:2px solid rgba(239,23,33,.7);outline-offset:1px}
+.champRankRow:active{transform:translateX(1px)}
+.champRankNo{font-size:13px;font-weight:950;text-align:center}
+.champRankName{font-size:13px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:clip;min-width:0}
 .champRankBar{height:17px;background:#20272c;border-radius:2px;overflow:hidden}.champRankBar i{display:block;height:100%}
 .champRankPts{font-size:12px;font-weight:950;text-align:right;color:var(--gold)}
-
-/* ===== TITLE CHANCE — TOP 6 ===== */
-.titleChancePanel{
-  margin-top:12px;
-  background:
-    radial-gradient(420px 120px at 50% 0%,rgba(243,207,78,.055),transparent 72%),
-    linear-gradient(145deg,rgba(24,31,36,.96),rgba(10,15,18,.96));
-  border:1px solid rgba(67,76,83,.95);
-  border-radius:16px;
-  box-shadow:0 10px 28px rgba(0,0,0,.45);
-  overflow:hidden;
-}
-.titleChancePanel .title{
-  font-size:20px;
-  padding:13px 15px 9px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  border-bottom:1px solid rgba(70,78,84,.55);
-}
-.titleChanceSub{
-  padding:8px 15px 2px;
-  color:#8f9aa2;
-  font-size:10px;
-  line-height:1.35;
-}
-.titleChanceList{padding:6px 11px 11px}
-.titleChanceRow{
-  display:grid;
-  grid-template-columns:24px 92px minmax(0,1fr) 42px;
-  gap:7px;
-  align-items:center;
-  margin:5px 0;
-  padding:4px 5px;
-  border-radius:8px;
-  cursor:pointer;
-  transition:background .14s ease,transform .14s ease,filter .14s ease;
-}
-.titleChanceRow:hover{background:rgba(255,255,255,.045);transform:translateX(2px);filter:brightness(1.05)}
-.titleChanceRow:focus-visible{outline:2px solid var(--red);outline-offset:1px}
-.titleChanceNo{font-size:12px;font-weight:950;text-align:center;color:#cfd6da}
-.titleChancePilot{font-size:12px;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-.titleChanceBar{height:10px;background:#20282d;border-radius:999px;overflow:hidden}
-.titleChanceBar i{display:block;height:100%;border-radius:999px}
-.titleChancePct{font-size:12px;font-weight:950;text-align:right;color:var(--gold)}
-@media(max-width:1320px){
-  .titleChancePanel{margin-top:0}
-}
-@media(max-width:700px){
-  .titleChancePanel .title{font-size:19px}
-  .titleChanceSub{font-size:9px;padding-top:7px}
-  .titleChanceRow{grid-template-columns:20px 82px minmax(0,1fr) 38px;gap:5px;margin:4px 0}
-  .titleChanceNo,.titleChancePilot,.titleChancePct{font-size:11px}
-  .titleChanceBar{height:9px}
-}
-
 @media(max-width:1320px){
  .champGrid{grid-template-columns:235px minmax(0,1fr)}.champRight{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr}
 }
@@ -395,483 +345,1065 @@ td:first-child{font-weight:900}
 }
 
 
-/* ===== FINAL MOBILE LAYOUT ===== */
-@media(max-width:700px){
-  html,body{width:100%;max-width:100%;overflow-x:hidden}
-  .app{width:100%;padding:8px}
-  .top{position:sticky;top:0;z-index:50;display:flex;flex-direction:column;align-items:stretch;gap:8px;
-       padding:6px 2px 9px;margin-bottom:7px;background:rgba(10,14,17,.94);backdrop-filter:blur(10px)}
-  .brand{gap:8px}.brand .cup{font-size:33px}.brand h1{font-size:29px;letter-spacing:-1.3px}
-  .nav{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:6px}
-  .nav button{padding:10px 6px;font-size:11px}
-
-  /* First page: pilot selector first, then classification/results, then the remaining charts. */
-  .champGrid{display:flex;flex-direction:column;gap:9px}
-  .slicerPanel{order:0;min-height:0;width:100%}
-  .champRight{order:1;width:100%;display:flex!important;flex-direction:column;gap:9px}
-  .champMain{order:2;display:flex;flex-direction:column;gap:9px;width:100%}
-  .champRightPanel{width:100%}
-  .champRightResults{width:100%}
-
-  .slicerTitle{font-size:17px;padding:12px 13px 8px}
-  .slicerSection{padding:0 12px 12px}
-  .filterTools{padding-bottom:5px}
-  .btn{padding:8px 9px;font-size:10px}
-  .pilotList{max-height:none;overflow:visible}
-  .chk{font-size:13px;margin:7px 0}
-  .racePill{font-size:12px;padding:10px 9px;margin:5px 0}
-
-  .champKpis{grid-template-columns:1fr 1fr;gap:7px}
-  .champKpi{min-height:82px;padding:10px 12px}
-  .champKpi .label{font-size:10px;line-height:1.2}.champKpi .num{font-size:28px}
-  .champLeader{grid-column:1/-1;grid-template-columns:42px 1fr;min-height:84px}
-  .champLeaderIcon{font-size:31px}.champLeaderLabel{font-size:10px}.champLeaderName{font-size:22px}.champLeaderPts{font-size:13px}
-
-  .title{font-size:18px;padding:11px 12px 8px}
-  .champPodium{grid-template-columns:repeat(3,1fr);gap:6px;padding:0 9px 10px}
-  .champPod{min-height:106px;padding:9px 4px;border-radius:11px}
-  .champPod .place{font-size:18px}.champPod .name{font-size:12px;margin:6px 0 2px}.champPod .pts{font-size:11px}
-
-  /* General ranking: show the complete list without an internal height cap. */
-  .champRank{padding:0 10px 11px;max-height:none;overflow:visible}
-  .champRankRow{grid-template-columns:22px 72px minmax(0,1fr) 30px;gap:6px;margin:7px 0}
-  .champRankNo{font-size:11px}.champRankName{font-size:11px;white-space:nowrap}
-  .champRankBar{height:17px}.champRankPts{font-size:11px}
-
-  /* Result table must fit on the phone: hide only the least useful lap column and allow race names to wrap. */
-  .champResultsTable{max-height:none;overflow:visible;padding:0 8px 9px}
-  .champResultsTable table{width:100%;min-width:0;table-layout:fixed;font-size:9.5px}
-  .champResultsTable th,.champResultsTable td{padding:7px 5px;overflow:hidden}
-  .champResultsTable th:nth-child(1),.champResultsTable td:nth-child(1){width:12%}
-  .champResultsTable th:nth-child(2),.champResultsTable td:nth-child(2){width:24%}
-  .champResultsTable th:nth-child(3),.champResultsTable td:nth-child(3){width:35%;white-space:normal}
-  .champResultsTable th:nth-child(4),.champResultsTable td:nth-child(4){width:13%}
-  .champResultsTable th:last-child,.champResultsTable td:last-child{display:table-cell}
-
-  .champEvoWrap{grid-template-columns:1fr;gap:3px;padding:0 7px 9px}
-  .champEvoChart{height:215px}
-  .champEvoLegend{border-left:0;border-top:1px solid #333b42;padding:9px 3px;
-                   display:grid;grid-template-columns:1fr 1fr;gap:3px 9px}
-  .champEvoLegend .item{font-size:12px;margin:3px 0}
-  .champEvoLegend .dot{width:10px;height:10px}.champEvoLegend .score{font-size:10px}
-
-  .champRaceGrid{grid-template-columns:1fr;gap:7px;padding:0 8px 10px}
-  .champRaceCard{border-radius:9px}.champRaceHead{font-size:13px;padding:9px 10px 7px}
-  .champRaceBody{padding:5px 9px 7px}.champRaceName{font-size:11px}
-
-  /* Pilot page on small screens */
-  .pilotRef{display:flex;flex-direction:column;gap:9px}
-  .pilotHero{display:flex;flex-direction:column;min-height:0}
-  .pilotHeroPhoto{padding:8px}.pilotHeroPhoto img,.pilotHeroPhoto .fallback{height:225px}
-  .pilotHeroInfo{padding:14px 15px 12px}.pilotHeroInfo .season{font-size:9px}
-  .pilotHeroInfo .name{font-size:44px}.pilotHeroInfo .rankLine{font-size:15px}
-  .pilotHeroInfo .quote{font-size:13px;margin-top:12px}
-  .heroMini{padding-top:11px}.heroMini .mini b{font-size:20px}.heroMini .mini span{font-size:9px}
-  .pilotMetricGrid{grid-template-columns:1fr 1fr;gap:7px}
-  .pilotMetric{min-height:82px;padding:9px;border-radius:11px}.pilotMetric .micon{font-size:18px}
-  .pilotMetric .mlabel{font-size:8px}.pilotMetric .mvalue{font-size:22px}
-  .pilotChooser{display:grid;grid-template-columns:1fr;gap:5px;margin:0 0 9px;padding:12px}
-  .pilotChooser label{display:block;font-size:10px;margin-bottom:0}
-  .pilotChooser select{padding:10px;font-size:13px}
-
-  .pilotVizRow{display:flex;flex-direction:column;gap:9px;margin-top:9px}
-  .pilotViz{min-height:0}.pilotChart,#pilotPointsRaceChart{height:215px;padding:0 4px 7px}
-  .positionChartWrap{height:215px;padding-right:0}.positionNote{display:none}
-  .pilotLowerRef{display:flex;flex-direction:column;gap:9px;margin-top:9px}
-  .quoteRef{display:none}
-  .resultsCorner .dataBlock{max-height:none}
-  .resultsCorner table{font-size:10px;min-width:0;table-layout:fixed}
-  .resultsCorner table th,.resultsCorner table td{padding:7px 5px}
-  .resultsCorner table th:nth-child(4),.resultsCorner table td:nth-child(4){width:35%}
-
-  .footer{font-size:8px;padding:9px 2px}
-}
-@media(max-width:420px){
-  .app{padding:6px}.brand h1{font-size:27px}.brand .cup{font-size:30px}
-  .champKpis{gap:6px}.champKpi{padding:9px}.champKpi .num{font-size:25px}
-  .champPod .name{font-size:11px}.champPod .pts{font-size:10px}
-  .champRankRow{grid-template-columns:22px 92px minmax(0,1fr) 30px;gap:5px}
-  .champRankName{font-size:10px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.champRankPts{font-size:10px}
-  .champResultsTable table{font-size:8.8px}
-  .champResultsTable th,.champResultsTable td{padding:6px 4px}
-}
+/* ===== Typography refinement ===== */
+body{font-size:15px}
+.title{font-size:23px}
+.slicerTitle{font-size:20px}
+.champKpi .label{font-size:15px}
+.champKpi .num{font-size:42px}
+.champLeaderLabel{font-size:13px}
+.champLeaderName{font-size:30px}
+.champLeaderPts{font-size:18px}
+.champPod .place{font-size:27px}
+.champPod .name{font-size:22px}
+.champPod .pts{font-size:17px}
+.champRankName{font-size:14px}
+.champRankNo{font-size:14px}
+.champRankPts{font-size:13px}
+.champRaceHead{font-size:15px}
+.champRaceName{font-size:12px}
+.champRacePts{font-size:13px}
+.nav button{font-size:13px}
+.classificationSelect{font-size:14px}
+.btn{font-size:12px}
+*/
 
 
 @media(max-width:700px){
-  .slicerPanel{display:flex;flex-direction:column}
-  /* Current first-page filter markup: race title/section, separator, pilot title/section. */
-  .slicerPanel > .slicerTitle:nth-child(4){order:1}
-  .slicerPanel > .slicerSection:nth-child(5){order:2}
-  .slicerPanel > .sep:nth-child(3){order:3}
-  .slicerPanel > .slicerTitle:nth-child(1){order:4}
-  .slicerPanel > .slicerSection:nth-child(2){order:5}
-  /* Never clip the pilot list or general classification on mobile. */
-  .pilotList{max-height:none!important;overflow:visible!important}
-  .champRank{max-height:none!important;overflow:visible!important}
-  /* Fit all result columns to the phone width. */
-  .champResultsTable table{min-width:0!important;width:100%!important;table-layout:fixed!important}
-  .champResultsTable th,.champResultsTable td{white-space:normal!important;word-break:break-word}
-  .champResultsTable th:nth-child(1),.champResultsTable td:nth-child(1){width:11%!important}
-  .champResultsTable th:nth-child(2),.champResultsTable td:nth-child(2){width:22%!important}
-  .champResultsTable th:nth-child(3),.champResultsTable td:nth-child(3){width:39%!important}
-  .champResultsTable th:nth-child(4),.champResultsTable td:nth-child(4){width:12%!important}
-  .champResultsTable th:nth-child(5),.champResultsTable td:nth-child(5){width:16%!important;display:table-cell!important}
-  /* Best lap column can make the table too dense; show it on a second compact line via smaller text. */
-  .champResultsTable th:nth-child(5),.champResultsTable td:nth-child(5){font-size:8.5px}
-  /* Ranking rows need enough width for all 12 drivers. */
-  .champRankRow{grid-template-columns:22px 96px minmax(0,1fr) 30px!important;gap:5px!important}
-  .champRankName{font-size:10.5px!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-  .champRankPts{font-size:10.5px!important}
+  .title{font-size:19px}
+  .slicerTitle{font-size:18px}
+  .champKpi .label{font-size:11px}
+  .champKpi .num{font-size:30px}
+  .champLeaderName{font-size:24px}
+  .champPod .place{font-size:21px}
+  .champPod .name{font-size:13px}
+  .champPod .pts{font-size:12px}
+  .champRankName{font-size:11px}
+  .champRankNo{font-size:11px}
+  .champRankPts{font-size:11px}
 }
 
 
-@media (max-width:700px){
-  .pilotRef{display:flex!important;flex-direction:column!important}
-  .pilotRef > .pilotChooserMobile{order:-10}
-  .pilotChooserMobile_UNUSED{
-    display:grid!important;grid-template-columns:1fr!important;gap:5px!important;
-    margin:0 0 1px!important;padding:12px!important;border:1px solid #2f383f!important;
-    border-radius:12px!important;background:linear-gradient(145deg,rgba(26,34,39,.92),rgba(10,15,18,.92))!important;
-  }
-  .pilotChooserMobile label{font-size:10px!important;display:block!important}
-  .pilotChooserMobile select{width:100%!important}
-}
+/* ===== Global typography scale ===== */
+body{font-size:16px}
+.title{font-size:25px}
+.slicerTitle{font-size:21px}
+.champKpi .label{font-size:16px}
+.champKpi .num{font-size:46px}
+.champLeaderLabel{font-size:14px}
+.champLeaderName{font-size:32px}
+.champLeaderPts{font-size:19px}
+.classificationSelect{font-size:15px}
+.btn{font-size:13px}
+.champPod .place{font-size:29px}
+.champPod .name{font-size:24px}
+.champPod .pts{font-size:18px}
+.champRankName{font-size:15px}
+.champRankNo{font-size:15px}
+.champRankPts{font-size:14px}
+.champRaceHead{font-size:16px}
+.champRaceName{font-size:13px}
+.champRacePts{font-size:14px}
+.nav button{font-size:14px}
 
 
 @media(max-width:700px){
-  .pilotChooser{
-    display:grid!important;
-    grid-template-columns:1fr!important;
-    gap:5px!important;
-    margin:0 0 9px!important;
-    padding:12px!important;
-    border:1px solid #2f383f!important;
-    border-radius:12px!important;
-    background:linear-gradient(145deg,rgba(26,34,39,.92),rgba(10,15,18,.92))!important;
-  }
-  .pilotChooser label{font-size:10px!important;display:block!important}
-  .pilotChooser select{width:100%!important;padding:10px!important;font-size:13px!important}
-  #pilotChooserMobileSlot{display:block!important;order:1;width:100%}
+  .heroMini{grid-template-columns:repeat(4,1fr);gap:4px}
+  .heroMini .mini b{font-size:19px}
+  .heroMini .mini span{font-size:9px}
+  .title{font-size:21px}
+  .slicerTitle{font-size:19px}
+  .champKpi .label{font-size:12px}
+  .champKpi .num{font-size:32px}
+  .champLeaderName{font-size:26px}
+  .champLeaderPts{font-size:14px}
+  .classificationSelect{font-size:14px}
+  .champPod .place{font-size:23px}
+  .champPod .name{font-size:14px}
+  .champPod .pts{font-size:12px}
+  .champRankName{font-size:12px}
+  .champRankNo{font-size:12px}
+  .champRankPts{font-size:12px}
+  .champRaceHead{font-size:14px}
+  .champRaceName{font-size:12px}
+  .champRacePts{font-size:13px}
 }
-@media(min-width:701px){
-  #pilotChooserMobileSlot{display:none!important}
+
+
+/* Final Top 5 chart labeling */
+.champEvoWrap{grid-template-columns:minmax(0,1fr) 215px}
+.champEvoChart{overflow:visible}
+
+
+/* ===== Results table: dashboard-integrated style ===== */
+.champRightResults{
+  background:
+    radial-gradient(520px 160px at 50% 0%,rgba(255,255,255,.045),transparent 72%),
+    linear-gradient(145deg,rgba(24,31,36,.96),rgba(10,15,18,.96));
+  border:1px solid rgba(67,76,83,.95);
+  border-radius:16px;
+  box-shadow:0 10px 28px rgba(0,0,0,.48);
+}
+.champRightResults .title{
+  font-size:20px;
+  padding:13px 15px 9px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border-bottom:1px solid rgba(70,78,84,.55);
+}
+.champResultsTable{
+  padding:7px 10px 10px;
+  max-height:300px;
+  overflow:auto;
+}
+.champResultsTable table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0 4px;
+  font-size:11.5px;
+}
+.champResultsTable th{
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:#141a1e;
+  color:#98a3ab;
+  font-size:10px;
+  font-weight:950;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  padding:8px 7px;
+  border:0;
+}
+.champResultsTable td{
+  padding:8px 7px;
+  background:rgba(25,31,35,.94);
+  color:#edf0f2;
+  border-top:1px solid rgba(68,76,82,.5);
+  border-bottom:1px solid rgba(8,11,13,.72);
+  white-space:nowrap;
+}
+.champResultsTable tbody tr td:first-child{
+  border-left:3px solid #46515a;
+  border-radius:7px 0 0 7px;
+  font-weight:950;
+}
+.champResultsTable tbody tr td:last-child{
+  border-radius:0 7px 7px 0;
+}
+.champResultsTable tbody tr:hover td{
+  background:rgba(35,43,49,.98);
+}
+.champResultsTable td:nth-child(2){
+  font-weight:900;
+}
+.champResultsTable td:nth-child(3){
+  color:#c4ccd1;
+  font-size:10.5px;
+}
+.champResultsTable td:nth-child(4){
+  text-align:center;
+  color:var(--gold);
+  font-weight:950;
+  font-size:12px;
+}
+.champResultsTable td:nth-child(5){
+  text-align:right;
+  color:#d5dce0;
+  font-family:Consolas,monospace;
+  font-size:10.5px;
+}
+
+/* colored pilot rail on every result row */
+.champResultsTable tbody tr.pilot-berton td:first-child{border-left-color:#f2c94e}
+.champResultsTable tbody tr.pilot-henrique td:first-child{border-left-color:#4e8cff}
+.champResultsTable tbody tr.pilot-rose td:first-child{border-left-color:#ff69b4}
+.champResultsTable tbody tr.pilot-rex td:first-child{border-left-color:#21c76a}
+.champResultsTable tbody tr.pilot-guima td:first-child{border-left-color:#22c1d6}
+.champResultsTable tbody tr.pilot-robinho td:first-child{border-left-color:#f39c33}
+.champResultsTable tbody tr.pilot-nicolas td:first-child{border-left-color:#8a61d8}
+.champResultsTable tbody tr.pilot-guilherme td:first-child{border-left-color:#f2f2f2}
+.champResultsTable tbody tr.pilot-lucas td:first-child{border-left-color:#ef1721}
+.champResultsTable tbody tr.pilot-rian td:first-child{border-left-color:#9d4edd}
+.champResultsTable tbody tr.pilot-caua td:first-child{border-left-color:#8d969d}
+.champResultsTable tbody tr.pilot-hiro td:first-child{border-left-color:#ff7a18}
+
+@media(max-width:700px){
+  .champRightResults .title{font-size:20px}
+  .champResultsTable{max-height:340px;padding:6px 7px 8px}
+  .champResultsTable table{font-size:10px;border-spacing:0 3px}
+  .champResultsTable th{font-size:9px;padding:7px 5px}
+  .champResultsTable td{padding:7px 5px}
+  .champResultsTable td:nth-child(3){font-size:9px}
+  .champResultsTable td:nth-child(5){font-size:9px}
+}
+
+
+/* Remove the old bright zebra rows from the general-results table */
+.champResultsTable table tbody tr:nth-child(even) td,
+.champResultsTable table tbody tr:nth-child(odd) td{
+  background:rgba(25,31,35,.94) !important;
+  color:#edf0f2 !important;
+}
+.champResultsTable table tbody tr:hover td{
+  background:rgba(35,43,49,.99) !important;
+  color:#fff !important;
+}
+.champResultsTable table th{
+  background:#11171b !important;
+  color:#dfe5e8 !important;
+}
+
+
+/* ===== Pilot RESULTS DAS CORRIDAS — same visual as General Classification ===== */
+.resultsCorner{
+  background:
+    radial-gradient(520px 160px at 50% 0%,rgba(255,255,255,.045),transparent 72%),
+    linear-gradient(145deg,rgba(24,31,36,.96),rgba(10,15,18,.96));
+  border:1px solid rgba(67,76,83,.95);
+  border-radius:16px;
+  box-shadow:0 10px 28px rgba(0,0,0,.48);
+  overflow:hidden;
+}
+.resultsCorner .title{
+  font-size:20px;
+  padding:13px 15px 9px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border-bottom:1px solid rgba(70,78,84,.55);
+}
+.resultsCorner .dataBlock{
+  max-height:245px;
+  padding:7px 10px 10px;
+  overflow:auto;
+}
+.resultsCorner table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0 4px;
+  font-size:11.5px;
+}
+.resultsCorner th{
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:#141a1e !important;
+  color:#dfe5e8 !important;
+  font-size:10px;
+  font-weight:950;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  padding:8px 7px;
+  border:0;
+}
+.resultsCorner td{
+  padding:8px 7px;
+  background:rgba(25,31,35,.94) !important;
+  color:#edf0f2 !important;
+  border-top:1px solid rgba(68,76,82,.5);
+  border-bottom:1px solid rgba(8,11,13,.72);
+  white-space:nowrap;
+}
+.resultsCorner tbody tr td:first-child{
+  border-left:3px solid #46515a;
+  border-radius:7px 0 0 7px;
+  font-weight:950;
+}
+.resultsCorner tbody tr td:last-child{
+  border-radius:0 7px 7px 0;
+}
+.resultsCorner tbody tr:hover td{
+  background:rgba(35,43,49,.99) !important;
+  color:#fff !important;
+  cursor:pointer;
+}
+.resultsCorner tbody tr.is-selected td{
+  background:rgba(40,49,56,.99) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+}
+.resultsCorner td:nth-child(2){
+  text-align:center;
+  font-weight:950;
+}
+.resultsCorner td:nth-child(3){
+  text-align:center;
+  color:var(--gold) !important;
+  font-weight:950;
+  font-size:12px;
+}
+.resultsCorner td:nth-child(4){
+  text-align:right;
+  color:#d5dce0 !important;
+  font-family:Consolas,monospace;
+  font-size:10.5px;
+}
+.resultsCorner tbody tr.pilot-selected td:first-child{
+  border-left-color:#46515a;
+}
+/* ===== Pilot result table: same compact 5-column layout as the reference ===== */
+.resultsCorner .pilotResultsTable{
+  table-layout:fixed;
+}
+.resultsCorner .pilotResultsTable th:nth-child(1),
+.resultsCorner .pilotResultsTable td:nth-child(1){width:29%}
+.resultsCorner .pilotResultsTable th:nth-child(2),
+.resultsCorner .pilotResultsTable td:nth-child(2){width:12%;text-align:center}
+.resultsCorner .pilotResultsTable th:nth-child(3),
+.resultsCorner .pilotResultsTable td:nth-child(3){width:20%;text-align:left}
+.resultsCorner .pilotResultsTable th:nth-child(4),
+.resultsCorner .pilotResultsTable td:nth-child(4){width:13%;text-align:center}
+.resultsCorner .pilotResultsTable th:nth-child(5),
+.resultsCorner .pilotResultsTable td:nth-child(5){width:26%}
+
+.resultsCorner .pilotResultsTable td:nth-child(3){
+  color:#edf0f2 !important;
+  font-size:11.5px;
+  font-weight:900;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.resultsCorner .pilotResultsTable td:nth-child(4){
+  color:var(--gold) !important;
+  font-weight:950;
+}
+.resultsCorner .pilotResultsTable td:nth-child(5){
+  text-align:right;
+  color:#d5dce0 !important;
+  font-family:Consolas,monospace;
+  font-size:10.5px;
+}
+.positionBadge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:34px;
+  padding:4px 7px;
+  border-radius:8px;
+  background:#162026;
+  border:1px solid #3a474f;
+  color:#f1f4f5;
+  font-weight:950;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+}
+.pilotResultsTable tbody tr.pilot-berton td:first-child{border-left-color:#f2c94e}
+.pilotResultsTable tbody tr.pilot-henrique td:first-child{border-left-color:#4e8cff}
+.pilotResultsTable tbody tr.pilot-rose td:first-child{border-left-color:#ff69b4}
+.pilotResultsTable tbody tr.pilot-rex td:first-child{border-left-color:#21c76a}
+.pilotResultsTable tbody tr.pilot-guima td:first-child{border-left-color:#22c1d6}
+.pilotResultsTable tbody tr.pilot-robinho td:first-child{border-left-color:#f39c33}
+.pilotResultsTable tbody tr.pilot-nicolas td:first-child{border-left-color:#8a61d8}
+.pilotResultsTable tbody tr.pilot-guilherme td:first-child{border-left-color:#f2f2f2}
+.pilotResultsTable tbody tr.pilot-lucas td:first-child{border-left-color:#ef1721}
+.pilotResultsTable tbody tr.pilot-rian td:first-child{border-left-color:#9d4edd}
+.pilotResultsTable tbody tr.pilot-caua td:first-child{border-left-color:#8d969d}
+.pilotResultsTable tbody tr.pilot-hiro td:first-child{border-left-color:#ff7a18}
+
+@media(max-width:700px){
+  .resultsCorner .pilotResultsTable th:nth-child(1),
+  .resultsCorner .pilotResultsTable td:nth-child(1){width:28%}
+  .resultsCorner .pilotResultsTable th:nth-child(2),
+  .resultsCorner .pilotResultsTable td:nth-child(2){width:13%}
+  .resultsCorner .pilotResultsTable th:nth-child(3),
+  .resultsCorner .pilotResultsTable td:nth-child(3){width:20%}
+  .resultsCorner .pilotResultsTable th:nth-child(4),
+  .resultsCorner .pilotResultsTable td:nth-child(4){width:13%}
+  .resultsCorner .pilotResultsTable th:nth-child(5),
+  .resultsCorner .pilotResultsTable td:nth-child(5){width:26%}
+  .resultsCorner .pilotResultsTable td:nth-child(3){font-size:9.8px}
+  .resultsCorner .pilotResultsTable td:nth-child(5){font-size:9px}
 }
 
 @media(max-width:700px){
-  #pilot > .pilotChooser{
-    display:grid!important;
-    grid-template-columns:1fr!important;
-    gap:5px!important;
-    margin:0 0 9px!important;
-    padding:11px 12px!important;
-    border:1px solid #2f383f!important;
-    border-radius:12px!important;
-    background:linear-gradient(145deg,rgba(26,34,39,.94),rgba(10,15,18,.94))!important;
-    width:100%!important;
-  }
-  #pilot > .pilotChooser label{
-    display:block!important;
-    font-size:10px!important;
-    margin:0 0 1px!important
-  }
-  #pilot > .pilotChooser select{
-    width:100%!important;
-    padding:10px!important;
-    font-size:13px!important
-  }
+  .resultsCorner .title{font-size:20px}
+  .resultsCorner .dataBlock{max-height:340px;padding:6px 7px 8px}
+  .resultsCorner table{font-size:10px;border-spacing:0 3px}
+  .resultsCorner th{font-size:9px;padding:7px 5px}
+  .resultsCorner td{padding:7px 5px}
+  .resultsCorner td:nth-child(4){font-size:9px}
 }
 
-/* Classification selectors in the same visual language as the pilot selector */
+
+/* ===== Clickable tables / cards ===== */
+.champRaceCard{transition:transform .14s ease,box-shadow .14s ease}
+.champRaceCard:hover{box-shadow:0 7px 18px rgba(0,0,0,.25);transform:translateY(-1px)}
+.champRaceHead{position:relative}
+.champRaceHead:after{content:"⌁";float:right;color:#7f8a91;font-size:12px;opacity:.75}
+
+.champResultsTable tbody tr,
+.resultsCorner tbody tr,
+.champRaceRow{
+  cursor:pointer;
+  transition:transform .14s ease,background .14s ease,box-shadow .14s ease,filter .14s ease;
+}
+.champResultsTable tbody tr:hover,
+.resultsCorner tbody tr:hover,
+.champRaceRow:hover{
+  filter:brightness(1.08);
+}
+.champResultsTable tbody tr:active,
+.resultsCorner tbody tr:active,
+.champRaceRow:active{
+  transform:scale(.995);
+}
+.champResultsTable tbody tr.is-selected td,
+.resultsCorner tbody tr.is-selected td,
+.champRaceRow.is-selected{
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 0 0 1px rgba(239,23,33,.18);
+}
+.champRaceRow{
+  border-radius:9px;
+  padding:4px 5px;
+}
+.champRaceRow:hover{
+  background:rgba(255,255,255,.04);
+}
+.champResultsTable tbody tr::after,
+.resultsCorner tbody tr::after{
+  content:"›";
+  position:absolute;
+  right:8px;
+  opacity:0;
+  color:#fff;
+  font-size:16px;
+  font-weight:950;
+  transition:opacity .14s ease;
+}
+.champResultsTable tbody tr,
+.resultsCorner tbody tr{position:relative}
+.champResultsTable tbody tr:hover::after,
+.resultsCorner tbody tr:hover::after{opacity:.75}
+
+
+/* Title probability calculation detail modal */
+.probDetailModal{position:fixed;inset:0;z-index:2100;display:none;align-items:center;justify-content:center;padding:18px}
+.probDetailModal.open{display:flex}
+.probDetailBackdrop{position:absolute;inset:0;background:rgba(2,5,7,.74);backdrop-filter:blur(8px)}
+.probDetailCard{position:relative;z-index:2;width:min(650px,100%);max-height:90vh;overflow:auto;background:radial-gradient(500px 180px at 10% 0%,rgba(239,23,33,.11),transparent 65%),linear-gradient(145deg,#1c252b,#0b1014);border:1px solid #46535c;border-radius:20px;box-shadow:0 28px 80px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.06);padding:24px}
+.probDetailClose{position:absolute;right:12px;top:10px;width:36px;height:36px;border-radius:10px;border:1px solid #46515a;background:#10171b;color:#fff;font-size:23px;line-height:1;cursor:pointer}
+.probDetailKicker{color:#a9b2b8;font-size:11px;font-weight:950;letter-spacing:.14em;text-transform:uppercase}
+.probDetailCard h2{margin:6px 42px 4px 0;font-size:30px;line-height:1.05;font-weight:950}
+.probDetailAccent{height:3px;width:88px;border-radius:999px;background:var(--red);margin:12px 0 18px}
+.probDetailGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.probDetailItem{min-height:78px;padding:13px 14px;border-radius:13px;background:rgba(8,13,16,.68);border:1px solid #2d383f;display:flex;flex-direction:column;justify-content:center;gap:5px}
+.probDetailItem.wide{grid-column:1/-1}
+.probDetailItem span{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#929da5;font-weight:900}
+.probDetailItem strong{font-size:19px;font-weight:950}
+.probDetailItem small{font-size:10px;color:#78848c;line-height:1.35}
+.probDetailExplanation{margin-top:13px;padding:13px 14px;border-radius:13px;background:rgba(8,13,16,.5);border:1px solid #2d383f;color:#b6c0c6;font-size:11px;line-height:1.55}
+.probDetailActions{display:flex;gap:9px;margin-top:16px}
+.probDetailBtn{flex:1;border:1px solid #48535b;background:#1a2227;color:#fff;border-radius:11px;padding:11px 13px;font-weight:950;cursor:pointer}
+.probDetailBtn:hover{filter:brightness(1.12)}
+@media(max-width:650px){.probDetailGrid{grid-template-columns:1fr}.probDetailItem.wide{grid-column:auto}.probDetailCard{padding:20px 16px}.probDetailCard h2{font-size:26px}}
+
+/* Result detail modal */
+.resultModal{
+  position:fixed;inset:0;z-index:2000;display:none;
+  align-items:center;justify-content:center;padding:18px;
+}
+.resultModal.open{display:flex}
+.resultModalBackdrop{
+  position:absolute;inset:0;background:rgba(2,5,7,.72);backdrop-filter:blur(8px);
+}
+.resultModalCard{
+  position:relative;z-index:2;width:min(560px,100%);
+  background:
+    radial-gradient(500px 180px at 10% 0%,rgba(239,23,33,.11),transparent 65%),
+    linear-gradient(145deg,#1c252b,#0b1014);
+  border:1px solid #46535c;border-radius:20px;
+  box-shadow:0 28px 80px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.06);
+  padding:24px;
+  animation:modalIn .16s ease-out;
+}
+@keyframes modalIn{
+  from{opacity:0;transform:translateY(10px) scale(.985)}
+  to{opacity:1;transform:none}
+}
+.resultModalClose{
+  position:absolute;right:12px;top:10px;width:36px;height:36px;border-radius:10px;
+  border:1px solid #46515a;background:#10171b;color:#fff;font-size:23px;line-height:1;cursor:pointer;
+}
+.resultModalKicker{
+  color:#a9b2b8;font-size:11px;font-weight:950;letter-spacing:.14em;text-transform:uppercase;
+}
+.resultModalCard h2{
+  margin:6px 42px 4px 0;font-size:30px;line-height:1.05;font-weight:950;
+}
+.resultModalAccent{
+  height:3px;width:88px;border-radius:999px;background:var(--red);margin:12px 0 18px;
+  box-shadow:0 0 15px rgba(239,23,33,.35);
+}
+.resultModalGrid{
+  display:grid;grid-template-columns:1fr 1fr;gap:9px;
+}
+.resultModalItem{
+  min-height:78px;padding:13px 14px;border-radius:13px;
+  background:rgba(8,13,16,.68);border:1px solid #2d383f;
+  display:flex;flex-direction:column;justify-content:center;gap:5px;
+}
+.resultModalItem.wide{grid-column:1/-1}
+.resultModalItem span{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#929da5;font-weight:900}
+.resultModalItem strong{font-size:19px;font-weight:950}
+.resultModalItem:nth-child(1) strong{color:#f2cf4c}
+.resultModalItem:nth-child(4) strong{color:var(--gold)}
+.resultModalItem:nth-child(5) strong{font-family:Consolas,monospace}
+.resultModalActions{display:flex;gap:9px;margin-top:16px}
+.modalBtn{
+  flex:1;border:1px solid #48535b;background:#1a2227;color:#fff;border-radius:11px;
+  padding:11px 13px;font-weight:950;cursor:pointer;
+}
+.modalBtn:hover{filter:brightness(1.12)}
+.modalBtn.primary{background:var(--red);border-color:var(--red)}
+body.modal-open{overflow:hidden}
+@media(max-width:700px){
+  .resultModal{padding:10px}
+  .resultModalCard{padding:18px;border-radius:16px}
+  .resultModalCard h2{font-size:25px}
+  .resultModalGrid{grid-template-columns:1fr 1fr;gap:7px}
+  .resultModalItem{min-height:72px;padding:11px 10px}
+  .resultModalItem strong{font-size:16px}
+  .resultModalActions{flex-direction:column}
+}
+
+
+/* ===== SIMULAÇÃO PAGE ===== */
+.simLayout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:13px;align-items:start}
+.simSidebar{padding:15px;min-height:700px;background:linear-gradient(145deg,rgba(16,25,30,.96),rgba(8,14,18,.96))}
+.simSideTitle{font-size:17px;font-weight:950;margin:2px 0 9px}
+.simSelect{width:100%;background:#11171b;color:#fff;border:1px solid #46515a;border-radius:9px;padding:10px 11px;font-weight:900}
+.priorButtons{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.priorBtn{background:#11171b;color:#cbd2d7;border:1px solid #46515a;border-radius:9px;padding:9px 6px;font-weight:900;cursor:pointer;transition:.15s}
+.priorBtn:hover{border-color:#f2c94e;color:#fff}
+.priorBtn.active{background:#f2c94e;color:#11171b;border-color:#f2c94e;box-shadow:0 0 12px #f2c94e33}
 .classificationSelect{
   width:100%;padding:12px 13px;background:#0f1519;color:#fff;
   border:1.5px solid #4e5961;border-radius:11px;font-weight:900;font-size:13px;
   outline:none;appearance:auto;
 }
 .classificationSelect:focus{border-color:#f2f3f4;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
-.slicerPanel .slicerSection{padding-bottom:15px}
-.classificationResults{
-  max-height:330px;
-  overflow-y:auto;
-  overflow-x:hidden;
-  padding:0 12px 12px;
-  scrollbar-width:thin;
-  scrollbar-color:#66717a #151b20;
-}
-.classificationResults::-webkit-scrollbar{width:8px}
-.classificationResults::-webkit-scrollbar-track{background:#151b20;border-radius:8px}
-.classificationResults::-webkit-scrollbar-thumb{background:#66717a;border-radius:8px}
-@media(max-width:700px){
-  .classificationSelect{font-size:13px;padding:11px 12px}
-  .classificationResults{
-    max-height:340px;
-    overflow-y:auto;
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-  }
-  .classificationResults table{
-    min-width:500px;
-    table-layout:auto;
-  }
-}
+.simHint{margin-top:14px;color:#87939b;font-size:10px;line-height:1.5}
+.simScenarioPicker{margin-top:14px;border-top:1px solid #2b343a;padding-top:10px}
+.simScenarioPicker summary{cursor:pointer;font-size:12px;font-weight:950;color:#d8dee2;list-style:none;user-select:none}
+.simScenarioPicker summary::-webkit-details-marker{display:none}
+.simScenarioPicker summary:after{content:"＋";float:right;color:#89959d}
+.simScenarioPicker[open] summary:after{content:"−"}
+.simScenarioPicker .pilotList{max-height:260px;overflow:auto;padding-right:3px}
+.simScenarioPicker .chk{font-size:11px;margin:6px 0}
+.scenarioPickerHint{margin-top:8px}
+.scenarioPickerTools{margin-top:7px}
 
+.simMain{display:grid;gap:13px}
+.simKpis{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.simKpi{padding:14px 15px;min-height:96px}
+.simKpi .label{font-size:10px;color:#a7b0b7;text-transform:uppercase;letter-spacing:.05em;font-weight:950}
+.simKpi .value{font-size:29px;font-weight:950;margin-top:5px}
+.simKpi .note{font-size:9px;color:#7e8991;margin-top:3px}
+.simCharts{display:grid;grid-template-columns:1.35fr 1fr;gap:13px}
+.simChartPanel{padding-bottom:10px}
+.simChart{height:290px;padding:0 10px 6px}
+.simLegendItem{display:flex;align-items:center;gap:6px}
+.simLegendDot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.simPercentiles{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:0 13px 13px}
+.simPercentile{background:#151b20;border:1px solid #2c353b;border-radius:10px;padding:10px;text-align:center}
+.simPercentile span{display:block;font-size:9px;color:#87919a;text-transform:uppercase;font-weight:900}
+.simPercentile strong{display:block;font-size:18px;margin-top:4px}
+.simStability{padding:0 14px 14px}
+.simStabilityChart{height:210px}
+.simExplanation{padding:14px 16px;color:#aeb8bf;font-size:11px;line-height:1.55}
+.simExplanation b{color:#fff}
+@media(max-width:1100px){.simLayout{grid-template-columns:1fr}.simSidebar{min-height:auto}.simCharts{grid-template-columns:1fr}.simKpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.simKpis{grid-template-columns:1fr}.simPercentiles{grid-template-columns:repeat(2,1fr)}}
 
-.resultsPageGrid{display:grid;grid-template-columns:1fr;gap:14px}
-.resultsHero{min-height:720px}
-.resultsControls{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 18px 14px}
-.resultsControls label{display:block;font-size:11px;color:#aeb5bc;text-transform:uppercase;font-weight:950;margin-bottom:5px}
-.resultsTableScroll{height:590px;overflow:auto;padding:0 13px 13px;scrollbar-width:thin;scrollbar-color:#66717a #151b20}
+/* ===== RESULTADOS PAGE — race-focused ===== */
+.resultsLayout{display:grid;grid-template-columns:205px minmax(0,1fr);gap:12px;align-items:stretch}
+.resultsSidebar{padding:15px;min-height:700px;background:linear-gradient(145deg,rgba(16,25,30,.96),rgba(8,14,18,.96))}
+.resultsSideTitle{font-size:17px;font-weight:950;margin:2px 0 9px;display:flex;align-items:center;gap:7px}
+.resultsSideSep{height:1px;background:#2b343a;margin:19px 0}
+.resultsViewNote{margin-top:20px;color:#8f9aa2;font-size:10px;line-height:1.45}
+.resultsViewNote strong{font-size:10px;color:#aeb7bd;letter-spacing:.11em}
+.resultsViewNote p{margin:7px 0 0}
+.resultsMain{min-width:0;display:flex;flex-direction:column;gap:12px}
+.resultsPanel{min-height:650px;overflow:hidden}
+.resultsKpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 12px 8px}
+.resultKpi{min-height:80px;padding:12px 14px;border-radius:11px;background:rgba(9,16,20,.72);border:1px solid #2c383f;display:flex;flex-direction:column;justify-content:center}
+.resultKpi b{font-size:29px;font-weight:950;line-height:1;color:#f3f5f6}
+.resultKpi span{font-size:8px;letter-spacing:.09em;font-weight:950;color:#8f9aa2;margin-top:8px}
+.resultKpi.accent b{color:var(--gold)}
+.resultsHint{font-size:10px;color:#7f8a92;text-align:right;padding:0 13px 5px}
+.resultsTableScroll{height:485px;overflow:auto;padding:0 11px 11px;scrollbar-width:thin;scrollbar-color:#66717a #151b20}
 .resultsTableScroll::-webkit-scrollbar{width:8px}.resultsTableScroll::-webkit-scrollbar-track{background:#151b20;border-radius:8px}.resultsTableScroll::-webkit-scrollbar-thumb{background:#66717a;border-radius:8px}
-
-/* ===== SHARED RACE RESULTS STYLE ===== */
-.raceResultsTable{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:12px}
-.raceResultsTable thead th{position:sticky;top:0;z-index:4;background:#11171b;color:#aeb7bf;padding:10px 10px;text-align:left;text-transform:uppercase;font-size:10px;letter-spacing:.06em;border-bottom:1px solid #353e45}
-.raceResultsTable tbody tr{--pilotColor:#66717a}
-.raceResultsTable tbody td{padding:10px 10px;background:linear-gradient(145deg,#20272c,#151b1f);color:#eef1f3;border-top:1px solid #2c353b;border-bottom:1px solid #11161a;box-shadow:0 3px 10px rgba(0,0,0,.22)}
-.raceResultsTable tbody td:first-child{border-left:3px solid var(--pilotColor);border-radius:9px 0 0 9px;font-weight:950}
-.raceResultsTable tbody td:last-child{border-radius:0 9px 9px 0}
-.raceResultsTable .resultPilot{font-weight:950;white-space:nowrap}
-.raceResultsTable .resultRace{font-weight:850;color:#d9dee2}
-.raceResultsTable .resultPos{font-size:14px;font-weight:950}
-.raceResultsTable .resultPoints{font-size:14px;font-weight:950;color:var(--gold)}
-.raceResultsTable .resultLap{font-family:Consolas,"Courier New",monospace;font-weight:850;color:#e9edf0;white-space:nowrap}
-.raceResultsTable .pod1{color:#ffe37c}.raceResultsTable .pod2{color:#eef1f3}.raceResultsTable .pod3{color:#f3a55d}
-.raceResultsTable .resultPosBadge{display:inline-block;min-width:34px;padding:4px 7px;text-align:center;border:1px solid #3c464d;border-radius:8px;background:#12181c}
-.resultsCorner .dataBlock{max-height:none}
-.resultsCorner .raceResultsTable{font-size:12px}
-.resultsCorner .raceResultsTable thead th,.resultsCorner .raceResultsTable tbody td{padding:9px 9px}
-
+.resultsTableScroll table{width:100%;border-collapse:separate;border-spacing:0 4px;font-size:12px}
+.resultsTableScroll th{position:sticky;top:0;z-index:5;background:#11181c!important;color:#aab3b9!important;font-size:10px;font-weight:950;text-transform:uppercase;letter-spacing:.05em;padding:9px 8px;border:0}
+.resultsTableScroll td{padding:10px 8px;background:rgba(18,25,29,.96);color:#edf0f2;border-top:1px solid rgba(66,76,83,.5);border-bottom:1px solid rgba(8,11,13,.72);white-space:nowrap}
+.resultsTableScroll tbody tr{cursor:pointer;position:relative;transition:filter .14s ease,transform .14s ease}
+.resultsTableScroll tbody tr:hover td{background:rgba(31,41,47,.99)}
+.resultsTableScroll tbody tr:active{transform:scale(.998)}
+.resultsTableScroll tbody tr td:first-child{border-left:3px solid #46515a;border-radius:7px 0 0 7px;font-weight:950}
+.resultsTableScroll tbody tr td:last-child{border-radius:0 7px 7px 0}
+.resultsTableScroll td:nth-child(1){width:10%}
+.resultsTableScroll td:nth-child(2){width:23%;font-weight:950}
+.resultsTableScroll td:nth-child(3){width:36%;color:#c5ccd1}
+.resultsTableScroll td:nth-child(4){width:31%;text-align:right}
+.resultStatus{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;background:#182127;border:1px solid #2b383f;font-size:10px;font-weight:950;color:#dfe5e8}
+.resultStatus.podium{color:#ffe07b;border-color:#695b28;background:#2b260e}
+.resultStatus.top5{color:#a9d4ff;border-color:#36526f;background:#121e29}
+.raceSummaryPanel{padding-bottom:12px}
+.raceSummaryGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;padding:0 11px}
+.summaryRaceCard{border:1px solid #29353c;background:linear-gradient(145deg,rgba(10,17,21,.96),rgba(7,13,16,.96));border-radius:11px;overflow:hidden}
+.summaryRaceHead{display:flex;justify-content:space-between;align-items:center;padding:10px 11px;border-bottom:1px solid #29353c;font-size:13px;font-weight:950}
+.summaryRaceHead small{font-size:9px;color:#89949c;font-weight:900}
+.summaryRaceBody{padding:7px 10px 9px}
+.summaryRaceRow{display:grid;grid-template-columns:25px 1fr auto;gap:7px;align-items:center;padding:8px 4px;border-radius:7px;cursor:pointer}
+.summaryRaceRow:hover{background:rgba(255,255,255,.035)}
+.summaryPlace{font-weight:950;color:#dfe4e7}
+.summaryName{font-size:11px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.summaryBadge{font-size:8px;text-transform:uppercase;font-weight:950;color:#8f99a0}
+.summaryBadge.podium{color:var(--gold)}
+.resultsTableScroll tbody tr.pilot-berton td:first-child{border-left-color:#f2c94e}
+.resultsTableScroll tbody tr.pilot-henrique td:first-child{border-left-color:#4e8cff}
+.resultsTableScroll tbody tr.pilot-rose td:first-child{border-left-color:#ff69b4}
+.resultsTableScroll tbody tr.pilot-rex td:first-child{border-left-color:#21c76a}
+.resultsTableScroll tbody tr.pilot-guima td:first-child{border-left-color:#22c1d6}
+.resultsTableScroll tbody tr.pilot-robinho td:first-child{border-left-color:#f39c33}
+.resultsTableScroll tbody tr.pilot-nicolas td:first-child{border-left-color:#8a61d8}
+.resultsTableScroll tbody tr.pilot-guilherme td:first-child{border-left-color:#f2f2f2}
+.resultsTableScroll tbody tr.pilot-lucas td:first-child{border-left-color:#ef1721}
+.resultsTableScroll tbody tr.pilot-rian td:first-child{border-left-color:#9d4edd}
+.resultsTableScroll tbody tr.pilot-caua td:first-child{border-left-color:#8d969d}
+.resultsTableScroll tbody tr.pilot-hiro td:first-child{border-left-color:#ff7a18}
+@media(max-width:980px){.resultsLayout{grid-template-columns:1fr}.resultsSidebar{min-height:0}.resultsMain{width:100%}.resultsTableScroll{height:500px}.raceSummaryGrid{grid-template-columns:1fr}}
 @media(max-width:700px){
- .resultsHero{min-height:0}
- .resultsControls{grid-template-columns:1fr;padding:0 12px 11px}
- .resultsTableScroll{height:520px;padding:0 7px 9px;overflow:auto}
- .resultsTableScroll .raceResultsTable{min-width:0;width:100%;table-layout:fixed;font-size:9.2px}
- .resultsTableScroll .raceResultsTable thead th{font-size:8px;padding:8px 4px}
- .resultsTableScroll .raceResultsTable tbody td{padding:7px 4px;word-break:break-word}
- .resultsTableScroll .raceResultsTable th:nth-child(1),.resultsTableScroll .raceResultsTable td:nth-child(1){width:24%}
- .resultsTableScroll .raceResultsTable th:nth-child(2),.resultsTableScroll .raceResultsTable td:nth-child(2){width:15%}
- .resultsTableScroll .raceResultsTable th:nth-child(3),.resultsTableScroll .raceResultsTable td:nth-child(3){width:20%}
- .resultsTableScroll .raceResultsTable th:nth-child(4),.resultsTableScroll .raceResultsTable td:nth-child(4){width:13%}
- .resultsTableScroll .raceResultsTable th:nth-child(5),.resultsTableScroll .raceResultsTable td:nth-child(5){width:28%}
- .resultsTableScroll .raceResultsTable .resultPilot{white-space:normal}
- .resultsTableScroll .raceResultsTable .resultPos{font-size:11px}
- .resultsTableScroll .raceResultsTable .resultPoints{font-size:11px}
- .resultsTableScroll .raceResultsTable .resultLap{font-size:8.7px;white-space:normal}
- .resultsTableScroll .raceResultsTable .resultPosBadge{min-width:27px;padding:3px 4px}
-
- .resultsCorner .raceResultsTable{font-size:9.2px;table-layout:fixed}
- .resultsCorner .raceResultsTable thead th{font-size:8px;padding:8px 4px}
- .resultsCorner .raceResultsTable tbody td{padding:7px 4px;word-break:break-word}
- .resultsCorner .raceResultsTable th:nth-child(1),.resultsCorner .raceResultsTable td:nth-child(1){width:24%}
- .resultsCorner .raceResultsTable th:nth-child(2),.resultsCorner .raceResultsTable td:nth-child(2){width:15%}
- .resultsCorner .raceResultsTable th:nth-child(3),.resultsCorner .raceResultsTable td:nth-child(3){width:20%}
- .resultsCorner .raceResultsTable th:nth-child(4),.resultsCorner .raceResultsTable td:nth-child(4){width:13%}
- .resultsCorner .raceResultsTable th:nth-child(5),.resultsCorner .raceResultsTable td:nth-child(5){width:28%}
- .resultsCorner .raceResultsTable .resultPilot{white-space:normal}
- .resultsCorner .raceResultsTable .resultLap{font-size:8.7px;white-space:normal}
+ .resultsKpis{grid-template-columns:1fr 1fr}.resultKpi.accent{grid-column:1/-1}
+ .resultsPanel{min-height:0}.resultsTableScroll{height:520px;padding:0 7px 9px}
+ .resultsTableScroll table{font-size:9.5px;table-layout:fixed}
+ .resultsTableScroll th,.resultsTableScroll td{padding:7px 5px;white-space:normal;word-break:break-word}
+ .resultsTableScroll td:nth-child(1){width:15%}.resultsTableScroll td:nth-child(2){width:27%}.resultsTableScroll td:nth-child(3){width:33%}.resultsTableScroll td:nth-child(4){width:25%}
+ .resultStatus{font-size:8px;padding:4px 6px}
+ .resultsHint{text-align:left;padding-left:13px}
 }
 
+/* ===== RESULTADOS — mesma linguagem visual da classificação ===== */
+.resultsModelGrid{display:grid;grid-template-columns:245px minmax(0,1fr) 315px;gap:14px;align-items:start}
+.resultsModelSidebar{padding:14px;min-height:100%;background:linear-gradient(145deg,rgba(21,29,34,.94),rgba(9,14,18,.94))}
+.resultsModelSidebar .title{font-size:20px;padding:0 0 8px}
+.resultsModelSidebar .classificationSelect{margin-bottom:2px}
+.resultsModelHint{margin-top:24px;padding-top:16px;border-top:1px solid #2d363c;color:#919ca4;font-size:11px;line-height:1.45}
+.hintTitle{color:#b9c0c5;font-weight:950;letter-spacing:.12em;font-size:10px}
+.resultsModelHint p{margin:7px 0 12px}
+.hintMini{padding:10px 11px;border:1px solid #2d373e;border-radius:10px;background:rgba(7,12,15,.5);color:#a9b2b8}
+.resultsModelMain{display:flex;flex-direction:column;gap:14px;min-width:0}
+.resultsModelHero{overflow:hidden}
+.resultsModelHero>.title{font-size:24px;padding:14px 17px 9px}
+.resultsModelKpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 13px 9px}
+.resultsModelKpi{min-height:80px;padding:12px 15px;border-radius:12px;background:linear-gradient(145deg,#172126,#0c1317);border:1px solid #2e3a42;display:flex;flex-direction:column;justify-content:center}
+.resultsModelKpi span{font-size:9px;color:#89969e;font-weight:950;letter-spacing:.1em}
+.resultsModelKpi b{font-size:34px;line-height:1;margin-top:6px;font-weight:950}
+.resultsModelKpi.highlight b{color:var(--gold)}
+.resultsModelHintBar{font-size:10px;color:#818e96;text-align:right;padding:0 14px 5px}
+.resultsModelTable{height:450px;padding:0 10px 11px}
+.resultsModelTable table{font-size:12px}
+.resultsModelTable th{font-size:10px;padding:9px 8px}
+.resultsModelTable td{padding:10px 8px}
+.resultsModelTable td:nth-child(1){width:12%}
+.resultsModelTable td:nth-child(2){width:27%}
+.resultsModelTable td:nth-child(3){width:35%}
+.resultsModelTable td:nth-child(4){width:26%}
+.resultsSummaryModel{padding-bottom:12px}
+.resultsSummaryModel>.title{font-size:22px}
+.resultsHighlights,.resultsBreakdown{overflow:hidden}
+.resultsHighlights .title,.resultsBreakdown .title{font-size:20px;padding:13px 15px 9px}
+.resultsHighlightBody{padding:3px 12px 12px}
+.highlightRace{padding:11px 8px;border-bottom:1px solid #29343a}
+.highlightRace:last-child{border-bottom:0}
+.highlightRaceHead{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:950}
+.highlightRaceHead small{color:#7f8b93;font-size:9px}
+.highlightWinner{display:grid;grid-template-columns:30px 1fr auto;gap:8px;align-items:center;margin-top:8px;padding:8px 9px;border-radius:9px;background:#11191d;border:1px solid #2c383f}
+.highlightWinner .bigPlace{font-size:17px;font-weight:950;color:var(--gold)}
+.highlightWinner .winnerName{font-size:13px;font-weight:950}
+.highlightWinner .winnerTag{font-size:9px;font-weight:950;color:#97a2a9;text-transform:uppercase}
+.breakRow{display:grid;grid-template-columns:84px 1fr 28px;gap:8px;align-items:center;margin:9px 12px}
+.breakLabel{font-size:10px;font-weight:900;color:#aeb7bd}
+.breakBar{height:9px;background:#20292e;border-radius:999px;overflow:hidden}
+.breakBar i{display:block;height:100%;border-radius:999px}
+.breakCount{text-align:right;color:#dfe4e7;font-size:11px;font-weight:950}
+@media(max-width:1200px){.resultsModelGrid{grid-template-columns:230px minmax(0,1fr)}.resultsModelRight{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:14px}}
+@media(max-width:900px){.resultsModelGrid{grid-template-columns:1fr}.resultsModelRight{grid-column:auto;display:flex;flex-direction:column}.resultsModelSidebar{min-height:0}.resultsModelTable{height:480px}}
+@media(max-width:700px){.resultsModelKpis{grid-template-columns:1fr 1fr}.resultsModelKpi.highlight{grid-column:1/-1}.resultsModelHero>.title{font-size:20px}.resultsModelHintBar{text-align:left}.resultsModelTable{height:520px;padding:0 7px 9px}.resultsModelTable table{font-size:9.5px;table-layout:fixed}.resultsModelTable th,.resultsModelTable td{padding:7px 5px;white-space:normal;word-break:break-word}.resultsModelTable td:nth-child(1){width:15%}.resultsModelTable td:nth-child(2){width:27%}.resultsModelTable td:nth-child(3){width:33%}.resultsModelTable td:nth-child(4){width:25%}.resultsSummaryModel>.title{font-size:20px}}
 
-/* Results pages share the same visual language as the pilot race-results panel. */
-.resultsHero .title{font-size:21px;font-weight:950}
-@media(max-width:700px){.resultsHero .title{font-size:18px}}
-
-/* Clickable championship ranking rows */
-.champRankRow{cursor:pointer;transition:transform .15s ease,background .15s ease,filter .15s ease;border-radius:8px;padding:2px 4px;}
-.champRankRow:hover{background:rgba(255,255,255,.045);transform:translateX(2px);filter:brightness(1.08)}
-.champRankRow:focus-visible{outline:2px solid var(--red);outline-offset:2px}
-.pilotJumpFlash{animation:pilotJumpFlash .9s ease;}
-@keyframes pilotJumpFlash{0%,100%{box-shadow:none}40%{box-shadow:0 0 0 2px rgba(239,23,33,.75),0 0 24px rgba(239,23,33,.22)}}
-
-
-
-/* ===== GLOBAL FONT BOOST — slightly larger while preserving the layout ===== */
-body{font-size:17px}
-.title{font-size:27px}
-.slicerTitle{font-size:23px}
-.btn{font-size:14px}
-.classificationSelect{font-size:16px}
-.champKpi .label{font-size:17px}
-.champKpi .num{font-size:48px}
-.champLeaderLabel{font-size:15px}
-.champLeaderName{font-size:34px}
-.champLeaderPts{font-size:20px}
-.champPod .place{font-size:30px}
-.champPod .name{font-size:25px}
-.champPod .pts{font-size:19px}
-.champRankName{font-size:16px}
-.champRankNo{font-size:16px}
-.champRankPts{font-size:15px}
-.champRaceHead{font-size:17px}
-.champRaceName{font-size:14px}
-.champRacePts{font-size:15px}
-.champResultsTable table{font-size:12.5px}
-.champResultsTable th{font-size:11px}
-.champResultsTable td:nth-child(3){font-size:11.5px}
-.champResultsTable td:nth-child(4){font-size:13px}
-.champResultsTable td:nth-child(5){font-size:11.5px}
-.raceResultsTable{font-size:13px}
-.raceResultsTable thead th{font-size:11px}
-.raceResultsTable .resultPos{font-size:15px}
-.raceResultsTable .resultPoints{font-size:15px}
-.raceResultsTable .resultLap{font-size:11.5px}
-.resultsControls label{font-size:12px}
-.resultsHero .title{font-size:23px}
-.pilotHeroInfo .season{font-size:13px}
-.pilotHeroInfo .name{font-size:61px}
-.pilotHeroInfo .rankLine{font-size:20px}
-.pilotHeroInfo .rankNo{font-size:29px}
-.pilotHeroInfo .quote{font-size:17px}
-.heroMini .mini b{font-size:24px}
-.heroMini .mini span{font-size:12px}
-.pilotMetric .micon{font-size:25px}
-.pilotMetric .mlabel{font-size:12px}
-.pilotMetric .mvalue{font-size:31px}
-.pilotChooser label{font-size:14px}
-.pilotChooser select{font-size:14px}
-.positionNote{font-size:12px}
-.legendTitle{font-size:12px}
-.legendItem{font-size:17px}
-.legendValue{font-size:15px}
-.champEvoLegend .item{font-size:16px}
-.champEvoLegend .score{font-size:15px}
-
+/* ===== RESULTS PAGE — FINAL VISUAL POLISH ===== */
+.resultsModelGrid{grid-template-columns:225px minmax(0,1fr) 300px;gap:12px}
+.resultsModelSidebar{
+  background:linear-gradient(145deg,rgba(19,27,32,.97),rgba(9,15,18,.97));
+  border-color:#2d3940;
+}
+.resultsModelSidebar .title{
+  color:#f1f4f5;
+  font-size:19px;
+  padding:2px 0 9px;
+  letter-spacing:-.2px;
+}
+.resultsModelSidebar .classificationSelect{
+  width:100%;
+  height:42px;
+  padding:0 38px 0 12px;
+  border:1px solid #46535b;
+  border-radius:10px;
+  background-color:#0e171b;
+  color:#eef2f3;
+  font-size:13px;
+  font-weight:900;
+  appearance:none;
+  -webkit-appearance:none;
+  color-scheme:dark;
+  cursor:pointer;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' fill='none' stroke='%23c5cdd1' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 12px center;
+}
+.resultsModelSidebar .classificationSelect:hover{border-color:#6a7780;background-color:#111c21}
+.resultsModelSidebar .classificationSelect:focus{outline:none;border-color:#7d8991;box-shadow:0 0 0 2px rgba(239,23,33,.14)}
+.resultsModelHint{margin-top:22px;padding-top:15px;color:#8f9ba3}
+.hintMini{
+  background:#0d1519;
+  border:1px solid #2f3a41;
+  color:#aeb7bc;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.02);
+}
+.resultsModelHero,
+.resultsSummaryModel,
+.resultsHighlights,
+.resultsBreakdown{
+  background:linear-gradient(145deg,rgba(24,31,36,.97),rgba(9,14,17,.97));
+  border-color:#2d3940;
+}
+.resultsModelHero>.title{font-size:23px}
+.resultsModelKpi{
+  background:linear-gradient(145deg,#131d22,#0c1418);
+  border-color:#304048;
+}
+.resultsModelHintBar{color:#7e8b93}
+.resultsModelTable{padding:0 9px 10px}
+.resultsModelTable table{border-spacing:0 4px}
+.resultsModelTable th{
+  background:#11181c!important;
+  color:#96a2aa!important;
+}
+.resultsModelTable td{
+  background:rgba(14,22,26,.97)!important;
+  color:#edf1f2!important;
+  border-top:1px solid rgba(53,65,73,.55);
+  border-bottom:1px solid rgba(4,8,10,.9);
+}
+.resultsModelTable tbody tr:nth-child(even) td,
+.resultsModelTable tbody tr:nth-child(odd) td{background:rgba(14,22,26,.97)!important;color:#edf1f2!important}
+.resultsModelTable tbody tr:hover td{background:#18242a!important;color:#fff!important}
+.resultsSummaryModel>.title{font-size:22px}
+.raceSummaryGrid{gap:10px}
+.summaryRaceCard{
+  background:linear-gradient(145deg,#111b20,#0a1115);
+  border-color:#2d3940;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
+}
+.summaryRaceHead{
+  background:rgba(14,21,25,.62);
+  border-bottom-color:#29353c;
+}
+.summaryRaceBody{padding:5px 9px 10px}
+.summaryRaceRow{
+  grid-template-columns:32px minmax(0,1fr) 78px;
+  gap:7px;
+  min-height:36px;
+  padding:7px 6px;
+  border-top:1px solid rgba(44,55,62,.34);
+  transition:background .14s ease,transform .14s ease;
+}
+.summaryRaceRow:first-child{border-top:0}
+.summaryRaceRow:hover{background:rgba(255,255,255,.045);transform:translateX(1px)}
+.summaryPlace{font-size:14px;color:#e7ecee}
+.summaryName{font-size:11px;font-weight:950;color:#f1f3f4}
+.summaryBadge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-height:22px;
+  padding:4px 7px;
+  border-radius:999px;
+  border:1px solid #35424a;
+  background:#111b20;
+  color:#98a5ad;
+  text-align:center;
+  font-size:8px;
+  letter-spacing:.03em;
+}
+.summaryBadge.podium{
+  background:#2b260e;
+  border-color:#66591f;
+  color:#f1d45d;
+}
+/* Status text gets its own visual treatment without introducing mismatched colors. */
+.summaryBadge.podium:before{content:'✦ ';opacity:.8}
+.summaryRaceRow .summaryBadge:not(.podium):not(:empty){color:#9da9b0}
+.resultsHighlights .title,.resultsBreakdown .title{color:#f1f4f5}
+.highlightRace{background:transparent}
+.highlightWinner{
+  background:#10191e;
+  border-color:#2d3940;
+}
+.breakRow{margin:10px 12px}
+.breakBar{background:#1b252a}
+@media(max-width:1200px){.resultsModelGrid{grid-template-columns:220px minmax(0,1fr) 280px}}
+@media(max-width:900px){.resultsModelGrid{grid-template-columns:1fr}.resultsModelSidebar{order:0}.resultsModelMain{order:1}.resultsModelRight{order:2}}
 @media(max-width:700px){
-  body{font-size:16px}
-  .title{font-size:22px}
-  .slicerTitle{font-size:20px}
-  .btn{font-size:11px}
-  .classificationSelect{font-size:15px}
-  .champKpi .label{font-size:13px}
-  .champKpi .num{font-size:34px}
-  .champLeaderLabel{font-size:11px}
-  .champLeaderName{font-size:27px}
-  .champLeaderPts{font-size:15px}
-  .champPod .place{font-size:24px}
-  .champPod .name{font-size:15px}
-  .champPod .pts{font-size:13px}
-  .champRankName{font-size:13px}
-  .champRankNo{font-size:13px}
-  .champRankPts{font-size:13px}
-  .champRaceHead{font-size:15px}
-  .champRaceName{font-size:13px}
-  .champRacePts{font-size:14px}
-  .champResultsTable table{font-size:10.5px}
-  .champResultsTable th{font-size:9.5px}
-  .champResultsTable td:nth-child(3){font-size:10px}
-  .champResultsTable td:nth-child(4){font-size:11px}
-  .champResultsTable td:nth-child(5){font-size:10px}
-  .raceResultsTable{font-size:10px}
-  .raceResultsTable thead th{font-size:8.5px}
-  .raceResultsTable .resultPos{font-size:11.5px}
-  .raceResultsTable .resultPoints{font-size:11.5px}
-  .raceResultsTable .resultLap{font-size:9px}
-  .resultsControls label{font-size:10px}
-  .resultsHero .title{font-size:20px}
-  .pilotHeroInfo .season{font-size:10px}
-  .pilotHeroInfo .name{font-size:46px}
-  .pilotHeroInfo .rankLine{font-size:16px}
-  .pilotHeroInfo .rankNo{font-size:28px}
-  .pilotHeroInfo .quote{font-size:14px}
-  .heroMini .mini b{font-size:21px}
-  .heroMini .mini span{font-size:10px}
-  .pilotMetric .micon{font-size:19px}
-  .pilotMetric .mlabel{font-size:9px}
-  .pilotMetric .mvalue{font-size:23px}
-  .pilotChooser label{font-size:11px}
-  .pilotChooser select{font-size:14px}
-  .positionNote{font-size:10px}
-  .legendTitle{font-size:10px}
-  .legendItem{font-size:13px}
-  .legendValue{font-size:11px}
-  .champEvoLegend .item{font-size:13px}
-  .champEvoLegend .score{font-size:11px}
+  .resultsModelSidebar .classificationSelect{height:40px;font-size:12px}
+  .summaryRaceRow{grid-template-columns:28px minmax(0,1fr) 76px;padding:6px 5px}
+  .summaryBadge{font-size:7.5px;min-height:21px;padding:4px 5px}
 }
 
 
-
-/* ===== PILOT MINI STATS — title chance alongside the existing indicators ===== */
-.heroMini{grid-template-columns:repeat(4,1fr)}
-.heroMini .mini:last-child b{color:var(--gold)}
-@media(max-width:700px){
-  .heroMini{grid-template-columns:repeat(4,1fr);gap:4px}
-  .heroMini .mini b{font-size:19px}
-  .heroMini .mini span{font-size:9px;line-height:1.1}
-}
-@media(max-width:520px){
-  .heroMini{grid-template-columns:repeat(2,1fr);gap:8px}
-}
-
-
-/* ===== TITLE CHANCE — reference layout ===== */
-.titleChancePanel{
+/* ===== TITLE PROBABILITY ===== */
+.titleProbability{
   margin-top:12px;
   background:
-    radial-gradient(440px 140px at 50% 0%,rgba(243,207,78,.06),transparent 72%),
-    linear-gradient(145deg,rgba(24,31,36,.97),rgba(10,15,18,.97));
+    radial-gradient(520px 170px at 6% 0%,rgba(239,23,33,.08),transparent 68%),
+    linear-gradient(145deg,rgba(28,35,40,.94),rgba(10,15,18,.94));
   border:1px solid rgba(67,76,83,.95);
-  border-radius:19px;
-  box-shadow:0 10px 28px rgba(0,0,0,.48);
-  overflow:hidden;
 }
-.titleChancePanel > .title{
-  font-size:21px;
-  padding:14px 16px 11px;
+.titleProbability .title{
   display:flex;align-items:center;gap:8px;
   border-bottom:1px solid rgba(70,78,84,.55);
 }
-.titleChanceFeatured{
-  margin:10px 11px 8px;
-  padding:15px 15px 13px;
-  border:1px solid #334048;
-  border-radius:12px;
-  background:linear-gradient(145deg,rgba(11,18,22,.97),rgba(7,12,15,.97));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
+.probabilityBody{
+  display:grid;
+  grid-template-columns:1.05fr 1fr;
+  gap:14px;
+  padding:13px 15px 15px;
 }
-.titleChanceFeaturedLabel{
-  color:#909ba3;font-size:10px;font-weight:950;letter-spacing:.12em;
+.probWinnerBox{
+  min-height:142px;
+  padding:17px 18px;
+  border:1px solid #39464e;
+  border-radius:13px;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(243,207,78,.15),transparent 45%),
+    linear-gradient(145deg,rgba(12,20,24,.92),rgba(7,12,15,.94));
+  display:flex;flex-direction:column;justify-content:center;
 }
-.titleChanceFeaturedName{
-  margin-top:4px;font-size:29px;line-height:1.05;font-weight:950;
+.probKicker{
+  color:#9ca7ae;font-size:10px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;
 }
-.titleChanceFeaturedPct{
-  margin-top:5px;font-size:39px;line-height:1;font-weight:950;color:var(--gold);
+.probWinnerName{
+  font-size:31px;font-weight:950;line-height:1.05;margin-top:5px;
 }
-.titleChanceFeaturedMeta{
-  margin-top:7px;color:#98a3aa;font-size:9.5px;line-height:1.3;
+.probWinnerPct{
+  color:var(--gold);font-size:38px;font-weight:950;line-height:1;margin-top:8px;
 }
-.titleChanceHeader{
-  display:grid;grid-template-columns:24px 86px minmax(0,1fr) 38px;
-  gap:7px;align-items:center;
-  padding:4px 16px 3px;
-  color:#858f97;font-size:9px;font-weight:950;letter-spacing:.07em;text-transform:uppercase;
+.probMeta{
+  color:#8f9aa2;font-size:10px;margin-top:9px;line-height:1.4;
 }
-.titleChanceList{padding:2px 11px 5px}
-.titleChanceRow{
-  display:grid;grid-template-columns:24px 86px minmax(0,1fr) 38px;gap:7px;
-  align-items:center;margin:4px 0;padding:4px 5px;border-radius:8px;
+.probList{
+  min-width:0;
+  padding:2px 0;
 }
-.titleChanceNo{font-size:12px;font-weight:950;text-align:center;color:#cfd6da}
-.titleChancePilot{font-size:12px;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-.titleChanceBar{height:10px;background:#20282d;border-radius:999px;overflow:hidden}
-.titleChanceBar i{display:block;height:100%;border-radius:999px}
-.titleChancePct{font-size:12px;font-weight:950;text-align:right;color:var(--gold)}
-.titleChanceFoot{
-  padding:4px 13px 13px;color:#818c94;font-size:9px;line-height:1.35;
+.probListHead{
+  display:grid;grid-template-columns:24px 90px 1fr 42px;gap:8px;
+  color:#7f8a92;font-size:9px;font-weight:950;text-transform:uppercase;
+  letter-spacing:.05em;margin:0 4px 7px;
+}
+.probRow{
+  display:grid;grid-template-columns:24px 90px 1fr 42px;gap:8px;align-items:center;
+  padding:6px 4px;border-radius:8px;cursor:pointer;
+}
+.probRow:hover{background:rgba(255,255,255,.035)}
+.probPos{font-size:11px;font-weight:950;color:#aeb7bd;text-align:center}
+.probName{font-size:11px;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.probTrack{height:9px;background:#202a2f;border-radius:999px;overflow:hidden}
+.probTrack i{display:block;height:100%;border-radius:999px}
+.probPct{text-align:right;font-size:11px;font-weight:950;color:#dce2e5}
+.probNote{
+  margin-top:8px;color:#68747c;font-size:9px;line-height:1.35;
+}
+.champKpis + .titleProbability{margin-top:12px}
+@media(max-width:960px){
+  .probabilityBody{grid-template-columns:1fr}
 }
 @media(max-width:700px){
-  .titleChancePanel > .title{font-size:19px;padding:12px 13px 9px}
-  .titleChanceFeatured{margin:8px 8px 7px;padding:13px 13px 11px}
-  .titleChanceFeaturedLabel{font-size:8.5px}
-  .titleChanceFeaturedName{font-size:25px}
-  .titleChanceFeaturedPct{font-size:34px}
-  .titleChanceFeaturedMeta{font-size:8px}
-  .titleChanceHeader{grid-template-columns:20px 76px minmax(0,1fr) 34px;gap:5px;padding:3px 12px 2px;font-size:8px}
-  .titleChanceList{padding:2px 7px 4px}
-  .titleChanceRow{grid-template-columns:20px 76px minmax(0,1fr) 34px;gap:5px;margin:3px 0;padding:4px 4px}
-  .titleChanceNo,.titleChancePilot,.titleChancePct{font-size:10.5px}
-  .titleChanceBar{height:9px}
-  .titleChanceFoot{font-size:8px;padding:3px 10px 10px}
+  .probabilityBody{padding:10px 10px 12px;gap:9px}
+  .probWinnerBox{min-height:118px;padding:14px}
+  .probWinnerName{font-size:27px}
+  .probWinnerPct{font-size:34px}
+  .probListHead{grid-template-columns:22px 76px 1fr 38px;font-size:8px}
+  .probRow{grid-template-columns:22px 76px 1fr 38px;padding:6px 2px}
+  .probName{font-size:10px}
+  .probPct{font-size:10px}
 }
+
+/* ===== Title chance placement: general page right rail + pilot percentage card ===== */
+.rightProbability{margin-top:0}
+.rightProbability .title{font-size:20px;padding:13px 15px 9px}
+.rightProbability .probabilityBody{grid-template-columns:1fr;gap:10px;padding:10px 12px 12px}
+.rightProbability .probWinnerBox{min-height:122px;padding:14px 15px}
+.rightProbability .probWinnerName{font-size:28px}
+.rightProbability .probWinnerPct{font-size:36px}
+.rightProbability .probMeta{font-size:9px}
+.rightProbability .probList{max-height:205px;overflow:auto;padding-right:2px}
+.rightProbability .probListHead{grid-template-columns:22px 78px 1fr 40px;font-size:8px}
+.rightProbability .probRow{grid-template-columns:22px 78px 1fr 40px;padding:5px 3px}
+.rightProbability .probName{font-size:10px}
+.rightProbability .probPct{font-size:10px}
+.titleChancePilot{display:flex;align-items:center;justify-content:center;min-height:250px;padding:18px;
+  background:
+    radial-gradient(circle at 50% 25%,rgba(243,207,78,.11),transparent 46%),
+    linear-gradient(145deg,rgba(13,20,24,.94),rgba(8,12,15,.94));
+  border:1px solid rgba(67,76,83,.95);
+  box-shadow:0 10px 28px rgba(0,0,0,.48);
+}
+.pilotChanceLabel{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#aab4bb;font-weight:950;margin-bottom:10px;text-align:center}.pilotChancePct{font-size:78px;line-height:1;font-weight:950;color:var(--gold);letter-spacing:-3px;text-shadow:0 4px 18px rgba(0,0,0,.45)}
+@media(max-width:1050px){.rightProbability .probabilityBody{grid-template-columns:1fr 1fr}.rightProbability .probList{max-height:none}}
+@media(max-width:700px){
+  .rightProbability .title{font-size:19px}
+  .rightProbability .probabilityBody{grid-template-columns:1fr;gap:8px}
+  .rightProbability .probList{max-height:240px}
+  .titleChancePilot{min-height:170px}
+  .pilotChancePct{font-size:64px}
+}
+
+
+/* ===== MOBILE PERFORMANCE + LAYOUT PATCH ===== */
+@media(max-width:700px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  .app{width:100%;padding:7px}
+  .top{position:sticky;top:0;z-index:50;display:flex;flex-direction:column;align-items:stretch;gap:7px;
+       padding:6px 2px 8px;margin-bottom:7px;background:rgba(10,14,17,.95);backdrop-filter:blur(9px)}
+  .brand{gap:8px}.brand .cup{font-size:32px}.brand h1{font-size:28px;letter-spacing:-1.3px}
+  .nav{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .nav button{padding:10px 5px;font-size:10px}
+
+  .champGrid{display:flex!important;flex-direction:column;gap:9px}
+  .slicerPanel{order:0;width:100%;min-height:0}
+  .champRight{order:1;width:100%;display:flex!important;flex-direction:column;gap:9px}
+  .champMain{order:2;width:100%;display:flex;flex-direction:column;gap:9px}
+  .champRightPanel,.titleProbability,.champRightResults{width:100%}
+
+  .slicerTitle{font-size:17px;padding:11px 12px 8px}
+  .slicerSection{padding:0 11px 12px}
+  .filterTools{padding-bottom:5px}
+  .btn{padding:8px 8px;font-size:10px}
+  .pilotList{max-height:none!important;overflow:visible!important}
+  .chk{font-size:12px;margin:7px 0}
+
+  .champKpis{grid-template-columns:1fr 1fr;gap:6px}
+  .champKpi{min-height:80px;padding:9px 10px}
+  .champKpi .label{font-size:10px;line-height:1.2}.champKpi .num{font-size:27px}
+  .champLeader{grid-column:1/-1;grid-template-columns:39px 1fr;min-height:82px}
+  .champLeaderIcon{font-size:30px}.champLeaderLabel{font-size:10px}.champLeaderName{font-size:21px}.champLeaderPts{font-size:13px}
+
+  .title{font-size:18px;padding:10px 11px 8px}
+  .champPodium{grid-template-columns:repeat(3,1fr);gap:5px;padding:0 8px 9px}
+  .champPod{min-height:100px;padding:8px 3px;border-radius:10px}
+  .champPod .place{font-size:18px}.champPod .name{font-size:11px;margin:5px 0 2px}.champPod .pts{font-size:10px}
+
+  .champRank{padding:0 9px 10px;max-height:none!important;overflow:visible!important}
+  .champRankRow{grid-template-columns:21px 75px minmax(0,1fr) 29px;gap:5px;margin:6px 0}
+  .champRankNo,.champRankName,.champRankPts{font-size:10px}.champRankBar{height:15px}
+
+  .titleChancePanel{margin-top:0}
+  .titleChancePanel .title{font-size:18px;padding:11px 12px 8px}
+  .titleChanceFeatured{margin:8px 8px 7px;padding:12px 12px 10px}
+  .titleChanceFeaturedLabel{font-size:8px}.titleChanceFeaturedName{font-size:24px}.titleChanceFeaturedPct{font-size:34px}.titleChanceFeaturedMeta{font-size:8px}
+  .titleChanceHeader{grid-template-columns:19px 72px minmax(0,1fr) 34px;gap:5px;padding:3px 11px 2px;font-size:7.5px}
+  .titleChanceList{padding:2px 7px 4px}
+  .titleChanceRow{grid-template-columns:19px 72px minmax(0,1fr) 34px;gap:5px;margin:3px 0;padding:4px 3px}
+  .titleChanceNo,.titleChancePilot,.titleChancePct{font-size:10px}.titleChanceBar{height:8px}.titleChanceFoot{font-size:7.5px;padding:3px 9px 9px}
+
+  .champResultsTable{max-height:none!important;overflow:visible!important;padding:0 7px 8px}
+  .champResultsTable table{min-width:0!important;width:100%!important;table-layout:fixed!important;font-size:9px!important}
+  .champResultsTable th,.champResultsTable td{padding:6px 4px;white-space:normal!important;word-break:break-word}
+  .champResultsTable th:nth-child(1),.champResultsTable td:nth-child(1){width:11%!important}
+  .champResultsTable th:nth-child(2),.champResultsTable td:nth-child(2){width:22%!important}
+  .champResultsTable th:nth-child(3),.champResultsTable td:nth-child(3){width:39%!important}
+  .champResultsTable th:nth-child(4),.champResultsTable td:nth-child(4){width:12%!important}
+  .champResultsTable th:nth-child(5),.champResultsTable td:nth-child(5){width:16%!important;font-size:8px!important}
+
+  .champEvoWrap{grid-template-columns:1fr;gap:3px;padding:0 6px 8px}
+  .champEvoChart{height:210px}
+  .champEvoLegend{border-left:0;border-top:1px solid #333b42;padding:8px 2px;display:grid;grid-template-columns:1fr 1fr;gap:3px 8px}
+  .champEvoLegend .item{font-size:11px;margin:3px 0}.champEvoLegend .dot{width:9px;height:9px}.champEvoLegend .score{font-size:10px}
+  .champRaceGrid{grid-template-columns:1fr;gap:6px;padding:0 7px 9px}
+  .champRaceCard{border-radius:9px}.champRaceHead{font-size:12px;padding:8px 9px 6px}.champRaceBody{padding:5px 8px 6px}.champRaceName{font-size:10px}.champRacePts{font-size:11px}
+
+  .pilotRef{display:flex!important;flex-direction:column!important;gap:8px}
+  .pilotHero{display:flex;flex-direction:column;min-height:0}
+  .pilotHeroPhoto{padding:7px}.pilotHeroPhoto img,.pilotHeroPhoto .fallback{height:220px}
+  .pilotHeroInfo{padding:13px 14px 11px}.pilotHeroInfo .season{font-size:9px}.pilotHeroInfo .name{font-size:42px}.pilotHeroInfo .rankLine{font-size:14px}.pilotHeroInfo .quote{font-size:12.5px;margin-top:11px}
+  .heroMini{grid-template-columns:repeat(4,1fr);gap:4px;padding-top:10px}.heroMini .mini b{font-size:18px}.heroMini .mini span{font-size:8.5px;line-height:1.1}
+  .pilotMetricGrid{grid-template-columns:1fr 1fr;gap:6px}.pilotMetric{min-height:80px;padding:8px;border-radius:10px}.pilotMetric .micon{font-size:18px}.pilotMetric .mlabel{font-size:8px}.pilotMetric .mvalue{font-size:21px}
+  .pilotChooser{display:grid!important;grid-template-columns:1fr!important;gap:5px;margin:0 0 8px;padding:11px;border-radius:11px}
+  .pilotChooser label{font-size:10px}.pilotChooser select{padding:9px;font-size:13px}
+  .pilotVizRow{display:flex;flex-direction:column;gap:8px;margin-top:8px}.pilotChart,#pilotPointsRaceChart{height:210px;padding:0 3px 6px}.positionChartWrap{height:210px;padding-right:0}.positionNote{display:none}
+  .pilotLowerRef{display:flex;flex-direction:column;gap:8px;margin-top:8px}.quoteRef{display:none}.resultsCorner .dataBlock{max-height:none}
+
+  .simLayout{display:flex;flex-direction:column;gap:8px}
+  .simSidebar{width:100%;min-height:0;padding:11px}
+  .simMain{width:100%;display:grid;gap:8px}
+  .simKpis{grid-template-columns:1fr 1fr;gap:6px}.simKpi{min-height:78px;padding:10px 11px}.simKpi .value{font-size:22px}.simKpi .label{font-size:9px}.simKpi .note{font-size:8px}
+  .simCharts{grid-template-columns:1fr;gap:8px}.simChart{height:230px;padding:0 5px 5px}.simPercentiles{grid-template-columns:repeat(2,1fr);gap:6px;padding:0 8px 9px}.simPercentile{padding:8px}.simPercentile strong{font-size:15px}
+
+  .resultsControls{grid-template-columns:1fr;padding:0 11px 9px}.resultsTableScroll{height:500px;padding:0 6px 8px}
+  .resultsTableScroll .raceResultsTable{min-width:0;width:100%;table-layout:fixed;font-size:9px}.resultsTableScroll .raceResultsTable thead th{font-size:8px;padding:7px 3px}.resultsTableScroll .raceResultsTable tbody td{padding:6px 3px;word-break:break-word}
+  .resultsTableScroll .raceResultsTable th:nth-child(1),.resultsTableScroll .raceResultsTable td:nth-child(1){width:24%}
+  .resultsTableScroll .raceResultsTable th:nth-child(2),.resultsTableScroll .raceResultsTable td:nth-child(2){width:15%}
+  .resultsTableScroll .raceResultsTable th:nth-child(3),.resultsTableScroll .raceResultsTable td:nth-child(3){width:20%}
+  .resultsTableScroll .raceResultsTable th:nth-child(4),.resultsTableScroll .raceResultsTable td:nth-child(4){width:13%}
+  .resultsTableScroll .raceResultsTable th:nth-child(5),.resultsTableScroll .raceResultsTable td:nth-child(5){width:28%}
+
+  .probDetailModal{padding:9px}.probDetailCard{padding:17px 14px;border-radius:15px}.probDetailCard h2{font-size:24px}.probDetailGrid{grid-template-columns:1fr 1fr;gap:6px}.probDetailItem{min-height:68px;padding:9px}.probDetailItem strong{font-size:15px}.probDetailItem span{font-size:9px}.probDetailItem small{font-size:9px}.probDetailExplanation{font-size:10px;line-height:1.5}
+}
+@media(max-width:420px){
+  .app{padding:6px}.brand h1{font-size:26px}.brand .cup{font-size:29px}.nav button{font-size:9.5px;padding:9px 4px}
+  .champRankRow{grid-template-columns:20px 70px minmax(0,1fr) 27px}.champRankName{font-size:9.5px}.champRankPts{font-size:9.5px}
+  .titleChanceFeaturedName{font-size:22px}.titleChanceFeaturedPct{font-size:31px}
+}
+
+
+@media(max-width:700px){
+  .slicerPanel > .slicerTitle,.slicerPanel > .slicerSection,.slicerPanel > .sep{order:auto!important}
+  .slicerPanel .classificationSelect{width:100%;font-size:13px;padding:11px 12px}
+}
+
+/* ===== METODOLOGIA / COMO FUNCIONA ===== */
+.howPage{display:grid;gap:14px}
+.howHero{padding:25px 28px;background:radial-gradient(650px 180px at 8% 0%,rgba(239,23,33,.11),transparent 65%),linear-gradient(145deg,rgba(24,31,36,.96),rgba(10,15,18,.96));}
+.howEyebrow{font-size:11px;letter-spacing:.15em;color:#aab3b9;font-weight:950;text-transform:uppercase}
+.howHero h2{font-size:38px;margin:8px 0 7px;line-height:1.02}
+.howHero p{max-width:860px;color:#b8c0c5;font-size:15px;line-height:1.5;margin:0}
+.howGrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.howCard{padding:19px 20px;position:relative;min-height:170px}
+.howCard.howWide{grid-column:1/-1}
+.howNum{position:absolute;right:15px;top:12px;font-size:10px;color:#647078;letter-spacing:.12em;font-weight:950}
+.howCard h3{margin:0 35px 8px 0;font-size:21px}
+.howCard p{margin:7px 0;color:#b6c0c6;font-size:13px;line-height:1.5}
+.howSmall{font-size:11px!important;color:#87939b!important}
+.howFormula{margin-top:10px;padding:11px 12px;border-radius:10px;background:#0d1418;border:1px solid #2c373e;color:#d6dde1;font-size:12px;line-height:1.45}
+.howScoreGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:11px}
+.howScoreGrid div{padding:11px 5px;text-align:center;background:#0e1519;border:1px solid #2b363d;border-radius:9px}
+.howScoreGrid b{display:block;font-size:18px;color:#f2cf4c}.howScoreGrid span{font-size:11px;color:#98a3aa}
+.howPrior{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.howPrior div{padding:10px;border-radius:10px;border:1px solid #303a41;background:#10171b}
+.howPrior div.selected{border-color:#f2cf4e;box-shadow:inset 0 0 0 1px rgba(242,207,78,.12)}
+.howPrior b{display:block;font-size:14px;color:#f2cf4e;margin-bottom:4px}.howPrior span{display:block;color:#a9b3b9;font-size:11px;line-height:1.4}
+.howFlow{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:13px}
+.howFlow span{padding:9px 12px;background:#10171b;border:1px solid #303a41;border-radius:999px;font-size:11px;font-weight:900;color:#e4e8ea}.howFlow i{color:#69757d;font-style:normal;font-weight:950}
+.howPercentileTable{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
+.howPercentileTable div{background:#10171b;border:1px solid #2c373e;border-radius:9px;padding:9px;text-align:center}
+.howPercentileTable b{display:block;font-size:13px;color:#f2cf4c}.howPercentileTable span{display:block;font-size:9px;line-height:1.3;color:#8e999f;margin-top:4px}
+.howImportant{margin-top:10px;padding:15px;border-radius:12px;background:linear-gradient(145deg,#121a1f,#0b1115);border:1px solid #39464e}
+.howImportant b{font-size:28px;color:#f2cf4c}.howImportant p{margin:5px 0;font-size:13px}
+@media(max-width:900px){.howGrid{grid-template-columns:1fr}.howCard.howWide{grid-column:auto}.howHero h2{font-size:30px}.howScoreGrid{grid-template-columns:repeat(4,1fr)}.howPercentileTable{grid-template-columns:1fr 1fr}.howPercentileTable div:last-child{grid-column:1/-1}.howPrior{grid-template-columns:1fr}}
+@media(max-width:560px){.howHero{padding:19px 16px}.howHero h2{font-size:26px}.howHero p{font-size:13px}.howCard{padding:15px 14px}.howCard h3{font-size:18px}.howScoreGrid{grid-template-columns:repeat(3,1fr)}.howFlow{gap:6px}.howFlow span{font-size:10px;padding:8px 9px}}
 
 </style>
 </head>
@@ -879,9 +1411,8 @@ body{font-size:17px}
 <div class="app">
 <header class="top">
  <div class="brand"><div class="cup">🏆</div><h1>COPA <span>TDP</span></h1></div>
- <div class="nav"><button id="nChamp" class="active" onclick="showPage('champ')">📊 Classificação Geral</button><button id="nPilot" onclick="showPage('pilot')">🏎️ Piloto</button><button id="nResults" onclick="showPage('results')">🏁 Resultados</button></div>
+ <div class="nav"><button id="nChamp" class="active" onclick="showPage('champ')">🏆 Classificação Geral</button><button id="nPilot" onclick="showPage('pilot')">🏎️ Piloto</button><button id="nSim" onclick="showPage('sim')">🔬 Simulação</button><button id="nResults" onclick="showPage('results')">🏁 Resultados</button><button id="nHow" onclick="showPage('how')">📖 Como funciona</button></div>
 </header>
-
 
 
 <section id="champ" class="page active">
@@ -907,7 +1438,7 @@ body{font-size:17px}
   <main class="champMain">
     <div class="champKpis">
       <div class="panel champKpi"><div class="label">🏁 Total de Corridas</div><div class="num" id="kRaces">0</div></div>
-      <div class="panel champKpi"><div class="label">👥 Total de Pilotos</div><div class="num" id="kDrivers">0</div></div>
+      <div class="panel champKpi"><div class="label">🏎️ Total de Pilotos</div><div class="num" id="kDrivers">0</div></div>
       <div class="panel champKpi champLeader">
         <div class="champLeaderIcon">🏆</div>
         <div><div class="champLeaderLabel">Líder do Campeonato</div><div class="champLeaderName" id="kLeaderName">—</div><div class="champLeaderPts" id="kLeaderPts">0 pts</div></div>
@@ -917,7 +1448,7 @@ body{font-size:17px}
     <div class="panel champTop3"><div class="title">🏆 Top 3 do Campeonato</div><div class="champPodium" id="podium"></div></div>
 
     <div class="panel block">
-      <div class="title">📈 Evolução do Top 5 no Campeonato</div>
+      <div class="title">🏁 Evolução do Top 5 no Campeonato</div>
       <div class="champEvoWrap">
         <div class="champEvoChart" id="top5Chart"></div>
         <div class="champEvoLegend" id="top5Legend"></div>
@@ -925,61 +1456,263 @@ body{font-size:17px}
     </div>
 
     <div class="panel block">
-      <div class="title">📊 Pontos por Corrida</div>
+      <div class="title">🏁 Pontos por Corrida</div>
       <div class="champRaceGrid" id="raceGrid"></div>
     </div>
   </main>
 
   <aside class="champRight">
     <div class="panel champRightPanel">
-      <div class="title">📊 Classificação Geral</div>
+      <div class="title">🏆 Classificação Geral</div>
       <div class="champRank" id="ranking"></div>
     </div>
 
-    <div class="titleChancePanel">
+    <div class="panel titleProbability rightProbability">
       <div class="title">🏆 Chance Estimada de Título</div>
-      <div class="titleChanceFeatured">
-        <div class="titleChanceFeaturedLabel">PROVÁVEL CAMPEÃO APÓS 10 CORRIDAS</div>
-        <div class="titleChanceFeaturedName" id="titleChanceLeader">—</div>
-        <div class="titleChanceFeaturedPct" id="titleChanceLeaderPct">—%</div>
-        <div class="titleChanceFeaturedMeta" id="titleChanceLeaderMeta">—</div>
+      <div class="probabilityBody">
+        <div class="probWinnerBox">
+          <div class="probKicker">PROVÁVEL CAMPEÃO APÓS 10 CORRIDAS</div>
+          <div class="probWinnerName" id="probWinnerName">—</div>
+          <div class="probWinnerPct" id="probWinnerPct">—</div>
+          <div class="probMeta" id="probMeta">—</div>
+        </div>
+        <div class="probList" id="probList"></div>
       </div>
-      <div class="titleChanceHeader"><span>#</span><span>PILOTO</span><span>CHANCE ESTIMADA</span><span>%</span></div>
-      <div class="titleChanceList" id="titleChanceList"></div>
-      <div class="titleChanceFoot">Estimativa de referência, não uma previsão oficial: usa os pontos atuais e a média histórica por corrida para projetar as 10 etapas.</div>
     </div>
+
   </aside>
 </div>
+
 </section>
 
-<section id="results" class="page">
-  <div class="resultsPageGrid">
-    <div class="panel resultsHero">
-      <div class="title">🏁 Resultados das Corridas</div>
-      <div class="resultsControls">
-        <div>
-          <label>Corrida</label>
-          <select id="resultsRaceFilter" class="classificationSelect">
-            <option value="ALL">Todas as corridas</option>
-          </select>
-        </div>
-        <div>
-          <label>Piloto</label>
-          <select id="resultsPilotFilter" class="classificationSelect">
-            <option value="ALL">Todos os pilotos</option>
-          </select>
-        </div>
+<section id="sim" class="page">
+  <div class="simLayout">
+    <aside class="panel simSidebar">
+      <div class="simSideTitle">🔬 Ver as simulações</div>
+      <select id="simPilotSelect" class="simSelect" onchange="renderSimulationPage()"></select>
+      <div class="sep"></div>
+      <div class="simSideTitle">🧮 Ajuste estatístico</div>
+      <div class="priorButtons" id="positionPriorButtons">
+        <button type="button" class="priorBtn" data-prior="1" onclick="changePositionPrior(1)">Prior 1</button>
+        <button type="button" class="priorBtn" data-prior="2" onclick="changePositionPrior(2)">Prior 2</button>
+        <button type="button" class="priorBtn active" data-prior="3" onclick="changePositionPrior(3)">Prior 3</button>
       </div>
-      <div class="resultsTableScroll" id="resultsAllTable"></div>
-    </div>
+      <div class="simHint"><b>Prior 1:</b> pouca correção — confia mais no histórico do piloto.<br><b>Prior 2:</b> correção moderada — equilíbrio entre histórico e média do campo.<br><b>Prior 3:</b> mais correção — dá mais peso à média do campo quando o histórico é curto.<br><b>Atual:</b> Prior 3.</div>
+      <details class="simScenarioPicker">
+        <summary>🎯 Cenário da chance</summary>
+        <div class="simHint scenarioPickerHint">Escolha os pilotos que entram na simulação da chance de título. Este é o cenário usado pelo mesmo cálculo estatístico da versão PC.</div>
+        <div class="filterTools scenarioPickerTools">
+          <button class="btn red" type="button" onclick="allScenarioPilots()">Todos</button>
+          <button class="btn" type="button" onclick="noneScenarioPilots()">Limpar</button>
+        </div>
+        <div id="chanceScenarioBox" class="pilotList"></div>
+      </details>
+      <div class="simSideTitle">🕒 Peso de recência</div>
+      <div class="simHint"><b>1ª corrida:</b> 1,0 &nbsp;•&nbsp; <b>2ª:</b> 1,1 &nbsp;•&nbsp; <b>3ª:</b> 1,2. A cada nova corrida, o peso seguinte aumenta 0,1. Isso dá mais importância à forma atual sem usar uma “tendência” separada.</div>
+      <div class="sep"></div>
+      <div class="simSideTitle">📌 Cenário atual</div>
+      <div id="simScenario" class="simHint">—</div>
+      <div class="simHint">Os gráficos desta página usam as mesmas <b>200.000 simulações</b> que calculam a chance de título. Em vez de desenhar 200 mil pontos individuais, os resultados são agrupados para você enxergar a distribuição completa sem deixar a dashboard pesada.</div>
+    </aside>
+
+    <main class="simMain">
+      <div class="simKpis">
+        <div class="panel simKpi"><div class="label">🏆 Chance de título</div><div class="value" id="simKpiProb">—</div><div class="note">simulações em que foi campeão</div></div>
+        <div class="panel simKpi"><div class="label">📊 Pontos finais</div><div class="value" id="simKpiProjected">—</div><div class="note">média das 200 mil simulações</div></div>
+        <div class="panel simKpi"><div class="label">🏁 Posição final</div><div class="value" id="simKpiPosition">—</div><div class="note">média nas simulações</div></div>
+        <div class="panel simKpi"><div class="label">🏎️ Participações</div><div class="value" id="simKpiParticipation">—</div><div class="note">média nas 7 corridas restantes</div></div>
+      </div>
+
+      <div class="simCharts">
+        <div class="panel simChartPanel"><div class="title">📊 Distribuição dos pontos finais</div><div class="simChart" id="simPointsChart"></div><div style="padding:0 15px 7px;font-size:10px;color:#8d979e"><span class="simLegendDot" style="background:var(--gold)"></span> Todas as 200.000 simulações estão representadas por estas colunas.</div></div>
+        <div class="panel simChartPanel"><div class="title">🏁 Posição final nas 200.000 simulações</div><div class="simChart" id="simPositionChart"></div></div>
+      </div>
+
+      <div class="panel simChartPanel"><div class="title">🏎️ Quantas das 7 corridas o piloto deve disputar?</div><div class="simChart" id="simParticipationChart"></div></div>
+
+      <div class="panel simChartPanel"><div class="title">📈 Estabilidade da chance ao longo das 200.000 simulações</div><div class="simStability"><div class="simStabilityChart" id="simStabilityChart"></div></div></div>
+
+      <div class="panel simChartPanel"><div class="title">🎯 Faixa de resultados</div><div class="simPercentiles" id="simPercentiles"></div></div>
+
+      <div class="panel simChartPanel"><div class="title">💡 Como ler este painel</div><div class="simExplanation" id="simExplanation">—</div></div>
+    </main>
   </div>
 </section>
 
 
+<section id="how" class="page">
+  <div class="howPage">
+    <div class="panel howHero">
+      <div class="howEyebrow">📖 COMO FUNCIONA A DASHBOARD</div>
+      <h2>Entenda de onde vem cada número</h2>
+      <p>Esta página explica, em linguagem simples, como a classificação, os pontos, a chance de título e os números da página <b>Simulação</b> são calculados.</p>
+    </div>
 
+    <div class="howGrid">
+      <article class="panel howCard">
+        <div class="howNum">01</div><h3>🏁 Pontos atuais</h3>
+        <p>Somamos os pontos que o piloto já ganhou nas corridas realizadas.</p>
+        <div class="howFormula"><b>Exemplo:</b> 5 + 10 + 3 = <strong>18 pontos</strong></div>
+      </article>
+
+      <article class="panel howCard">
+        <div class="howNum">02</div><h3>🏆 Classificação geral</h3>
+        <p>A classificação é feita somente com os pontos reais do campeonato. O Prior e as simulações <b>não alteram</b> a classificação atual.</p>
+      </article>
+
+      <article class="panel howCard howWide">
+        <div class="howNum">03</div><h3>🎯 Como a posição vira pontos</h3>
+        <div class="howScoreGrid">
+          <div><b>1º</b><span>10 pts</span></div><div><b>2º</b><span>7 pts</span></div><div><b>3º</b><span>5 pts</span></div>
+          <div><b>4º</b><span>3 pts</span></div><div><b>5º</b><span>2 pts</span></div><div><b>6º</b><span>1 pt</span></div>
+          <div><b>7º+</b><span>0 pts</span></div>
+        </div>
+      </article>
+
+      <article class="panel howCard">
+        <div class="howNum">04</div><h3>👥 Participação</h3>
+        <p>Para os pilotos em geral, usamos diretamente o histórico:</p>
+        <div class="howFormula"><b>3 de 3</b> = 100% &nbsp;•&nbsp; <b>2 de 3</b> = 66,7% &nbsp;•&nbsp; <b>1 de 3</b> = 33,3%</div>
+        
+      </article>
+
+      <article class="panel howCard">
+        <div class="howNum">05</div><h3>📏 Desempenho relativo</h3>
+        <p>Como o número de pilotos pode mudar entre corridas, não usamos apenas a posição bruta. Transformamos a posição em uma escala de <b>0% a 100%</b>.</p>
+        <div class="howFormula">1º = 100% &nbsp;•&nbsp; último = 0% &nbsp;•&nbsp; os demais ficam entre esses valores</div>
+      </article>
+
+      <article class="panel howCard">
+        <div class="howNum">06</div><h3>↕️ Variação</h3>
+        <p>Também medimos o quanto os resultados costumam oscilar. Um piloto com resultados parecidos tem pouca variação; um piloto que alterna muito entre posições tem mais variação.</p>
+      </article>
+
+      <article class="panel howCard">
+        <div class="howNum">07</div><h3>🕒 Peso de recência</h3>
+        <p>As corridas mais novas têm um pouco mais de peso:</p>
+        <div class="howFormula"><b>1ª</b> = 1,0 &nbsp;•&nbsp; <b>2ª</b> = 1,1 &nbsp;•&nbsp; <b>3ª</b> = 1,2</div>
+        <p class="howSmall">A cada nova corrida, o próximo peso aumenta 0,1. Isso considera a forma mais recente sem criar um fator separado de “evolução”.</p>
+      </article>
+
+      <article class="panel howCard">
+        <div class="howNum">08</div><h3>🧩 Prior 1, 2 e 3</h3>
+        <p>O Prior é uma pequena correção para evitar que um histórico muito curto seja tratado como certeza.</p>
+        <div class="howPrior"><div><b>Prior 1</b><span>Pouca correção. Confia mais no histórico.</span></div><div><b>Prior 2</b><span>Correção moderada. Equilíbrio entre histórico e campo.</span></div><div class="selected"><b>Prior 3</b><span>Mais correção. Dá mais peso à média do campo.</span></div></div>
+        <p class="howSmall"><b>Padrão atual: Prior 3.</b> O Prior só entra na projeção; ele não muda a classificação real.</p>
+      </article>
+
+      <article class="panel howCard howWide">
+        <div class="howNum">09</div><h3>🏆 Chance de título</h3>
+        <p>Primeiro pegamos os pontos atuais. Depois simulamos as <b>7 corridas restantes</b>. Em cada corrida, o modelo decide quem participa e, para quem participa, sorteia um desempenho baseado no histórico do piloto.</p>
+        <div class="howFlow"><span>Participa?</span><i>→</i><span>Desempenho</span><i>→</i><span>Posição</span><i>→</i><span>Pontos</span><i>→</i><span>Total do campeonato</span></div>
+      </article>
+
+      <article class="panel howCard">
+        <div class="howNum">10</div><h3>🔁 200.000 campeonatos</h3>
+        <p>Esse processo é repetido <b>200.000 vezes</b>. Cada repetição é um possível campeonato completo.</p>
+        <div class="howFormula"><b>Chance de título</b> = campeonatos em que foi campeão ÷ 200.000</div>
+      </article>
+
+      <article class="panel howCard">
+        <div class="howNum">11</div><h3>📊 Pontos estimados</h3>
+        <p>É a <b>média dos pontos finais</b> nas 200.000 simulações.</p>
+        <div class="howFormula">Pontos atuais + média dos pontos conquistados nas 7 corridas simuladas</div>
+      </article>
+
+      <article class="panel howCard">
+        <div class="howNum">12</div><h3>🏎️ Participações esperadas</h3>
+        <p>É a média de quantas das 7 corridas o piloto participou nas 200.000 simulações.</p>
+        <div class="howFormula">Para Berton: 7 × 80% = <strong>5,6 corridas</strong> em média</div>
+      </article>
+
+      <article class="panel howCard">
+        <div class="howNum">13</div><h3>🎯 P10, P25, Mediana, P75 e P90</h3>
+        <p>Esses valores mostram como os pontos finais ficaram distribuídos.</p>
+        <div class="howPercentileTable"><div><b>P10</b><span>10% ficaram aqui ou abaixo</span></div><div><b>P25</b><span>25% ficaram aqui ou abaixo</span></div><div><b>Mediana</b><span>metade abaixo e metade acima</span></div><div><b>P75</b><span>75% ficaram aqui ou abaixo</span></div><div><b>P90</b><span>90% ficaram aqui ou abaixo</span></div></div>
+      </article>
+
+      <article class="panel howCard">
+        <div class="howNum">14</div><h3>📈 Estabilidade da chance</h3>
+        <p>O gráfico mostra a <b>chance acumulada</b> conforme as simulações avançam. Se a linha se estabiliza cedo, a estimativa está convergindo.</p>
+      </article>
+
+      <article class="panel howCard">
+        <div class="howNum">15</div><h3>± O que significa a incerteza?</h3>
+        <p>Quando aparece algo como <b>±0,21 p.p.</b>, isso quer dizer que a estimativa da simulação pode oscilar cerca de <b>0,21 ponto percentual para cima ou para baixo</b> por causa do número finito de simulações.</p>
+        <div class="howFormula"><b>Exemplo:</b> 68,3% ± 0,21 p.p. ≈ <strong>68,09% a 68,51%</strong></div>
+        <p>O <b>95%</b> não significa “95% de incerteza”. É o nível usado para calcular essa margem. Em termos simples, usamos uma faixa que cobre aproximadamente 95% dos resultados esperados para a variação causada pela própria Monte Carlo.</p>
+        <div class="howFormula"><b>É bom ou ruim?</b> Para as 200.000 simulações, ±0,21 p.p. é uma margem pequena, então a estimativa está <strong>bem estável quanto ao número de simulações</strong>. Isso não significa que o modelo tenha 95% de certeza sobre o campeonato real.</div>
+        <p class="howSmall">Essa margem mede apenas a variação da simulação. Ela não mede a qualidade dos dados nem se as premissas do modelo estão corretas.</p>
+      </article>
+
+      <article class="panel howCard howWide">
+        <div class="howNum">16</div><h3>🔎 Como interpretar a porcentagem</h3>
+        <div class="howImportant"><b>68,3%</b><p>não significa que o piloto tenha exatamente 68,3% de chance na vida real.</p><p>Significa que, <b>dentro das regras e premissas do modelo</b>, ele terminou campeão em cerca de 68,3% dos 200.000 campeonatos simulados.</p></div>
+      </article>
+
+      <article class="panel howCard howWide">
+        <div class="howNum">17</div><h3>🎛️ Filtros e cenários</h3>
+        <p>Os filtros de piloto e corrida da <b>Classificação Geral</b> ajudam a visualizar o campeonato real. Já o cenário de pilotos usado na chance de título serve para testar hipóteses, como retirar alguns adversários da disputa simulada.</p>
+        <p class="howSmall">Assim você pode comparar cenários diferentes sem alterar os pontos reais já registrados.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="results" class="page">
+  <div class="resultsModelGrid">
+    <aside class="panel resultsModelSidebar">
+      <div class="title">🏁 Corrida</div>
+      <select id="resultsRaceFilter" class="classificationSelect">
+        <option value="ALL">Todas as corridas</option>
+      </select>
+
+      <div class="sep"></div>
+
+      <div class="title">🏎️ Piloto</div>
+      <select id="resultsPilotFilter" class="classificationSelect">
+        <option value="ALL">Todos os pilotos</option>
+      </select>
+
+      <div class="resultsModelHint">
+        <div class="hintTitle">VISÃO DA ETAPA</div>
+        <p>Escolha uma corrida ou piloto para atualizar todos os elementos da página.</p>
+        <div class="hintMini">Clique em qualquer resultado ou cartão para abrir os detalhes.</div>
+      </div>
+    </aside>
+
+    <main class="resultsModelMain">
+      <div class="panel resultsModelHero">
+        <div class="title">🏁 Resultados das Corridas</div>
+        <div class="resultsModelKpis">
+          <div class="resultsModelKpi"><span>REGISTROS</span><b id="resultsCount">0</b></div>
+          <div class="resultsModelKpi"><span>PILOTOS</span><b id="resultsDrivers">0</b></div>
+          <div class="resultsModelKpi highlight"><span>PÓDIOS</span><b id="resultsPodiums">0</b></div>
+        </div>
+        <div class="resultsModelHintBar">Clique em uma linha para abrir o resultado selecionado.</div>
+        <div class="resultsTableScroll resultsModelTable" id="resultsTable"></div>
+      </div>
+
+      <div class="panel resultsSummaryModel">
+        <div class="title">🏎️ Resumo das Etapas</div>
+        <div class="raceSummaryGrid" id="resultsSummary"></div>
+      </div>
+    </main>
+
+    <aside class="resultsModelRight">
+      <div class="panel resultsHighlights">
+        <div class="title">🏆 Destaques da Etapa</div>
+        <div id="resultsHighlights"></div>
+      </div>
+      <div class="panel resultsBreakdown">
+        <div class="title">📋 Distribuição de Resultados</div>
+        <div id="resultsBreakdown"></div>
+      </div>
+    </aside>
+  </div>
+</section>
 
 <section id="pilot" class="page">
-
   <div class="pilotRef">
     <div class="panel pilotHero">
       <div class="pilotHeroPhoto">
@@ -1002,31 +1735,31 @@ body{font-size:17px}
 
     <div class="pilotMetricGrid">
       <div class="pilotMetric">
-        <div class="micon">🏆</div><div class="mlabel">Pontos</div><div class="mvalue" id="pPts">0</div>
+        <div class="micon">🪙</div><div class="mlabel">Pontos</div><div class="mvalue" id="pPts">0</div>
       </div>
       <div class="pilotMetric">
-        <div class="micon">🏁</div><div class="mlabel">Corridas</div><div class="mvalue" id="pRace">0</div>
+        <div class="micon">🛞</div><div class="mlabel">Corridas</div><div class="mvalue" id="pRace">0</div>
       </div>
       <div class="pilotMetric">
         <div class="micon">⏱️</div><div class="mlabel">Melhor tempo</div><div class="mvalue" id="pBest">—</div>
       </div>
       <div class="pilotMetric">
-        <div class="micon">🥇</div><div class="mlabel">Melhor posição</div><div class="mvalue" id="pBestPos">—</div>
+        <div class="micon">🏅</div><div class="mlabel">Melhor posição</div><div class="mvalue" id="pBestPos">—</div>
       </div>
       <div class="pilotMetric">
-        <div class="micon">🏎️</div><div class="mlabel">Vitórias</div><div class="mvalue" id="pWins">0</div>
+        <div class="micon">🚀</div><div class="mlabel">Vitórias</div><div class="mvalue" id="pWins">0</div>
       </div>
       <div class="pilotMetric">
-        <div class="micon">📊</div><div class="mlabel">Posição no campeonato</div><div class="mvalue" id="pRank">—</div>
+        <div class="micon">🧭</div><div class="mlabel">Posição no campeonato</div><div class="mvalue" id="pRank">—</div>
       </div>
       <div class="pilotMetric">
-        <div class="micon">📊</div><div class="mlabel">Média de pontos</div><div class="mvalue" id="mAvg">—</div>
+        <div class="micon">🧮</div><div class="mlabel">Média de pontos</div><div class="mvalue" id="mAvg">—</div>
       </div>
       <div class="pilotMetric">
-        <div class="micon">〽️</div><div class="mlabel">Consistência</div><div class="mvalue" id="mCons">—</div>
+        <div class="micon">🛞</div><div class="mlabel">Consistência</div><div class="mvalue" id="mCons">—</div>
       </div>
       <div class="pilotMetric">
-        <div class="micon">🎯</div><div class="mlabel">Taxa de pódio</div><div class="mvalue" id="mPodium">—</div>
+        <div class="micon">🏆</div><div class="mlabel">Taxa de pódio</div><div class="mvalue" id="mPodium">—</div>
       </div>
 
       <div class="pilotChooser">
@@ -1036,15 +1769,14 @@ body{font-size:17px}
     </div>
   </div>
 
-
   <div class="pilotVizRow">
     <div class="panel pilotViz">
-      <div class="title"><span class="redIcon">💯</span> PONTOS POR CORRIDA</div>
+      <div class="title"><span class="redIcon">💥</span> PONTOS POR CORRIDA</div>
       <div class="pilotChart" id="pilotPointsRaceChart"></div>
     </div>
 
     <div class="panel pilotViz">
-      <div class="title"><span class="redIcon">⌁</span> EVOLUÇÃO DE POSIÇÕES</div>
+      <div class="title"><span class="redIcon">📍</span> EVOLUÇÃO DE POSIÇÕES</div>
       <div class="positionChartWrap">
         <div class="pilotChart" id="pilotEvo"></div>
         <div class="positionNote">ⓘ<br><br>Quanto mais alto no gráfico,<br>melhor a posição.<br><br>O eixo é invertido (1º no topo).</div>
@@ -1054,17 +1786,72 @@ body{font-size:17px}
 
   <div class="pilotLowerRef">
     <div class="panel resultsCorner">
-      <div class="title">🏁 RESULTADOS DAS CORRIDAS</div>
+      <div class="title">🧾 RESULTADOS DAS CORRIDAS</div>
       <div class="dataBlock" id="pilotTable"></div>
     </div>
 
     <div class="panel quoteRef">
       <div class="bigQuote">“</div>
       <p>Cada volta<br>é uma chance<br>de ser melhor.</p>
-      <div class="helmetMark">🏎️</div>
+      <div class="helmetMark">🏁</div>
     </div>
   </div>
 </section>
+
+
+<!-- ===== CLICKABLE RESULT DETAIL MODAL ===== -->
+<div id="resultModal" class="resultModal" aria-hidden="true">
+  <div class="resultModalBackdrop" onclick="closeResultModal()"></div>
+  <div class="resultModalCard" role="dialog" aria-modal="true" aria-labelledby="resultModalTitle">
+    <button class="resultModalClose" type="button" onclick="closeResultModal()" aria-label="Fechar">×</button>
+    <div class="resultModalKicker">🏁 DETALHES DO RESULTADO</div>
+    <h2 id="resultModalTitle">Resultado</h2>
+    <div id="resultModalAccent" class="resultModalAccent"></div>
+    <div class="resultModalGrid">
+      <div class="resultModalItem"><span>🏅 Posição</span><strong id="modalPos">—</strong></div>
+      <div class="resultModalItem"><span>🏎️ Piloto</span><strong id="modalPilot">—</strong></div>
+      <div class="resultModalItem wide"><span>🏁 Corrida</span><strong id="modalRace">—</strong></div>
+      <div class="resultModalItem wide"><span>🎖️ Resultado</span><strong id="modalStatus">—</strong></div>
+    </div>
+    <div class="resultModalActions">
+      <button type="button" class="modalBtn primary" onclick="openModalSimulation()">🔬 Ver simulação</button>
+      <button type="button" class="modalBtn" onclick="applyModalRace()">🏁 Selecionar corrida</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== TITLE PROBABILITY DETAIL MODAL ===== -->
+<div id="probDetailModal" class="probDetailModal" aria-hidden="true">
+  <div class="probDetailBackdrop" onclick="closeProbDetail()"></div>
+  <div class="probDetailCard" role="dialog" aria-modal="true" aria-labelledby="probDetailTitle">
+    <button class="probDetailClose" type="button" onclick="closeProbDetail()" aria-label="Fechar">×</button>
+    <div class="probDetailKicker">🏆 COMO A CHANCE FOI CALCULADA</div>
+    <h2 id="probDetailTitle">Piloto</h2>
+    <div id="probDetailAccent" class="probDetailAccent"></div>
+    <div class="probDetailGrid">
+      <div class="probDetailItem"><span>🏆 Chance de título</span><strong id="pdProb">—</strong><small id="pdUncertainty">—</small></div>
+      <div class="probDetailItem"><span>📊 Pontos atuais</span><strong id="pdCurrent">—</strong></div>
+      <div class="probDetailItem"><span>🔮 Pontos estimados no final</span><strong id="pdProjected">—</strong></div>
+      <div class="probDetailItem"><span>➕ Pontos estimados restantes</span><strong id="pdFuture">—</strong></div>
+      <div class="probDetailItem"><span>🏁 Corridas restantes</span><strong id="pdRemaining">—</strong></div>
+      <div class="probDetailItem"><span>🏎️ Participação por corrida</span><strong id="pdParticipation">—</strong></div>
+      <div class="probDetailItem"><span>🛞 Participações esperadas</span><strong id="pdExpectedRaces">—</strong><small id="pdExpectedRacesNote">—</small></div>
+      <div class="probDetailItem"><span>📈 Desempenho médio usado</span><strong id="pdMeanRel">—</strong><small>0% = último; 100% = 1º no histórico</small></div>
+      <div class="probDetailItem"><span>↕️ Variação do desempenho</span><strong id="pdSdRel">—</strong></div>
+      <div class="probDetailItem"><span>🕒 Peso das corridas</span><strong id="pdRecency">—</strong><small>corridas recentes têm um pouco mais de peso</small></div>
+      <div class="probDetailItem"><span>🎯 Posição final estimada</span><strong id="pdFinalPos">—</strong><small>média nas simulações</small></div>
+      <div class="probDetailItem"><span>🥇 Chance de Top 3</span><strong id="pdTop3">—</strong></div>
+      <div class="probDetailItem"><span>🧩 Prior estatístico</span><strong id="pdPrior">—</strong><small>equivale a observações extras da média do campo</small></div>
+      <div class="probDetailItem"><span>🧮 Simulações</span><strong id="pdSims">—</strong></div>
+      <div class="probDetailItem wide"><span>💡 O que isso significa?</span><strong id="pdSimpleText">—</strong></div>
+    </div>
+    <div class="probDetailExplanation" id="pdExplanation">—</div>
+    <div class="probDetailActions">
+      <button type="button" class="probDetailBtn" onclick="closeProbDetail()">Fechar</button>
+    </div>
+  </div>
+</div>
 
 <div class="footer">COPA TDP • Dashboard independente • Dados incorporados dos arquivos enviados</div>
 </div>
@@ -1084,13 +1871,13 @@ const pilotColors={
   "LUCAS":"#ef1721",
   "BERTON":"#f2c94e",
   "HENRIQUE":"#4e8cff",
-  "ROSE":"#9d4edd",
+  "ROSE":"#ff69b4",
   "REX":"#21c76a",
   "GUIMA":"#22c1d6",
   "ROBINHO":"#f39c33",
   "NICOLAS":"#8a61d8",
   "GUILHERME":"#f2f2f2",
-  "RIAN":"#ff4f9a",
+  "RIAN":"#9d4edd",
   "CAUA":"#8d969d",
   "HIRO":"#ff7a18"
 };
@@ -1105,19 +1892,16 @@ function pilotColor(name){
 function readableTop5Chart(series,labels,colors,maxY){
   if(!labels.length)return `<div class="empty">Sem dados</div>`;
 
-  // Reserve more space on the right because the final scores are shown
-  // beside the final points, not above the lines.
   const W=900,H=320,L=64,R=120,T=22,B=58,M=Math.max(1,maxY);
   let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="none">`;
 
-  // Grid / Y axis
   for(let i=0;i<=5;i++){
     const y=T+(H-T-B)*i/5,val=M-(M*i/5);
     s+=`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#30383e" stroke-width="1.2"/>`;
     s+=`<text x="9" y="${y+6}" fill="#d6dde1" font-size="17" font-weight="900">${Number.isInteger(val)?val:val.toFixed(1)}</text>`;
   }
 
-  // Lines and points only — no values printed above intermediate points.
+  // Draw the series only; values are intentionally NOT printed above the points.
   series.forEach((arr,si)=>{
     const col=colors[si];
     const pts=arr.map((v,i)=>{
@@ -1127,7 +1911,6 @@ function readableTop5Chart(series,labels,colors,maxY){
     }).join(" ");
 
     s+=`<polyline points="${pts}" fill="none" stroke="${col}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
-
     arr.forEach((v,i)=>{
       const x=L+i*(W-L-R)/Math.max(1,labels.length-1);
       const y=T+(H-T-B)*(1-(v/M));
@@ -1135,8 +1918,8 @@ function readableTop5Chart(series,labels,colors,maxY){
     });
   });
 
-  // Show each pilot's score only once, at the end of the line,
-  // positioned to the right of the final point.
+  // Show the cumulative score only at the LAST point of each line,
+  // to the right of the point, matching the user's reference image.
   series.forEach((arr,si)=>{
     const col=colors[si];
     const lastIndex=arr.length-1;
@@ -1144,12 +1927,12 @@ function readableTop5Chart(series,labels,colors,maxY){
     const x=L+lastIndex*(W-L-R)/Math.max(1,labels.length-1);
     const y=T+(H-T-B)*(1-(value/M));
 
-    s+=`<text x="${x+16}" y="${y+6}" text-anchor="start"
-      fill="#fff" stroke="#101418" stroke-width="6" paint-order="stroke"
+    s+=`<text x="${x+15}" y="${y+6}"
+      text-anchor="start"
+      fill="#fff" stroke="#101418" stroke-width="5" paint-order="stroke"
       font-size="18" font-weight="950">${value}</text>`;
   });
 
-  // Race labels
   labels.forEach((label,i)=>{
     const x=L+i*(W-L-R)/Math.max(1,labels.length-1);
     s+=`<text x="${x}" y="${H-14}" text-anchor="middle"
@@ -1160,13 +1943,28 @@ function readableTop5Chart(series,labels,colors,maxY){
 }
 function syncRacePills(){document.querySelectorAll("#racesBox .racePill").forEach(el=>{const cb=el.querySelector("input");el.classList.toggle("on",cb.checked);});}
 function selected(id){return[...document.querySelectorAll(`#${id} input:checked`)].map(x=>x.value)}
-function showPage(id){
-  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  document.getElementById("nChamp").classList.toggle("active",id==="champ");
-  document.getElementById("nPilot").classList.toggle("active",id==="pilot");
-  document.getElementById("nResults").classList.toggle("active",id==="results");
+function getScenarioPilots(){
+  const list=selected("chanceScenarioBox");
+  return list.length ? list : [...new Set(DATA.map(x=>x.piloto))];
 }
+function allScenarioPilots(){document.querySelectorAll("#chanceScenarioBox input").forEach(x=>x.checked=true);scheduleTitleProbability(true)}
+function noneScenarioPilots(){document.querySelectorAll("#chanceScenarioBox input").forEach(x=>x.checked=false);scheduleTitleProbability(true)}
+
+window.__chanceDebounceTimer=null;
+window.__chanceScenarioKey="";
+function chanceScenarioKey(){return getScenarioPilots().slice().sort().join("¦");}
+function scheduleTitleProbability(force=false){
+  const key=chanceScenarioKey();
+  if(!force && key===window.__chanceScenarioKey)return;
+  window.__chanceScenarioKey=key;
+  clearTimeout(window.__chanceDebounceTimer);
+  window.__chanceDebounceTimer=setTimeout(()=>{window.__chanceDebounceTimer=null;updateTitleProbability();},100);
+}
+function showPage(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");document.getElementById("nChamp").classList.toggle("active",id==="champ");document.getElementById("nPilot").classList.toggle("active",id==="pilot");document.getElementById("nSim").classList.toggle("active",id==="sim");document.getElementById("nResults").classList.toggle("active",id==="results");document.getElementById("nHow").classList.toggle("active",id==="how");if(id==="results")updateResults();if(id==="sim")renderSimulationPage()}
+function allRaces(){document.querySelectorAll("#racesBox input").forEach(x=>x.checked=true);syncRacePills();updateChamp()}
+function noneRaces(){document.querySelectorAll("#racesBox input").forEach(x=>x.checked=false);syncRacePills();updateChamp()}
+function allPilots(){document.querySelectorAll("#pilotsBox input").forEach(x=>x.checked=true);updateChamp()}
+function nonePilots(){document.querySelectorAll("#pilotsBox input").forEach(x=>x.checked=false);updateChamp()}
 
 function lineChart(series,labels,colors,maxY,withValues=false){
  if(!labels.length)return `<div class="empty">Sem dados</div>`;
@@ -1179,42 +1977,386 @@ function lineChart(series,labels,colors,maxY,withValues=false){
 }
 
 
-function openPilot(pilot){
-  const sel=document.getElementById("pilotSelect");
-  if(!sel)return;
-  sel.value=pilot;
-  showPage("pilot");
-  updatePilot();
-  const chooser=document.querySelector(".pilotChooser");
-  const pilotPage=document.getElementById("pilot");
-  if(pilotPage){
-    try{pilotPage.scrollIntoView({behavior:"smooth",block:"start"});}catch(e){pilotPage.scrollIntoView();}
+window.MODEL_POSITION_PRIOR = window.MODEL_POSITION_PRIOR ?? 3;
+
+function changePositionPrior(value){
+  const n=Number(value);
+  window.MODEL_POSITION_PRIOR = Number.isFinite(n) && n>=1 && n<=3 ? n : 3;
+  document.querySelectorAll('#positionPriorButtons .priorBtn').forEach(btn=>{
+    btn.classList.toggle('active', Number(btn.dataset.prior)===window.MODEL_POSITION_PRIOR);
+  });
+  updateTitleProbability();
+}
+
+function updateTitleProbability(){
+  const TOTAL_RACES = 10;
+  const completed = RACES.length;
+  const remaining = Math.max(0, TOTAL_RACES - completed);
+
+  // O filtro continua definindo o cenário da simulação.
+  const selectedPilots = getScenarioPilots();
+  const pilots = selectedPilots.length ? selectedPilots : [...new Set(DATA.map(x=>x.piloto))];
+
+  const posMapLocal = {
+    "Primeiro":1,"Segundo":2,"Terceiro":3,"Quarto":4,"Quinta":5,"Quinto":5,
+    "Sexto":6,"Sétimo":7,"Setimo":7,"Oitavo":8,"Nono":9,
+    "Décimo":10,"Decimo":10,"Décimo Primeiro":11,"Decimo Primeiro":11
+  };
+  const scoreFromPosition = p => p===1 ? 10 : p===2 ? 7 : p===3 ? 5 : p===4 ? 3 : p===5 ? 2 : p===6 ? 1 : 0;
+
+  const rows = DATA.filter(x=>pilots.includes(x.piloto));
+  if(!rows.length){
+    document.getElementById("probWinnerName").textContent="—";
+    document.getElementById("probWinnerPct").textContent="—";
+    document.getElementById("probMeta").textContent="Sem dados suficientes.";
+    document.getElementById("probList").innerHTML=`<div class="empty">Sem dados</div>`;
+    window.TITLE_PROBS={};
+    window.TITLE_DETAILS={};
+    return;
   }
-  if(chooser) chooser.classList.add("pilotJumpFlash");
-  setTimeout(()=>chooser&&chooser.classList.remove("pilotJumpFlash"),900);
+
+  // Interrompe o worker anterior. O cenário novo não espera o cálculo antigo terminar.
+  window.__probRunToken=(window.__probRunToken||0)+1;
+  const runToken=window.__probRunToken;
+  if(window.__probWorker){ try{ window.__probWorker.terminate(); }catch(e){} window.__probWorker=null; }
+
+  // Cache: repetir um cenário já calculado fica praticamente instantâneo.
+  const POSITION_PRIOR=Number.isFinite(window.MODEL_POSITION_PRIOR)?Number(window.MODEL_POSITION_PRIOR):3;
+  const scenarioKey=pilots.slice().sort().join("¦")+"¦PRIOR="+POSITION_PRIOR;
+  window.__probCache=window.__probCache||new Map();
+  const cached=window.__probCache.get(scenarioKey);
+  if(cached){
+    renderTitleProbability(cached, remaining, cached.SIMS||200000, pilots.length, runToken);
+    return;
+  }
+
+  const mean = a => a.length ? a.reduce((s,x)=>s+x,0)/a.length : 0;
+  const sd = a => {
+    if(a.length<2) return 0;
+    const m=mean(a);
+    return Math.sqrt(a.reduce((s,x)=>s+(x-m)**2,0)/(a.length-1));
+  };
+
+  // Grid real de cada corrida, usado para normalizar a posição.
+  const fieldSizeByRace={};
+  RACES.forEach(r=>{
+    fieldSizeByRace[r]=new Set(DATA.filter(x=>x.raceKey===r).map(x=>x.piloto)).size;
+  });
+  // Peso moderado para recência: 1ª corrida = 1,0; 2ª = 1,1; 3ª = 1,2; e assim por diante.
+  const RECENCY_WEIGHTS=Object.fromEntries(RACES.map((r,i)=>[r,1+(i*0.1)]));
+  const relativePerformance=(position,fieldSize)=>{
+    if(!Number.isFinite(position)||position<=0)return null;
+    if(fieldSize<=1)return 1;
+    return Math.max(0,Math.min(1,1-((position-1)/(fieldSize-1))));
+  };
+  const weightedMean=(values,weights)=>{
+    let sw=0, sx=0;
+    values.forEach((v,i)=>{const w=weights[i]||0; if(Number.isFinite(v)&&w>0){sw+=w;sx+=w*v;}});
+    return sw?sx/sw:0;
+  };
+  const weightedSD=(values,weights)=>{
+    const m=weightedMean(values,weights);
+    let sw=0, s2=0;
+    values.forEach((v,i)=>{const w=weights[i]||0; if(Number.isFinite(v)&&w>0){sw+=w;s2+=w*(v-m)**2;}});
+    return sw?Math.sqrt(s2/sw):0;
+  };
+
+  const allPairs=DATA.map(x=>{
+    const pos=posMapLocal[x.posicao]??Number(x.posicao);
+    const value=relativePerformance(pos,fieldSizeByRace[x.raceKey]||1);
+    return {value,weight:RECENCY_WEIGHTS[x.raceKey]||1};
+  }).filter(x=>Number.isFinite(x.value));
+  const fieldMeanRel=weightedMean(allPairs.map(x=>x.value),allPairs.map(x=>x.weight));
+  const fieldSDRel=weightedSD(allPairs.map(x=>x.value),allPairs.map(x=>x.weight))||0.20;
+  const stats={};
+  pilots.forEach(p=>{
+    const histRows=DATA.filter(x=>x.piloto===p);
+    const perfHist=histRows.map(x=>{
+      const pos=posMapLocal[x.posicao]??Number(x.posicao);
+      return {value:relativePerformance(pos,fieldSizeByRace[x.raceKey]||1),weight:RECENCY_WEIGHTS[x.raceKey]||1,race:x.raceKey};
+    }).filter(x=>Number.isFinite(x.value));
+    const n=perfHist.length;
+    const values=perfHist.map(x=>x.value), weights=perfHist.map(x=>x.weight);
+    const observationWeight=weights.reduce((a,b)=>a+b,0);
+    const rawMean=observationWeight?weightedMean(values,weights):fieldMeanRel;
+    const rawSD=n>=2?weightedSD(values,weights):fieldSDRel;
+    const current=histRows.reduce((sum,x)=>sum+Number(x.pontos||0),0);
+    const historicalRaces=new Set(histRows.map(x=>x.raceKey)).size;
+    // Participação direta: 3/3 = 100%, 2/3 = 66,7%, 1/3 = 33,3%. Berton = 80%.
+    const participation=(p.toUpperCase()==="BERTON") ? 0.8 : (completed ? historicalRaces/completed : 0);
+    stats[p]={
+      current,
+      meanRel:(observationWeight*rawMean+POSITION_PRIOR*fieldMeanRel)/(observationWeight+POSITION_PRIOR),
+      sdRel:(observationWeight*rawSD+POSITION_PRIOR*fieldSDRel)/(observationWeight+POSITION_PRIOR),
+      participation,
+      historicalRaces,
+      observationWeight,
+      rawMean,
+      rawSD,
+      recencyWeights:perfHist.map(x=>({race:x.race,weight:x.weight}))
+    };
+  });
+
+  // 200 mil simulações: maior estabilidade da estimativa, executadas em Web Worker.
+  const SIMS=200000;
+  const n=pilots.length;
+  const payload={
+    pilots,
+    remaining,
+    SIMS,
+    currentPts:pilots.map(p=>stats[p].current),
+    meanRel:pilots.map(p=>stats[p].meanRel),
+    sdRel:pilots.map(p=>stats[p].sdRel),
+    participation:pilots.map(p=>stats[p].participation),
+    historicalRaces:pilots.map(p=>stats[p].historicalRaces),
+    fieldMeanRel,
+    fieldSDRel,
+    positionPrior:POSITION_PRIOR,
+    observationWeight:pilots.map(p=>stats[p].observationWeight),
+    rawMean:pilots.map(p=>stats[p].rawMean),
+    rawSD:pilots.map(p=>stats[p].rawSD),
+    recencyWeights:RACES.map(r=>({race:r,weight:RECENCY_WEIGHTS[r]})),
+    seed:(()=>{
+      let seed=(20260920>>>0);
+      seed=(seed+Math.round(POSITION_PRIOR*1000))>>>0;
+      pilots.slice().sort().forEach(p=>{for(let i=0;i<p.length;i++)seed=(seed+p.charCodeAt(i)*(i+3))>>>0;});
+      return seed>>>0;
+    })()
+  };
+
+  const workerCode=`
+    self.onmessage=function(ev){
+      const d=ev.data, pilots=d.pilots, n=pilots.length, remaining=d.remaining, SIMS=d.SIMS;
+      const currentPts=Float64Array.from(d.currentPts), meanRel=Float64Array.from(d.meanRel), sdRel=Float64Array.from(d.sdRel), participation=Float64Array.from(d.participation);
+      const futureTotals=new Float64Array(n), participationCounts=new Float64Array(n), participationTotal=new Float64Array(n), finalPositionTotals=new Float64Array(n), top3Counts=new Float64Array(n), wins=new Float64Array(n), finalPts=new Float64Array(n), latent=new Float64Array(n);
+      const maxFuture=remaining*10;
+      // participationCounts = participações na simulação atual; participationTotal = acumulado das 200 mil simulações.
+
+      const pointHist=Array.from({length:n},()=>new Uint32Array(maxFuture+1));
+      const posHist=Array.from({length:n},()=>new Uint32Array(n+1));
+      const participationHist=Array.from({length:n},()=>new Uint32Array(remaining+1));
+      const blockSize=1000, blockCount=Math.ceil(SIMS/blockSize);
+      const blockWins=Array.from({length:blockCount},()=>new Float64Array(n));
+      let seed=d.seed>>>0;
+      const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
+      const randn=()=>{let u=0,v=0;while(u===0)u=rand();while(v===0)v=rand();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);};
+      const scoreFromPosition=p=>p===1?10:p===2?7:p===3?5:p===4?3:p===5?2:p===6?1:0;
+      const order=new Array(n), raceOrder=[];
+      for(let sim=0;sim<SIMS;sim++){
+        for(let i=0;i<n;i++){finalPts[i]=currentPts[i]; participationCounts[i]=0;}
+        for(let r=0;r<remaining;r++){
+          raceOrder.length=0;
+          for(let i=0;i<n;i++){
+            if(rand()<participation[i]){
+              latent[i]=Math.max(0,Math.min(1,meanRel[i]+sdRel[i]*randn()));
+              raceOrder.push(i);
+              participationCounts[i]++; participationTotal[i]++;
+            }
+          }
+          raceOrder.sort((a,b)=>latent[b]-latent[a]||a-b);
+          for(let pos=0;pos<raceOrder.length;pos++){
+            const idx=raceOrder[pos], pts=scoreFromPosition(pos+1);
+            finalPts[idx]+=pts;
+            futureTotals[idx]+=pts;
+          }
+        }
+        for(let i=0;i<n;i++)order[i]=i;
+        order.sort((a,b)=>finalPts[b]-finalPts[a]||a-b);
+        const simBlock=Math.floor(sim/blockSize);
+        for(let i=0;i<n;i++){
+          const fp=Math.max(0,Math.min(maxFuture,finalPts[i]-currentPts[i]));
+          pointHist[i][fp]++;
+          participationHist[i][participationCounts[i]]++;
+        }
+        for(let k=0;k<n;k++){const idx=order[k]; posHist[idx][k+1]++;}
+        const best=finalPts[order[0]];
+        let tieCount=1; while(tieCount<n&&finalPts[order[tieCount]]===best)tieCount++;
+        const winShare=1/tieCount;
+        for(let k=0;k<tieCount;k++){wins[order[k]]+=winShare; blockWins[simBlock][order[k]]+=winShare;}
+        const topN=Math.min(3,n); for(let k=0;k<topN;k++)top3Counts[order[k]]++;
+        let i=0; while(i<n){ let j=i+1; while(j<n&&finalPts[order[j]]===finalPts[order[i]])j++; const avgRank=((i+1)+j)/2; for(let k=i;k<j;k++)finalPositionTotals[order[k]]+=avgRank; i=j; }
+      }
+      const projections=pilots.map((p,i)=>{
+        const pHat=wins[i]/SIMS;
+        const z=1.96;
+        const den=1+(z*z)/SIMS;
+        const center=(pHat+(z*z)/(2*SIMS))/den;
+        const half=z*Math.sqrt((pHat*(1-pHat))/SIMS+(z*z)/(4*SIMS*SIMS))/den;
+        return {
+          pilot:p,index:i,current:currentPts[i],projected:(currentPts[i]*SIMS+futureTotals[i])/SIMS,
+          futurePoints:futureTotals[i]/SIMS,prob:pHat*100,
+          mcLow:Math.max(0,(center-half)*100),mcHigh:Math.min(100,(center+half)*100),
+          mcUncertainty:half*100,
+          expectedParticipation:participationTotal[i]/SIMS,expectedFinalPosition:finalPositionTotals[i]/SIMS,
+          top3Prob:top3Counts[i]/SIMS*100,meanRel:meanRel[i],sdRel:sdRel[i],participation:participation[i],historicalRaces:d.historicalRaces[i],positionPrior:d.positionPrior,
+          observationWeight:d.observationWeight[i],rawMean:d.rawMean[i],rawSD:d.rawSD[i],recencyWeights:d.recencyWeights
+        };
+      }).sort((a,b)=>b.prob-a.prob||b.projected-a.projected);
+      self.postMessage({projections,SIMS,maxFuture,positionPrior:d.positionPrior,pointHist:pointHist.map(a=>Array.from(a)),posHist:posHist.map(a=>Array.from(a)),participationHist:participationHist.map(a=>Array.from(a)),blockWins:blockWins.map(a=>Array.from(a)),blockSize});
+    };
+  `;
+  const blob=new Blob([workerCode],{type:"application/javascript"});
+  const worker=new Worker(URL.createObjectURL(blob));
+  window.__probWorker=worker;
+  worker.onmessage=function(ev){
+    if(window.__probRunToken!==runToken){worker.terminate();return;}
+    const result=ev.data;
+    result.projections.forEach(x=>{ x._scenarioField=n; x._fieldMeanRel=fieldMeanRel; x._fieldSDRel=fieldSDRel; });
+    result.remaining=remaining;
+    result.positionPrior=POSITION_PRIOR;
+    // Guarda até 30 cenários para reuso rápido.
+    window.__probCache.set(scenarioKey,result);
+    if(window.__probCache.size>30)window.__probCache.delete(window.__probCache.keys().next().value);
+    worker.terminate();
+    if(window.__probWorker===worker)window.__probWorker=null;
+    renderTitleProbability(result,remaining,result.SIMS,n,runToken);
+  };
+  worker.onerror=function(){
+    if(window.__probRunToken!==runToken)return;
+    worker.terminate();
+    if(window.__probWorker===worker)window.__probWorker=null;
+    // Fallback silencioso: tenta uma simulação menor no próximo clique sem congelar a interface.
+    document.getElementById("probMeta").textContent="Não foi possível atualizar a simulação.";
+  };
+  worker.postMessage(payload);
 }
 
-function getChampPilot(){
-  const el=document.getElementById("champPilotFilter");
-  return el?el.value:"ALL";
+function renderTitleProbability(result,remaining,SIMS,n,runToken){
+  if(window.__probRunToken!==runToken)return;
+  const projections=result.projections||[];
+  if(!projections.length)return;
+  window.TITLE_PROBS=Object.fromEntries(projections.map(x=>[x.pilot,x.prob]));
+  window.__probLastResult=result;
+  window.__probLastScenario={pilots:Object.keys(window.TITLE_PROBS),remaining,SIMS,n};
+  const fieldMeanRel=projections[0]._fieldMeanRel||0;
+  const fieldSDRel=projections[0]._fieldSDRel||0;
+  const positionPrior=Number.isFinite(result.positionPrior)?result.positionPrior:(Number.isFinite(projections[0].positionPrior)?projections[0].positionPrior:2);
+  window.TITLE_DETAILS=Object.fromEntries(projections.map(x=>[
+    x.pilot,{...x,remaining,SIMS,scenarioField:n,fieldMeanRel,fieldSDRel,positionPrior}
+  ]));
+  const winner=projections[0];
+  document.getElementById("probWinnerName").textContent=winner.pilot;
+  document.getElementById("probWinnerPct").textContent=winner.prob.toFixed(1)+"%";
+  document.getElementById("probMeta").innerHTML=
+    `${remaining} ${remaining===1?"corrida restante":"corridas restantes"} • projeção: ${winner.projected.toFixed(1)} pts • ${n} piloto(s) no cenário • ${SIMS.toLocaleString("pt-BR")} simulações<br><b>Margem da simulação (95%): ±${winner.mcUncertainty.toFixed(2)} p.p.</b> • prior = ${positionPrior}`;
+  const top=Math.min(6,projections.length);
+  const maxProb=Math.max(1,...projections.map(x=>x.prob));
+  document.getElementById("probList").innerHTML=
+    `<div class="probListHead"><span>#</span><span>PILOTO</span><span>CHANCE ESTIMADA</span><span>%</span></div>`+
+    projections.slice(0,top).map((x,i)=>
+      `<div class="probRow" data-prob-pilot="${esc(x.pilot)}" data-pilot-nav="${esc(x.pilot)}" tabindex="0" aria-label="Ver cálculo da chance de título de ${esc(x.pilot)}">
+        <div class="probPos">${i+1}</div>
+        <div class="probName">${esc(x.pilot)}</div>
+        <div class="probTrack"><i style="width:${Math.max(2,x.prob/maxProb*100)}%;background:${pilotColor(x.pilot)}"></i></div>
+        <div class="probPct">${x.prob.toFixed(1)}%</div>
+      </div>`
+    ).join("")+ 
+    `<div class="probNote">O filtro de pilotos define o cenário. A participação futura usa a taxa histórica direta (ex.: 3/3 = 100%), com Berton fixado em 80%. O desempenho é normalizado pelo tamanho do grid. O prior = ${positionPrior} reduz o peso exagerado de históricos muito curtos. A incerteza mostrada é somente da Monte Carlo, não da qualidade dos dados ou das premissas.</div>`;
+  if(document.getElementById("sim")?.classList.contains("active")) renderSimulationPage();
 }
-function getChampRace(){
-  const el=document.getElementById("champRaceFilter");
-  return el?el.value:"ALL";
+function simHistogramSvg(counts, labels, opts={}){
+  const W=900,H=300,L=52,R=18,T=20,B=48;
+  const max=Math.max(1,...counts), n=counts.length;
+  const barGap=n>40?1:4, barW=Math.max(2,(W-L-R-(n-1)*barGap)/n);
+  const color=opts.color||'#f3cf4e';
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="none">`;
+  for(let i=0;i<=4;i++){const y=T+(H-T-B)*i/4,val=max*(1-i/4);s+=`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#30373d"/><text x="5" y="${y+4}" fill="#8f999f" font-size="10">${Math.round(val).toLocaleString('pt-BR')}</text>`}
+  counts.forEach((v,i)=>{
+    const h=(H-T-B)*(v/max), x=L+i*(barW+barGap), y=T+(H-T-B)-h;
+    s+=`<rect x="${x.toFixed(2)}" y="${y.toFixed(2)}" width="${Math.max(1,barW).toFixed(2)}" height="${Math.max(0,h).toFixed(2)}" rx="2" fill="${color}" opacity=".92"><title>${esc(labels[i]||'')} : ${v.toLocaleString('pt-BR')} simulações</title></rect>`;
+  });
+  const step=Math.max(1,Math.ceil(n/10));
+  labels.forEach((lab,i)=>{if(i%step!==0&&i!==n-1)return;const x=L+i*(barW+barGap)+barW/2;s+=`<text x="${x}" y="${H-15}" text-anchor="middle" fill="#c6cdd2" font-size="10">${esc(lab)}</text>`});
+  return s+'</svg>';
 }
-
+function simLineSvg(values, labels, opts={}){
+  const W=900,H=220,L=52,R=20,T=18,B=38;
+  const pct=opts.percent===true;
+  const max=pct?1:Math.max(0.0001,...values);
+  const min=pct?0:0;
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" height="100%" preserveAspectRatio="none">`;
+  for(let i=0;i<=4;i++){
+    const frac=i/4, y=T+(H-T-B)*frac, val=max*(1-frac);
+    s+=`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#30373d"/>`;
+    s+=`<text x="5" y="${y+4}" fill="#8f999f" font-size="10">${pct?(val*100).toFixed(0)+'%':(val*100).toFixed(1)+'%'}</text>`;
+  }
+  const pts=values.map((v,i)=>{
+    const x=L+i*(W-L-R)/Math.max(1,values.length-1);
+    const y=T+(H-T-B)*(1-(v-min)/(max-min||1));
+    return `${x},${y}`;
+  }).join(' ');
+  s+=`<polyline points="${pts}" fill="none" stroke="var(--red)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`;
+  values.forEach((v,i)=>{
+    const x=L+i*(W-L-R)/Math.max(1,values.length-1);
+    const y=T+(H-T-B)*(1-(v-min)/(max-min||1));
+    s+=`<circle cx="${x}" cy="${y}" r="2.5" fill="var(--red)"/>`;
+  });
+  const step=Math.max(1,Math.ceil(labels.length/8));
+  labels.forEach((lab,i)=>{if(i%step!==0&&i!==labels.length-1)return;const x=L+i*(W-L-R)/Math.max(1,labels.length-1);s+=`<text x="${x}" y="${H-12}" text-anchor="middle" fill="#c6cdd2" font-size="10">${esc(lab)}</text>`});
+  if(Number.isFinite(opts.finalValue)){
+    const y=T+(H-T-B)*(1-opts.finalValue);
+    s+=`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#f2c94e" stroke-width="1.5" stroke-dasharray="6 5" opacity=".9"/>`;
+    s+=`<text x="${W-R}" y="${y-6}" text-anchor="end" fill="#f2c94e" font-size="10" font-weight="900">Final ${((opts.finalValue)*100).toFixed(1)}%</text>`;
+  }
+  return s+'</svg>';
+}
+function quantileFromHist(hist,q){
+  const total=hist.reduce((a,b)=>a+b,0); if(!total)return 0;
+  const target=Math.max(1,Math.ceil(total*q)); let c=0;
+  for(let i=0;i<hist.length;i++){c+=hist[i]; if(c>=target)return i;} return hist.length-1;
+}
+function populateSimPilotSelect(pilots){
+  const sel=document.getElementById('simPilotSelect'); if(!sel)return;
+  const current=sel.value;
+  sel.innerHTML=pilots.map(p=>`<option value="${esc(p)}">${esc(p)}</option>`).join('');
+  if(pilots.includes(current))sel.value=current;
+  else if(pilots.length)sel.value=pilots[0];
+}
+function renderSimulationPage(){
+  const r=window.__probLastResult;
+  const scenario=window.__probLastScenario;
+  if(!r||!r.projections||!r.projections.length)return;
+  const pilots=r.projections.map(x=>x.pilot), sel=document.getElementById('simPilotSelect');
+  populateSimPilotSelect(pilots);
+  const pilot=sel?.value||pilots[0];
+  const proj=r.projections.find(x=>x.pilot===pilot); if(!proj)return;
+  const idx=Number.isInteger(proj.index)?proj.index:pilots.indexOf(pilot);
+  if(idx<0)return;
+  const current=proj.current, futureHist=(r.pointHist?.[idx]||[]), posHist=r.posHist?.[idx]||[], partHist=r.participationHist?.[idx]||[];
+  document.getElementById('simScenario').innerHTML=`<b>${pilots.length} piloto(s)</b> selecionado(s)<br>${pilots.map(esc).join(' • ')}<br><br><b>${r.SIMS.toLocaleString('pt-BR')}</b> simulações para as <b>${scenario?.remaining ?? 7}</b> corridas restantes.<br><br><b>Prior:</b> ${r.positionPrior ?? 2} • <b>Margem Monte Carlo (95%):</b> ±${proj.mcUncertainty.toFixed(2)} p.p.`;
+  document.querySelectorAll('#positionPriorButtons .priorBtn').forEach(btn=>btn.classList.toggle('active',Number(btn.dataset.prior)===(r.positionPrior ?? 3)));
+  document.getElementById('simKpiProb').textContent=proj.prob.toFixed(1)+'% ± '+proj.mcUncertainty.toFixed(2)+' p.p.';
+  document.getElementById('simKpiProjected').textContent=proj.projected.toFixed(1)+' pts';
+  document.getElementById('simKpiPosition').textContent=proj.expectedFinalPosition.toFixed(2)+'º';
+  document.getElementById('simKpiParticipation').textContent=proj.expectedParticipation.toFixed(2);
+  const finalLabels=futureHist.map((_,i)=>String(current+i));
+  document.getElementById('simPointsChart').innerHTML=simHistogramSvg(futureHist,finalLabels,{color:'var(--gold)'});
+  const posLabels=posHist.slice(1).map((_,i)=>String(i+1)+'º');
+  document.getElementById('simPositionChart').innerHTML=simHistogramSvg(posHist.slice(1),posLabels,{color:'var(--blue)'});
+  const partLabels=partHist.map((_,i)=>String(i));
+  document.getElementById('simParticipationChart').innerHTML=simHistogramSvg(partHist,partLabels,{color:'var(--green)'});
+  const blockWins=(r.blockWins||[]).map(b=>(b[idx]||0));
+  let cumulativeWins=0;
+  const blocks=blockWins.map((v,i)=>{cumulativeWins+=v; return cumulativeWins/((i+1)*r.blockSize);});
+  const blockLabels=blocks.map((_,i)=>`${((i+1)*r.blockSize/1000).toFixed(0)}k`);
+  document.getElementById('simStabilityChart').innerHTML=simLineSvg(blocks,blockLabels,{percent:true,finalValue:proj.prob/100});
+  const qs=[.1,.25,.5,.75,.9], qLabels=['P10','P25','Mediana','P75','P90'];
+  document.getElementById('simPercentiles').innerHTML=qs.map((q,i)=>`<div class="simPercentile"><span>${qLabels[i]}</span><strong>${(current+quantileFromHist(futureHist,q)).toFixed(1)} pts</strong></div>`).join('');
+  document.getElementById('simExplanation').innerHTML=`Neste cenário, <b>${esc(pilot)}</b> termina campeão em <b>${proj.prob.toFixed(1)}%</b> das 200.000 simulações. A estimativa de Monte Carlo tem uma incerteza de aproximadamente <b>±${proj.mcUncertainty.toFixed(2)} pontos percentuais</b> em um intervalo de 95%; isso mede apenas a oscilação natural de usar um número finito de simulações, e não a incerteza das premissas do modelo. O prior = <b>${r.positionPrior ?? 2}</b> faz uma pequena correção para históricos curtos. As corridas mais recentes têm peso um pouco maior (1,0; 1,1; 1,2; ...), mas <b>não existe um fator separado de tendência</b>. O gráfico de pontos usa todas as simulações e mostra quantas vezes cada total de pontos apareceu. O gráfico de posição mostra em quais posições o piloto terminou. O gráfico de participação mostra quantas das 7 corridas ele disputou em cada simulação. A média prevista é de <b>${proj.projected.toFixed(1)} pontos</b> e de <b>${proj.expectedParticipation.toFixed(2)} participações</b> nas corridas restantes.`;
+}
+function getChampPilot(){return document.getElementById("champPilotFilter")?.value||"ALL";}
+function getChampRace(){return document.getElementById("champRaceFilter")?.value||"ALL";}
 function updateChamp(){
-  const selectedPilot=document.getElementById("champPilotFilter")?.value||"ALL";
-  const selectedRace=document.getElementById("champRaceFilter")?.value||"ALL";
-  const rs=selectedRace==="ALL"?RACES:[selectedRace];
-
+  const selectedPilot=getChampPilot();
+  const selectedRace=getChampRace();
+  const rs=selectedRace==="ALL" ? RACES : [selectedRace];
   const rows=DATA.filter(x=>
     (selectedRace==="ALL"||x.raceKey===selectedRace) &&
     (selectedPilot==="ALL"||x.piloto===selectedPilot)
   );
   const st=standings(rows);
 
-  document.getElementById("kRaces").textContent=rs.length;
+   document.getElementById("kRaces").textContent=rs.length;
   document.getElementById("kDrivers").textContent=new Set(rows.map(x=>x.piloto)).size;
   document.getElementById("kLeaderName").textContent=st[0]?st[0][0]:"—";
   document.getElementById("kLeaderPts").textContent=st[0]?st[0][1]+" pts":"0 pts";
@@ -1227,7 +2369,7 @@ function updateChamp(){
 
   const max=st[0]?.[1]||1;
   document.getElementById("ranking").innerHTML=st.length?st.map((x,i)=>
-    `<div class="champRankRow" role="button" tabindex="0" data-pilot="${esc(x[0])}" onclick="openPilot('${esc(x[0]).replace("'","\\'")}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPilot('${esc(x[0]).replace("'","\\'")}')}" title="Abrir página de ${esc(x[0])}">
+    `<div class="champRankRow" tabindex="0" data-pilot-nav="${esc(x[0])}" aria-label="Abrir página do piloto ${esc(x[0])}">
       <div class="champRankNo">${i+1}</div>
       <div class="champRankName">${esc(x[0])}</div>
       <div class="champRankBar"><i style="width:${x[1]/max*100}%;background:${pilotColor(x[0])}"></i></div>
@@ -1235,37 +2377,7 @@ function updateChamp(){
     </div>`
   ).join(""):`<div class="empty">Sem dados</div>`;
 
-  // Top 6 title chances are calculated from the full championship dataset.
-  updateTitleProbability();
-  const chanceBox=document.getElementById("titleChanceList");
-  if(chanceBox){
-    const top6=Object.entries(window.TITLE_PROBS||{})
-      .sort((a,b)=>b[1]-a[1])
-      .slice(0,6);
-    chanceBox.innerHTML=top6.length ? top6.map(([pilot,prob],i)=>`
-      <div class="titleChanceRow" role="button" tabindex="0"
-           title="Abrir página de ${esc(pilot)}"
-           onclick="openPilot('${pilot}')"
-           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPilot('${pilot}')}" >
-        <div class="titleChanceNo">${i+1}º</div>
-        <div class="titleChancePilot">${esc(pilot)}</div>
-        <div class="titleChanceBar"><i style="width:${Math.max(0,Math.min(100,prob))}%;background:${pilotColor(pilot)}"></i></div>
-        <div class="titleChancePct">${prob.toFixed(0)}%</div>
-      </div>`).join("") : `<div class="empty">Sem dados</div>`;
-  }
-
-
-  const chanceInfo=window.TITLE_PROB_INFO||{};
-  const chanceLeader=document.getElementById("titleChanceLeader");
-  const chanceLeaderPct=document.getElementById("titleChanceLeaderPct");
-  const chanceLeaderMeta=document.getElementById("titleChanceLeaderMeta");
-  if(chanceLeader){chanceLeader.textContent=chanceInfo.leader||"—";}
-  if(chanceLeaderPct){chanceLeaderPct.textContent=(Number(chanceInfo.probability)||0).toFixed(0)+"%";}
-  if(chanceLeaderMeta){
-    chanceLeaderMeta.textContent=`${Number(chanceInfo.remaining)||0} corridas restantes • projeção: ${(Number(chanceInfo.projected)||0).toFixed(1)} pts • baseada no histórico atual`;
-  }
-
-  // Cumulative points, race by race.
+  // Cumulative Top 5: every race adds to the previous total.
   const top5=st.slice(0,5).map(x=>x[0]);
   const totals=Object.fromEntries(top5.map(p=>[p,0]));
   const evo=top5.map(p=>rs.map(r=>{
@@ -1280,14 +2392,28 @@ function updateChamp(){
     return `<div class="item"><span class="dot" style="background:${pilotColor(p)}"></span><span>${esc(p)}</span><span class="score">${last}</span></div>`;
   }).join(""):`<div class="empty">Sem dados</div>`;
 
+  const sorted=rows.slice().sort((a,b)=>Number(b.pontos)-Number(a.pontos)||(posMap[a.posicao]||99)-(posMap[b.posicao]||99)||a.piloto.localeCompare(b.piloto));
+  const resultTableEl=document.getElementById("resultTable");
+  if(resultTableEl) resultTableEl.innerHTML=sorted.length?`<table>
+    <thead><tr><th>POS.</th><th>PILOTO</th><th>CORRIDA</th><th>PTS</th><th>MELHOR VOLTA</th></tr></thead>
+    <tbody>${sorted.map((x,idx)=>`<tr tabindex="0" class="pilot-${String(x.piloto).toLowerCase()}"
+      data-detail-pilot="${esc(x.piloto)}" data-detail-race="${esc(x.raceKey)}" data-detail-source="geral" aria-label="Ver detalhes de ${esc(x.piloto)} em ${esc(x.raceKey)}">
+      <td><strong>${posMap[x.posicao]||"—"}º</strong></td><td>${esc(x.piloto)}</td><td>${esc(x.raceKey)}</td>
+      <td>${x.pontos}</td><td>${esc(x.volta)}</td>
+    </tr>`).join("")}</tbody></table>`:`<div class="empty">Sem dados</div>`;
+
   const raceGrid=document.getElementById("raceGrid");
-  raceGrid.innerHTML=rs.map(r=>{
+  raceGrid.innerHTML=rs.map((r,ri)=>{
     const rr=rows.filter(x=>x.raceKey===r).sort((a,b)=>Number(b.pontos)-Number(a.pontos)||a.piloto.localeCompare(b.piloto));
     const mx=Math.max(1,...rr.map(x=>Number(x.pontos)));
+    const raceEmojis=["🏁","⚡","🏎️","🔥","🌪️","🎬","🛞","🏆"];
+    const raceEmoji=raceEmojis[ri%raceEmojis.length];
     return `<div class="champRaceCard">
-      <div class="champRaceHead">🏁 ${esc(r)}</div>
+      <div class="champRaceHead">${raceEmoji} ${esc(r)}</div>
       <div class="champRaceBody">${rr.slice(0,6).map(x=>
-        `<div class="champRaceRow">
+        `<div class="champRaceRow" tabindex="0"
+          data-detail-pilot="${esc(x.piloto)}" data-detail-race="${esc(x.raceKey)}" data-detail-source="pontos"
+          aria-label="Ver resultado de ${esc(x.piloto)} em ${esc(x.raceKey)}">
           <div class="champRaceDot" style="background:${pilotColor(x.piloto)}"></div>
           <div class="champRaceName">${esc(x.piloto)}</div>
           <div class="champRacePts">${x.pontos}</div>
@@ -1303,83 +2429,11 @@ function htmlTable(rows){
  return`<table><thead><tr><th>PILOTO</th><th>COLOCAÇÃO</th><th>CORRIDA</th><th>MELHOR VOLTA</th><th>PONTOS</th></tr></thead><tbody>${rows.map(x=>`<tr><td>${esc(x.piloto)}</td><td>${esc(x.posicao)}</td><td>${esc(x.raceKey)}</td><td>${esc(x.volta)}</td><td>${x.pontos}</td></tr>`).join("")}</tbody></table>`;
 }
 
-function raceResultsTable(rows){
-  if(!rows.length)return `<div class="empty">Sem dados para os filtros selecionados.</div>`;
-  const result=rows.slice().sort((a,b)=>
-    RACES.indexOf(a.raceKey)-RACES.indexOf(b.raceKey) ||
-    (posMap[a.posicao]||99)-(posMap[b.posicao]||99) ||
-    a.piloto.localeCompare(b.piloto)
-  );
-  return `<table class="raceResultsTable">
-    <thead><tr><th>CORRIDA</th><th>POSIÇÃO</th><th>PILOTO</th><th>PONTOS</th><th>MELHOR VOLTA</th></tr></thead>
-    <tbody>${result.map(x=>{
-      const pos=posMap[x.posicao]||null;
-      const posClass=pos===1?'pod1':pos===2?'pod2':pos===3?'pod3':'';
-      return `<tr style="--pilotColor:${pilotColor(x.piloto)}">
-        <td class="resultRace">${esc(x.raceKey)}</td>
-        <td><span class="resultPosBadge resultPos ${posClass}">${pos?pos+'º':'—'}</span></td>
-        <td class="resultPilot">${esc(x.piloto)}</td>
-        <td class="resultPoints">${x.pontos}</td>
-        <td class="resultLap">${esc(x.volta)}</td>
-      </tr>`;
-    }).join('')}</tbody>
-  </table>`;
-}
-
-function updateTitleProbability(){
-  const TOTAL_RACES=10;
-  const completed=RACES.length;
-  const remaining=Math.max(0,TOTAL_RACES-completed);
-  const all=standings(DATA);
-
-  if(!all.length){
-    window.TITLE_PROBS={};
-    window.TITLE_PROB_INFO={};
-    return;
-  }
-
-  const observed=DATA.map(x=>Number(x.pontos));
-  const fieldMean=observed.length ? observed.reduce((a,b)=>a+b,0)/observed.length : 0;
-  const PRIOR=2;
-
-  const projections=all.map(([pilot,current])=>{
-    const history=DATA.filter(x=>x.piloto===pilot).map(x=>Number(x.pontos));
-    const n=history.length;
-    const avg=n
-      ? (history.reduce((a,b)=>a+b,0)+PRIOR*fieldMean)/(n+PRIOR)
-      : fieldMean;
-
-    return {
-      pilot,
-      current:Number(current),
-      projected:Number(current)+avg*remaining
-    };
-  });
-
-  const maxProjected=Math.max(...projections.map(x=>x.projected));
-  const TEMP=16;
-  const weights=projections.map(x=>Math.exp((x.projected-maxProjected)/TEMP));
-  const z=weights.reduce((a,b)=>a+b,0)||1;
-
-  projections.forEach((x,i)=>x.prob=weights[i]/z*100);
-  window.TITLE_PROBS=Object.fromEntries(projections.map(x=>[x.pilot,x.prob]));
-  const leader=projections.slice().sort((a,b)=>b.prob-a.prob)[0];
-  window.TITLE_PROB_INFO={
-    leader:leader?leader.pilot:'—',
-    probability:leader?leader.prob:0,
-    projected:leader?leader.projected:0,
-    remaining
-  };
-}
-
 function updatePilot(){
   const p=document.getElementById("pilotSelect").value;
-  updateTitleProbability();
   const pilotProbEl=document.getElementById("pilotTitleProb");
   if(pilotProbEl){
-    const prob=(window.TITLE_PROBS&&window.TITLE_PROBS[p]!==undefined)
-      ? window.TITLE_PROBS[p]
-      : 0;
+    const prob=(window.TITLE_PROBS&&window.TITLE_PROBS[p]!==undefined)?window.TITLE_PROBS[p]:0;
     pilotProbEl.textContent=prob.toFixed(0)+"%";
   }
   const rows=DATA.filter(x=>x.piloto===p);
@@ -1416,7 +2470,18 @@ function updatePilot(){
     ph.onerror=()=>{ph.style.display="none";fb.style.display="grid"};
   }else{ph.style.display="none";fb.style.display="grid"}
 
-  document.getElementById("pilotTable").innerHTML=raceResultsTable(rows);
+  document.getElementById("pilotTable").innerHTML=rows.length?`
+  <table class="pilotResultsTable"><thead><tr><th>CORRIDA</th><th>POSIÇÃO</th><th>PILOTO</th><th>PONTOS</th><th>MELHOR VOLTA</th></tr></thead>
+  <tbody>${RACES.map(r=>rows.find(x=>x.raceKey===r)).filter(Boolean).map(x=>
+    `<tr tabindex="0" class="pilot-selected pilot-${String(x.piloto).toLowerCase()}" data-detail-pilot="${esc(x.piloto)}" data-detail-race="${esc(x.raceKey)}" data-detail-source="piloto"
+      aria-label="Ver resultado de ${esc(x.piloto)} em ${esc(x.raceKey)}">
+      <td>${esc(x.raceKey)}</td>
+      <td><strong class="positionBadge">${posMap[x.posicao]||"—"}º</strong></td>
+      <td>${esc(x.piloto)}</td>
+      <td>${x.pontos}</td>
+      <td>${esc(x.volta)}</td>
+    </tr>`
+  ).join("")}</tbody></table>`:`<div class="empty">Sem dados</div>`;
 
   // Red bar chart: actual points earned in each race.
   const pointVals=RACES.map(r=>rows.filter(x=>x.raceKey===r).reduce((a,x)=>a+Number(x.pontos),0));
@@ -1470,69 +2535,252 @@ function updatePilot(){
 }
 
 
-let pilotChooserHome=null;
-function placeExistingPilotChooser(){
-  const chooser=document.querySelector(".pilotChooser");
-  const grid=document.querySelector(".pilotMetricGrid");
-  const pilotPage=document.getElementById("pilot");
-  if(!chooser||!grid||!pilotPage)return;
 
-  if(!pilotChooserHome) pilotChooserHome={parent:grid,next:chooser.nextSibling};
 
-  const mobile=window.matchMedia("(max-width: 700px)").matches;
-  if(mobile){
-    if(chooser.parentElement!==pilotPage){
-      pilotPage.insertBefore(chooser,pilotPage.firstElementChild);
-    }
-  }else{
-    if(chooser.parentElement!==grid){
-      if(pilotChooserHome.next && pilotChooserHome.next.parentElement===grid){
-        grid.insertBefore(chooser,pilotChooserHome.next);
-      }else{
-        grid.appendChild(chooser);
-      }
-    }
+/* ===== Results page ===== */
+function positionStatus(n){
+  if(n===1)return '<span class="resultStatus podium">🏆 Vitória</span>';
+  if(n<=3)return '<span class="resultStatus podium">🥇 Pódio</span>';
+  if(n<=5)return '<span class="resultStatus top5">🏎️ Top 5</span>';
+  return '<span class="resultStatus">🏁 Classificado</span>';
+}
+function updateResults(){
+  const raceSel=document.getElementById('resultsRaceFilter');
+  const pilotSel=document.getElementById('resultsPilotFilter');
+  if(!raceSel||!pilotSel)return;
+  const raceVal=raceSel.value, pilotVal=pilotSel.value;
+  const rows=DATA.filter(x=>(raceVal==='ALL'||x.raceKey===raceVal)&&(pilotVal==='ALL'||x.piloto===pilotVal))
+    .slice().sort((a,b)=>RACES.indexOf(a.raceKey)-RACES.indexOf(b.raceKey)||(posMap[a.posicao]||99)-(posMap[b.posicao]||99)||a.piloto.localeCompare(b.piloto));
+  const podiums=rows.filter(x=>(posMap[x.posicao]||99)<=3).length;
+  const top5=rows.filter(x=>(posMap[x.posicao]||99)<=5).length;
+  document.getElementById('resultsCount').textContent=rows.length;
+  document.getElementById('resultsDrivers').textContent=new Set(rows.map(x=>x.piloto)).size;
+  document.getElementById('resultsPodiums').textContent=podiums;
+  document.getElementById('resultsTable').innerHTML=rows.length?`<table><thead><tr><th>POS.</th><th>PILOTO</th><th>CORRIDA</th><th>RESULTADO</th></tr></thead><tbody>${rows.map(x=>{
+    const n=posMap[x.posicao]||99;
+    return `<tr tabindex="0" class="pilot-${String(x.piloto).toLowerCase()}" data-detail-pilot="${esc(x.piloto)}" data-detail-race="${esc(x.raceKey)}" data-detail-source="resultados"><td><strong>${n<99?n+'º':'—'}</strong></td><td>${esc(x.piloto)}</td><td>${esc(x.raceKey)}</td><td>${positionStatus(n)}</td></tr>`;
+  }).join('')}</tbody></table>`:`<div class="empty">Sem dados para os filtros selecionados</div>`;
+
+  const summaryRaces=(raceVal==='ALL'?RACES:RACES.filter(r=>r===raceVal));
+  document.getElementById('resultsSummary').innerHTML=summaryRaces.map(r=>{
+    const rr=DATA.filter(x=>x.raceKey===r && (pilotVal==='ALL'||x.piloto===pilotVal)).slice().sort((a,b)=>(posMap[a.posicao]||99)-(posMap[b.posicao]||99));
+    const icon=r.includes('DREAM')?'🏎️':'🏁';
+    return `<div class="summaryRaceCard"><div class="summaryRaceHead"><span>${icon} ${esc(r)}</span><small>${rr.length} pilotos</small></div><div class="summaryRaceBody">${rr.map(x=>{const n=posMap[x.posicao]||99;return `<div class="summaryRaceRow pilot-${String(x.piloto).toLowerCase()}" tabindex="0" data-detail-pilot="${esc(x.piloto)}" data-detail-race="${esc(x.raceKey)}" data-detail-source="resumo"><div class="summaryPlace">${n<99?n+'º':'—'}</div><div class="summaryName">${esc(x.piloto)}</div><div class="summaryBadge ${n<=3?'podium':''}">${n===1?'Vitória':n<=3?'Pódio':n<=5?'Top 5':'Classificado'}</div></div>`;}).join('')||'<div class="empty">Sem dados</div>'}</div></div>`;
+  }).join('');
+
+  const visibleRaces=summaryRaces;
+  document.getElementById('resultsHighlights').innerHTML=visibleRaces.length?`<div class="resultsHighlightBody">${visibleRaces.map(r=>{
+    const rr=DATA.filter(x=>x.raceKey===r && (pilotVal==='ALL'||x.piloto===pilotVal)).slice().sort((a,b)=>(posMap[a.posicao]||99)-(posMap[b.posicao]||99));
+    const winner=rr[0];
+    return `<div class="highlightRace"><div class="highlightRaceHead"><span>🏁 ${esc(r)}</span><small>${rr.length} participantes</small></div>${winner?`<div class="highlightWinner" tabindex="0" data-detail-pilot="${esc(winner.piloto)}" data-detail-race="${esc(winner.raceKey)}" data-detail-source="destaque"><div class="bigPlace">1º</div><div class="winnerName">${esc(winner.piloto)}</div><div class="winnerTag">Vitória</div></div>`:'<div class="empty">Sem dados</div>'}</div>`;
+  }).join('')}</div>`:`<div class="empty">Sem dados</div>`;
+
+  const total=rows.length||1;
+  const buckets=[
+    ['Vitórias',rows.filter(x=>(posMap[x.posicao]||99)===1).length,'#f2c94e'],
+    ['Pódios',rows.filter(x=>(posMap[x.posicao]||99)>=2&&(posMap[x.posicao]||99)<=3).length,'#a6b0b7'],
+    ['Top 5',rows.filter(x=>(posMap[x.posicao]||99)>=4&&(posMap[x.posicao]||99)<=5).length,'#4fb2ff'],
+    ['Demais',rows.filter(x=>(posMap[x.posicao]||99)>=6).length,'#69757d']
+  ];
+  document.getElementById('resultsBreakdown').innerHTML=buckets.map(([label,count,color])=>`<div class="breakRow"><div class="breakLabel">${label}</div><div class="breakBar"><i style="width:${Math.min(100,count/total*100)}%;background:${color}"></i></div><div class="breakCount">${count}</div></div>`).join('')+`<div class="breakRow"><div class="breakLabel">Top 5</div><div class="breakBar"><i style="width:${Math.min(100,top5/total*100)}%;background:#19d64d"></i></div><div class="breakCount">${top5}</div></div>`;
+}
+
+/* ===== Navigation from Classification ranking to Pilot page ===== */
+function goToPilot(pilot){
+  const sel=document.getElementById("pilotSelect");
+  if(!sel || !pilot)return;
+  sel.value=pilot;
+  showPage("pilot");
+  updatePilot();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ===== Interactive result selection ===== */
+let modalSelection = null;
+
+function findResult(pilot, race){
+  return DATA.find(x=>x.piloto===pilot && x.raceKey===race) || null;
+}
+
+function openResultDetail(pilot, race, source=""){
+  const row=findResult(pilot,race);
+  if(!row)return;
+
+  modalSelection={...row,source};
+
+  document.getElementById("modalPilot").textContent=row.piloto;
+  document.getElementById("modalRace").textContent=row.raceKey;
+  const resultN=posMap[row.posicao]||99;
+  document.getElementById("modalPos").textContent=(resultN<99?resultN:"—")+"º";
+  document.getElementById("modalStatus").textContent=resultN===1?"Vitória":resultN<=3?"Pódio":resultN<=5?"Top 5":"Classificado";
+  document.getElementById("resultModalTitle").textContent=row.raceKey;
+
+  const accent=document.getElementById("resultModalAccent");
+  accent.style.background=pilotColor(row.piloto);
+  accent.style.boxShadow=`0 0 18px ${pilotColor(row.piloto)}55`;
+
+  document.getElementById("resultModal").classList.add("open");
+  document.getElementById("resultModal").setAttribute("aria-hidden","false");
+  document.body.classList.add("modal-open");
+
+  document.querySelectorAll(".is-selected").forEach(el=>el.classList.remove("is-selected"));
+  document.querySelectorAll(`[data-detail-pilot="${CSS.escape(pilot)}"][data-detail-race="${CSS.escape(race)}"]`)
+    .forEach(el=>el.classList.add("is-selected"));
+
+  setTimeout(()=>document.querySelector(".resultModalClose")?.focus(),20);
+}
+
+function closeResultModal(){
+  const m=document.getElementById("resultModal");
+  if(!m)return;
+  m.classList.remove("open");
+  m.setAttribute("aria-hidden","true");
+  document.body.classList.remove("modal-open");
+  document.querySelectorAll(".is-selected").forEach(el=>el.classList.remove("is-selected"));
+}
+
+function openModalSimulation(){
+  if(!modalSelection)return;
+  const sel=document.getElementById("simPilotSelect");
+  if(sel) sel.value=modalSelection.piloto;
+  closeResultModal();
+  showPage("sim");
+  renderSimulationPage();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function applyModalRace(){
+  if(!modalSelection)return;
+  const race=modalSelection.raceKey;
+  const raceFilter=document.getElementById("champRaceFilter");
+  const pilotFilter=document.getElementById("champPilotFilter");
+  if(raceFilter)raceFilter.value=race;
+  if(pilotFilter)pilotFilter.value=modalSelection.piloto;
+  updateChamp();
+  showPage("champ");
+  closeResultModal();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function openProbDetail(pilot){
+  const d=window.TITLE_DETAILS?.[pilot];
+  if(!d)return;
+  const pct=d.prob.toFixed(1)+"%";
+  const participationPct=(d.participation*100).toFixed(0)+"%";
+  const uncertainty=`±${d.mcUncertainty.toFixed(2)} p.p. (margem de Monte Carlo, 95%)`;
+  const expected=d.expectedParticipation.toFixed(1);
+  const future=Math.max(0,d.futurePoints);
+  document.getElementById("probDetailTitle").textContent=d.pilot;
+  document.getElementById("probDetailAccent").style.background=pilotColor(d.pilot);
+  document.getElementById("probDetailAccent").style.boxShadow=`0 0 18px ${pilotColor(d.pilot)}55`;
+  document.getElementById("pdProb").textContent=pct;
+  document.getElementById("pdUncertainty").textContent=uncertainty;
+  document.getElementById("pdCurrent").textContent=d.current.toFixed(1)+" pts";
+  document.getElementById("pdProjected").textContent=d.projected.toFixed(1)+" pts";
+  document.getElementById("pdFuture").textContent=future.toFixed(1)+" pts";
+  document.getElementById("pdRemaining").textContent=d.remaining;
+  document.getElementById("pdParticipation").textContent=participationPct;
+  document.getElementById("pdExpectedRaces").textContent=expected+" corridas";
+  document.getElementById("pdExpectedRacesNote").textContent=`de ${d.remaining} possíveis`;
+  document.getElementById("pdMeanRel").textContent=(d.meanRel*100).toFixed(1)+"%";
+  document.getElementById("pdSdRel").textContent=(d.sdRel*100).toFixed(1)+" pontos percentuais";
+  const rw=(d.recencyWeights||[]).map(x=>`${x.race}: ${x.weight.toFixed(1)}`).join(" • ");
+  document.getElementById("pdRecency").textContent=rw||"—";
+  document.getElementById("pdFinalPos").textContent=d.expectedFinalPosition.toFixed(2)+"º";
+  document.getElementById("pdTop3").textContent=d.top3Prob.toFixed(1)+"%";
+  document.getElementById("pdPrior").textContent=String(d.positionPrior ?? 2);
+  document.getElementById("pdSims").textContent=d.SIMS.toLocaleString("pt-BR");
+  document.getElementById("pdSimpleText").textContent=`O modelo usa ${participationPct} de chance de participação por corrida, espera ${expected} participações nas ${d.remaining} corridas e projeta ${d.projected.toFixed(1)} pontos no total. A estimativa é ${pct}, com incerteza de aproximadamente ${uncertainty}.`;
+  const rwText=(d.recencyWeights||[]).map(x=>`${x.race} = ${x.weight.toFixed(1)}`).join(", ");
+  document.getElementById("pdExplanation").innerHTML=`A chance de <b>${esc(d.pilot)}</b> foi calculada simulando as ${d.remaining} corridas restantes <b>${d.SIMS.toLocaleString("pt-BR")}</b> vezes. Em cada corrida, primeiro o modelo decide se cada piloto do cenário participa. Se participa, ele recebe um desempenho provável baseado no histórico, mas ajustado para comparar corridas com grids de tamanhos diferentes. O histórico recebe um <b>peso um pouco maior conforme a corrida fica mais recente</b> (${rwText||"pesos não disponíveis"}). Isso serve para dar mais importância à forma mais atual do piloto, sem criar uma regra separada de “evolução” ou tendência. Antes disso, usamos o <b>prior = ${d.positionPrior ?? 2}</b>: ele funciona como uma pequena correção para históricos curtos, puxando a média e a variação do piloto um pouco em direção à média do campo. Depois os participantes são ordenados, a posição vira pontos pela regra 10, 7, 5, 3, 2, 1 e 0, e os pontos são somados ao total atual. No final, contamos quantas simulações tiveram <b>${esc(d.pilot)}</b> como campeão. Por isso, ${pct} significa que o piloto terminou em 1º em aproximadamente essa fração dos ${d.SIMS.toLocaleString("pt-BR")} campeonatos simulados, dentro deste cenário de pilotos selecionados. A incerteza de ${uncertainty} mede apenas a oscilação da simulação de Monte Carlo; ela não mede a incerteza das premissas do modelo.`;
+  document.getElementById("probDetailModal").classList.add("open");
+  document.getElementById("probDetailModal").setAttribute("aria-hidden","false");
+  document.body.classList.add("modal-open");
+  setTimeout(()=>document.querySelector(".probDetailClose")?.focus(),20);
+}
+
+function closeProbDetail(){
+  const m=document.getElementById("probDetailModal");
+  if(!m)return;
+  m.classList.remove("open");
+  m.setAttribute("aria-hidden","true");
+  document.body.classList.remove("modal-open");
+}
+
+document.addEventListener("click", (ev)=>{
+  const probPilot=ev.target.closest("[data-prob-pilot]");
+  if(probPilot){
+    openProbDetail(probPilot.dataset.probPilot);
+    return;
   }
-}
+  const pilotNav=ev.target.closest("[data-pilot-nav]");
+  if(pilotNav){
+    goToPilot(pilotNav.dataset.pilotNav);
+    return;
+  }
+  const head=ev.target.closest(".champRaceHead");
+  if(head){
+    const card=head.closest(".champRaceCard");
+    const first=card?.querySelector("[data-detail-pilot][data-detail-race]");
+    if(first){ openResultDetail(first.dataset.detailPilot,first.dataset.detailRace,"corrida"); }
+    return;
+  }
+  const el=ev.target.closest("[data-detail-pilot][data-detail-race]");
+  if(el){
+    openResultDetail(el.dataset.detailPilot,el.dataset.detailRace,el.dataset.detailSource||"");
+    return;
+  }
+  if(ev.target.id==="resultModal") closeResultModal();
+});
 
-
-function updateResultsPage(){
-  const rf=document.getElementById("resultsRaceFilter")?.value||"ALL";
-  const pf=document.getElementById("resultsPilotFilter")?.value||"ALL";
-  const rows=DATA.filter(x=>
-    (rf==="ALL"||x.raceKey===rf) &&
-    (pf==="ALL"||x.piloto===pf)
-  );
-  document.getElementById("resultsAllTable").innerHTML=raceResultsTable(rows);
-}
+document.addEventListener("keydown",(ev)=>{
+  const probPilot=ev.target.closest?.("[data-prob-pilot]");
+  if(probPilot && (ev.key==="Enter" || ev.key===" ")){
+    ev.preventDefault();
+    openProbDetail(probPilot.dataset.probPilot);
+    return;
+  }
+  const pilotNav=ev.target.closest?.("[data-pilot-nav]");
+  if(pilotNav && (ev.key==="Enter" || ev.key===" ")){
+    ev.preventDefault();
+    goToPilot(pilotNav.dataset.pilotNav);
+    return;
+  }
+  if(ev.key==="Escape" && document.getElementById("probDetailModal")?.classList.contains("open")){
+    closeProbDetail();return;
+  }
+  if(ev.key==="Escape" && document.getElementById("resultModal")?.classList.contains("open")){
+    closeResultModal();return;
+  }
+  const el=ev.target.closest?.("[data-detail-pilot][data-detail-race]");
+  if(el && (ev.key==="Enter" || ev.key===" ")){
+    ev.preventDefault();
+    openResultDetail(el.dataset.detailPilot,el.dataset.detailRace,el.dataset.detailSource||"");
+  }
+});
 
 function init(){
-  const raceSel=document.getElementById("champRaceFilter");
-  RACES.forEach(r=>raceSel.insertAdjacentHTML("beforeend",`<option value="${esc(r)}">${esc(r)}</option>`));
+ const resultsRace=document.getElementById("resultsRaceFilter");
+ const resultsPilot=document.getElementById("resultsPilotFilter");
+ RACES.forEach(r=>resultsRace?.insertAdjacentHTML("beforeend",`<option value="${esc(r)}">${esc(r)}</option>`));
+ PILOTS.forEach(p=>resultsPilot?.insertAdjacentHTML("beforeend",`<option value="${esc(p)}">${esc(p)}</option>`));
+ resultsRace?.addEventListener("change",updateResults);
+ resultsPilot?.addEventListener("change",updateResults);
+ const champRace=document.getElementById("champRaceFilter");
+ if(champRace)RACES.forEach(r=>champRace.insertAdjacentHTML("beforeend",`<option value="${esc(r)}">${esc(r)}</option>`));
+ const champPilot=document.getElementById("champPilotFilter");
+ if(champPilot)PILOTS.forEach(p=>champPilot.insertAdjacentHTML("beforeend",`<option value="${esc(p)}">${esc(p)}</option>`));
+ if(champRace)champRace.onchange=updateChamp;
+ if(champPilot)champPilot.onchange=updateChamp;
 
-  const pilotSel=document.getElementById("champPilotFilter");
-  PILOTS.forEach(p=>pilotSel.insertAdjacentHTML("beforeend",`<option value="${esc(p)}">${esc(p)}</option>`));
+ const scenarioBox=document.getElementById("chanceScenarioBox");
+ if(scenarioBox)PILOTS.forEach(p=>scenarioBox.insertAdjacentHTML("beforeend",`<label class="chk"><input type="checkbox" value="${esc(p)}" checked onchange="scheduleTitleProbability(true)"> ${esc(p)}</label>`));
 
-  pilotSel.onchange=updateChamp;
-  raceSel.onchange=updateChamp;
-
-  const rr=document.getElementById("resultsRaceFilter");
-  RACES.forEach(r=>rr.insertAdjacentHTML("beforeend",`<option value="${esc(r)}">${esc(r)}</option>`));
-  const rp=document.getElementById("resultsPilotFilter");
-  PILOTS.forEach(p=>rp.insertAdjacentHTML("beforeend",`<option value="${esc(p)}">${esc(p)}</option>`));
-  rr.onchange=updateResultsPage;
-  rp.onchange=updateResultsPage;
-
-  const sel=document.getElementById("pilotSelect");
-  PILOTS.forEach(p=>sel.insertAdjacentHTML("beforeend",`<option value="${esc(p)}">${esc(p)}</option>`));
-  sel.onchange=updatePilot;
-
-  placeExistingPilotChooser();
-  window.addEventListener("resize",placeExistingPilotChooser);
-
-  updateChamp();
-  updatePilot();
-  updateResultsPage();
+ const sel=document.getElementById("pilotSelect");PILOTS.forEach(p=>sel.insertAdjacentHTML("beforeend",`<option value="${esc(p)}">${esc(p)}</option>`));sel.onchange=updatePilot;
+ populateSimPilotSelect(PILOTS);
+ updateChamp();
+ scheduleTitleProbability(true);
+ updatePilot();updateResults();
 }
 init();
 </script>
